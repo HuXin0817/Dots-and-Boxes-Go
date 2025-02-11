@@ -15,44 +15,31 @@ import (
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
 )
 
-var StartMenuSize = fyne.NewSize(612, 600)
-
-var StartMenuIconCanvas = func() *canvas.Image {
+func ShowStartMenu() {
+	MainWindow.SetTitle("Dots and Boxes")
+	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{})
+	Container := container.NewWithoutLayout()
+	MenuSize := fyne.NewSize(612, 600)
+	Container.Resize(MenuSize)
 	IconCanvas := canvas.NewImageFromResource(Icon)
 	IconCanvas.Resize(fyne.NewSize(200, 200))
-	return IconCanvas
-}()
-
-var StartMenuTitleText = func() *canvas.Text {
+	IconCanvas.Move(fyne.NewPos(206, 50))
+	Container.Add(IconCanvas)
 	TitleText := canvas.NewText("Dots and Boxes", TextColor())
 	TitleText.Alignment = fyne.TextAlignCenter
 	TitleText.TextSize = 26
 	TitleText.FontSource = TimesNewRomanBold
 	TitleText.Resize(fyne.NewSize(200, 50))
-	return TitleText
-}()
-
-var StartMenuGameLink = func() *canvas.Text {
+	TitleText.Move(fyne.NewPos(206, 250))
+	Container.Add(TitleText)
 	GameLink := canvas.NewText("https://github.com/HuXin0817/Dots-and-Boxes", LinkColor)
 	GameLink.Resize(fyne.NewSize(200, 50))
 	GameLink.Alignment = fyne.TextAlignCenter
 	GameLink.TextSize = 17
 	GameLink.TextStyle = fyne.TextStyle{Bold: true, Italic: true}
 	GameLink.FontSource = TimesNewRomanItalic
-	return GameLink
-}()
-
-func ShowStartMenu() {
-	MainWindow.SetTitle("Dots and Boxes")
-	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{})
-	Container := container.NewWithoutLayout()
-	Container.Resize(StartMenuSize)
-	StartMenuIconCanvas.Move(fyne.NewPos(206, 50))
-	Container.Add(StartMenuIconCanvas)
-	StartMenuTitleText.Move(fyne.NewPos(206, 250))
-	Container.Add(StartMenuTitleText)
-	StartMenuGameLink.Move(fyne.NewPos(206, 285))
-	Container.Add(StartMenuGameLink)
+	GameLink.Move(fyne.NewPos(206, 285))
+	Container.Add(GameLink)
 	SpinnerCanvas, err := widgetx.NewAnimatedGifFromResource(SpinnerGIFResource)
 	if err != nil {
 		dialog.NewError(err, MainWindow).Show()
@@ -148,9 +135,9 @@ func ShowStartMenu() {
 	PlayLocalButton.Move(fyne.NewPos(206, 495))
 	Container.Add(PlayLocalButton)
 	MainContainer := container.New(&CenterLayout{
-		Min: StartMenuSize,
+		Min: MenuSize,
 	}, Container)
-	MainContainer.Resize(StartMenuSize)
+	MainContainer.Resize(MenuSize)
 	fadeIn(time.Second, 300*time.Millisecond, MainContainer)
 	MainWindow.SetContent(MainContainer)
 }

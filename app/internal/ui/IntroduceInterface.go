@@ -10,33 +10,26 @@ import (
 	"github.com/HuXin0817/dots-and-boxes/app/internal/gen"
 )
 
-var IntroduceInterfaceIconCanvas = func() *canvas.Image {
+func ShowIntroduceInterface() {
+	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{})
+	Container := container.NewWithoutLayout()
+	MenuSize := fyne.NewSize(612, 600)
+	Container.Resize(MenuSize)
 	IconCanvas := canvas.NewImageFromResource(Icon)
 	IconCanvas.Resize(fyne.NewSize(150, 150))
-	return IconCanvas
-}()
-
-var IntroduceInterfaceTitleText = func() *canvas.Text {
+	IconCanvas.Move(fyne.NewPos(100, 225))
+	Container.Add(IconCanvas)
 	TitleText := canvas.NewText("Dots and Boxes", TextColor())
 	TitleText.Alignment = fyne.TextAlignCenter
 	TitleText.TextSize = 33
 	TitleText.FontSource = TimesNewRomanBold
 	TitleText.Resize(fyne.NewSize(250, 70))
-	return TitleText
-}()
-
-func ShowIntroduceInterface() {
-	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{})
-	Container := container.NewWithoutLayout()
-	Container.Resize(StartMenuSize)
-	IntroduceInterfaceIconCanvas.Move(fyne.NewPos(100, 225))
-	Container.Add(IntroduceInterfaceIconCanvas)
-	IntroduceInterfaceTitleText.Move(fyne.NewPos(280, 265))
-	Container.Add(IntroduceInterfaceTitleText)
+	TitleText.Move(fyne.NewPos(280, 265))
+	Container.Add(TitleText)
 	MainContainer := container.New(&CenterLayout{
-		Min: StartMenuSize,
+		Min: MenuSize,
 	}, Container)
-	MainContainer.Resize(StartMenuSize)
+	MainContainer.Resize(MenuSize)
 	c := fadeIn(time.Second, time.Second, MainContainer)
 	MainWindow.SetContent(MainContainer)
 	go func() {
