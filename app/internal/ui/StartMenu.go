@@ -61,7 +61,12 @@ func ShowStartMenu() {
 	SpinnerCanvas.Resize(fyne.NewSize(70, 70))
 	SpinnerCanvas.Move(fyne.NewPos(271, 335))
 	Container.Add(SpinnerCanvas)
+	started := false
 	PlayOnlineButton := widget.NewButton("Play Online", func() {
+		if started {
+			return
+		}
+		started = true
 		audio.Play(gen.TouchButton)
 		restart(true)
 	})
@@ -129,6 +134,10 @@ func ShowStartMenu() {
 			if err := config.Conf.Save(); err != nil {
 				dialog.NewError(err, MainWindow).Show()
 			}
+			if started {
+				return
+			}
+			started = true
 			audio.Play(gen.TouchButton)
 			restart(false)
 		}, MainWindow)
