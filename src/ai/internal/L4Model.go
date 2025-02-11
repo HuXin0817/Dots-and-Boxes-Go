@@ -26,16 +26,19 @@ func (m *L4Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
 		return l
 	}
 	T := len(*m) - 1
-	var r container.EdgeScoreMap
 	var wg sync.WaitGroup
 	wg.Add(T)
 	for i := range T {
 		go func(i int) {
-			r.Plus((*m)[i].Searching(b))
+			(*m)[i].BestCandidateEdges(b)
 			wg.Done()
 		}(i)
 	}
-	r.Plus((*m)[T].Searching(b))
+	(*m)[T].BestCandidateEdges(b)
 	wg.Wait()
+	var r container.EdgeScoreMap
+	for i := range *m {
+		r.Plus(&(*m)[i].EdgeScoreMap)
+	}
 	return r.Export()
 }

@@ -9,13 +9,13 @@ import (
 
 type L1Model struct {
 	L0       L0Model
-	AuxBoard board.BoardV3
+	auxBoard board.BoardV3
 }
 
 func NewL1Model() *L1Model {
 	return &L1Model{
 		L0:       *NewL0Model(),
-		AuxBoard: *board.NewBoardV3(),
+		auxBoard: *board.NewBoardV3(),
 	}
 }
 
@@ -29,13 +29,13 @@ func (m *L1Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
 		assert.True(nil, Candidate.Empty())
 	}
 	for _, e := range b.EmptyEdges() {
-		m.AuxBoard.Reset(&b.BoardV1)
+		m.auxBoard.Reset(&b.BoardV1)
 		if config.DEBUG {
-			assert.Equal(nil, m.AuxBoard.Add(e), 0)
+			assert.Equal(nil, m.auxBoard.Add(e), 0)
 		} else {
-			m.AuxBoard.Add(e)
+			m.auxBoard.Add(e)
 		}
-		s := m.AuxBoard.MaxObtainableScore(mins)
+		s := m.auxBoard.MaxObtainableScore(mins)
 		if s < mins {
 			mins = s
 			Candidate.Reset(e)
