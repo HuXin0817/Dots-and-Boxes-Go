@@ -51,8 +51,8 @@ func (c *Config) Save() error {
 var defaultConf = Config{
 	AI1:     false,
 	AI2:     false,
-	AI1Name: "L3",
-	AI2Name: "L3",
+	AI1Name: "L4",
+	AI2Name: "L4",
 }
 
 var Conf = func() Config {
