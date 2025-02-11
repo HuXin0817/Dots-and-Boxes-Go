@@ -139,6 +139,8 @@ func NewGameInterface() *GameInterface {
 			}, MainWindow)
 			game.Dialog.SetOnClosed(func() { game.Dialog = nil })
 			game.Dialog.Show()
+		case fyne.KeyM:
+			audio.On = !audio.On
 		}
 	})
 	return game

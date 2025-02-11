@@ -12,8 +12,12 @@ import (
 )
 
 var once sync.Once
+var On = true
 
 func Play(audioData []byte) {
+	if !On {
+		return
+	}
 	streamer, format, err := mp3.Decode(io.NopCloser(bytes.NewReader(audioData)))
 	if err != nil {
 		fmt.Println(err)

@@ -140,4 +140,9 @@ func ShowStartMenu() {
 	MainContainer.Resize(MenuSize)
 	fadeIn(time.Second, 300*time.Millisecond, MainContainer)
 	MainWindow.SetContent(MainContainer)
+	MainWindow.Canvas().SetOnTypedKey(func(e *fyne.KeyEvent) {
+		if e.Name == fyne.KeyM {
+			audio.On = !audio.On
+		}
+	})
 }
