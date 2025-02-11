@@ -104,12 +104,12 @@ func restart(Online bool) {
 			}
 			if isFirst {
 				go func() {
-					mock.Run(UI.CurrentBoard(), UI.Add, userAdd, enemyAdd)
+					mock.Run(UI.CurrentBoard(), UI.Gaming, UI.Add, userAdd, enemyAdd)
 					UI.Close()
 				}()
 			} else {
 				go func() {
-					mock.Run(UI.CurrentBoard(), UI.Add, enemyAdd, userAdd)
+					mock.Run(UI.CurrentBoard(), UI.Gaming, UI.Add, enemyAdd, userAdd)
 					UI.Close()
 				}()
 			}
@@ -132,7 +132,7 @@ func restart(Online bool) {
 				func2 = func() model.Edge { return AI2(UI.CurrentBoard()) }
 			}
 			go func() {
-				mock.Run(UI.CurrentBoard(), UI.Add, func1, func2)
+				mock.Run(UI.CurrentBoard(), UI.Gaming, UI.Add, func1, func2)
 				UI.Close()
 			}()
 		}

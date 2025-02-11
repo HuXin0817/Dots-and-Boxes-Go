@@ -265,7 +265,7 @@ func (game *GameInterface) UpdateTitle() {
 		go func() {
 			t := config.PlayerTimeOut / time.Second
 			for range time.Tick(time.Second) {
-				if game.Board.Step != nowStep {
+				if game.End || game.Board.Step != nowStep {
 					return
 				}
 				MainWindow.SetTitle(fmt.Sprintf("%s (%ds)", title, t))
@@ -291,17 +291,14 @@ func (game *GameInterface) Gaming() bool {
 	if game.TimeOut != 0 {
 		return false
 	}
-	notOver := game.Board.NotOver()
-	if !notOver {
-		audio.Play(gen.Win)
-	}
-	return notOver
+	return game.Board.NotOver()
 }
 
 func (game *GameInterface) Close() {
 	if game.End {
 		return
 	}
+	audio.Play(gen.Win)
 	game.End = true
 	MainWindow.SetTitle("dots and boxes")
 	game.RemoveHighlight()

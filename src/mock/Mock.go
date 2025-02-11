@@ -8,8 +8,8 @@ import (
 	"github.com/HuXin0817/dots-and-boxes/src/model/board"
 )
 
-func Run(b *board.BoardV2, Add func(model.Edge), GetEdge1, GetEdge2 func() model.Edge) {
-	for b.NotOver() {
+func Run(b *board.BoardV2, NotOver func() bool, Add func(model.Edge), GetEdge1, GetEdge2 func() model.Edge) {
+	for NotOver() {
 		if b.Turn == model.Player1Turn {
 			Add(GetEdge1())
 		} else {
@@ -20,7 +20,7 @@ func Run(b *board.BoardV2, Add func(model.Edge), GetEdge1, GetEdge2 func() model
 
 func RunAILocal(m1, m2 func(v2 *board.BoardV2) model.Edge) (Player1Score, Player2Score int) {
 	b := board.NewBoardV2()
-	Run(b,
+	Run(b, b.NotOver,
 		func(edge model.Edge) { b.Add(edge) },
 		func() model.Edge { return m1(b) },
 		func() model.Edge { return m2(b) },

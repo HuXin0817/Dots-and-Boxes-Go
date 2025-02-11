@@ -129,6 +129,7 @@ func ShowStartMenu() {
 			if err := config.Conf.Save(); err != nil {
 				dialog.NewError(err, MainWindow).Show()
 			}
+			audio.Play(gen.TouchButton)
 			restart(false)
 		}, MainWindow)
 		PlayLocalButtonSettingDialog.Resize(fyne.NewSize(300, 360))
