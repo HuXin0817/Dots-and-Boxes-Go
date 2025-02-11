@@ -42,7 +42,7 @@ func GetColor(lightColor, darkColor *color.NRGBA) *color.NRGBA {
 
 var (
 	BackGroundColor          = GetColor(LightThemeGameInterfaceBackGroundColor, DarkThemeGameInterfaceBackGroundColor)
-	ButtonColor              = GetColor(LightThemeEmptyEdgeColor, DarkThemeEmptyEdgeColor)
+	EmptyEdgeColor           = GetColor(LightThemeEmptyEdgeColor, DarkThemeEmptyEdgeColor)
 	BoxTipsColor             = GetColor(LightThemeScoreableTipsColor, DarkThemeScoreableTipsColor)
 	StartMenuBackgroundColor = GetColor(LightThemeStartMenuBackgroundColor, DarkThemeStartMenuBackgroundColor)
 	TextColor                = func() color.Color {

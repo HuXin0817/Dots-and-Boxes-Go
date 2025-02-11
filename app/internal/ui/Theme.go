@@ -7,9 +7,7 @@ import (
 	"fyne.io/fyne/v2/theme"
 )
 
-var (
-	ThemeVariant = fyne.CurrentApp().Settings().ThemeVariant()
-)
+var ThemeVariant = fyne.CurrentApp().Settings().ThemeVariant()
 
 type fyneDefaultTheme struct{}
 
@@ -48,7 +46,7 @@ func (s *StartMenuTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVaria
 		return StartMenuBackgroundColor
 	}
 	if name == theme.ColorNameButton {
-		return ButtonColor
+		return EmptyEdgeColor
 	}
 	return theme.DefaultTheme().Color(name, variant)
 }

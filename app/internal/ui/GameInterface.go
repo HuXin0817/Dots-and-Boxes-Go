@@ -23,9 +23,15 @@ var MainWindow = app.NewWithID("io.github.dotsandboxes").NewWindow("Dots and Box
 
 type GameInterface struct {
 	Board         board.BoardV2
+	UserInputEdge model.Edge
+	LastEdge      model.Edge
+	Dialog        dialog.Dialog
+	End           bool
+	Paused        bool
 	IsFirst       bool
 	Online        bool
 	TimeOut       int
+	Container     *fyne.Container
 	DotCanvases   [model.MaxDot]*canvas.Image
 	EdgeCanvases  [model.MaxEdge]*canvas.Line
 	EdgeAnimation [model.MaxEdge]*fyne.Animation
@@ -34,12 +40,6 @@ type GameInterface struct {
 	BoxAnimation  [model.MaxBox]*fyne.Animation
 	BoxTipped     [model.MaxBox]bool
 	Buttons       [model.MaxEdge]*widget.Button
-	UserInputEdge model.Edge
-	LastEdge      model.Edge
-	Container     *fyne.Container
-	Dialog        dialog.Dialog
-	End           bool
-	Paused        bool
 }
 
 func NewGameInterface() *GameInterface {
@@ -54,7 +54,7 @@ func NewGameInterface() *GameInterface {
 		w.Add(game.BoxCanvases[b])
 	}
 	for e := range model.MaxEdge {
-		game.EdgeCanvases[e] = NewEdgeCanvas(e, ButtonColor)
+		game.EdgeCanvases[e] = NewEdgeCanvas(e, EmptyEdgeColor)
 		w.Add(game.EdgeCanvases[e])
 	}
 	for e := range model.MaxEdge {
