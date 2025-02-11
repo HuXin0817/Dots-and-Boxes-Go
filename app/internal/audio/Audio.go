@@ -3,23 +3,15 @@ package audio
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"time"
 
 	"github.com/faiface/beep/mp3"
 	"github.com/faiface/beep/speaker"
 )
 
-type reader struct {
-	*bytes.Reader
-}
-
-func (*reader) Close() error { return nil }
-
 func play(audioData []byte) (err error) {
-	r := &reader{
-		Reader: bytes.NewReader(audioData),
-	}
-	streamer, format, err := mp3.Decode(r)
+	streamer, format, err := mp3.Decode(io.NopCloser(bytes.NewReader(audioData)))
 	if err != nil {
 		return err
 	}
