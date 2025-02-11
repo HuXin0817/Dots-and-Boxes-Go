@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+
+.DS_Store
+
+app/fyne_metadata_init.go
+app/internal/gen/
