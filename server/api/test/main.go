@@ -7,8 +7,8 @@ import (
 
 	"github.com/HuXin0817/dots-and-boxes/server/api"
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
+	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
-	"github.com/HuXin0817/dots-and-boxes/src/model/board"
 )
 
 const N = 100

@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
-	"github.com/HuXin0817/dots-and-boxes/src/model/board"
 	"gopkg.in/Knetic/govaluate.v2"
 )
 

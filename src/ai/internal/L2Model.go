@@ -1,10 +1,10 @@
 package internal
 
 import (
+	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/config"
+	"github.com/HuXin0817/dots-and-boxes/src/container"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
-	"github.com/HuXin0817/dots-and-boxes/src/model/board"
-	"github.com/HuXin0817/dots-and-boxes/src/model/container"
 	"github.com/stretchr/testify/assert"
 )
 

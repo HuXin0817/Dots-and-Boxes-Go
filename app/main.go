@@ -1,9 +1,11 @@
 package main
 
-import "github.com/HuXin0817/dots-and-boxes/app/internal/ui"
+import "fyne.io/fyne/v2/app"
+
+var MainWindow = app.NewWithID("io.github.dotsandboxes").NewWindow("Dots and Boxes")
 
 //go:generate go run cmd/generate.go
 func main() {
-	ui.ShowIntroduceInterface()
-	ui.MainWindow.ShowAndRun()
+	ShowIntroduceInterface()
+	MainWindow.ShowAndRun()
 }

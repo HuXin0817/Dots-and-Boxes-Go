@@ -1,4 +1,4 @@
-package ui
+package main
 
 import (
 	"time"
@@ -6,8 +6,8 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/audio"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/gen"
+	"github.com/HuXin0817/dots-and-boxes/app/assets/gen"
+	"github.com/HuXin0817/dots-and-boxes/src/audio"
 )
 
 func ShowIntroduceInterface() {

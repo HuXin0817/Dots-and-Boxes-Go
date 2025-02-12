@@ -1,11 +1,11 @@
-package ui
+package main
 
 import (
 	"bytes"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/theme"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/gen"
+	"github.com/HuXin0817/dots-and-boxes/app/assets/gen"
 	svg "github.com/ajstarks/svgo"
 )
 

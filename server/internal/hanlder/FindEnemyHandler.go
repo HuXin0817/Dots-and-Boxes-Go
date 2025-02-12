@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/HuXin0817/dots-and-boxes/server/internal/game"
 	"github.com/HuXin0817/dots-and-boxes/server/internal/model"
+	"github.com/HuXin0817/dots-and-boxes/src/game"
 	"github.com/gin-gonic/gin"
 )
 

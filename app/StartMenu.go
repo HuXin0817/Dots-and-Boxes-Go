@@ -1,4 +1,4 @@
-package ui
+package main
 
 import (
 	"time"
@@ -9,10 +9,9 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 	widgetx "fyne.io/x/fyne/widget"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/audio"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/config"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/gen"
+	"github.com/HuXin0817/dots-and-boxes/app/assets/gen"
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
+	"github.com/HuXin0817/dots-and-boxes/src/audio"
 )
 
 func ShowStartMenu() {
@@ -65,7 +64,7 @@ func ShowStartMenu() {
 	PlayOnlineButton.Move(fyne.NewPos(206, 435))
 	Container.Add(PlayOnlineButton)
 	PlayLocalButton := widget.NewButton("Play Local", func() {
-		TmpConfig := config.Conf
+		TmpConfig := Conf
 		Player1RadioGroup := widget.NewRadioGroup([]string{
 			"People",
 			"Computer",
@@ -76,7 +75,7 @@ func ShowStartMenu() {
 				TmpConfig.AI1 = true
 			}
 		})
-		if config.Conf.AI1 {
+		if Conf.AI1 {
 			Player1RadioGroup.SetSelected("Computer")
 		} else {
 			Player1RadioGroup.SetSelected("People")
@@ -91,15 +90,15 @@ func ShowStartMenu() {
 				TmpConfig.AI2 = true
 			}
 		})
-		if config.Conf.AI2 {
+		if Conf.AI2 {
 			Player2RadioGroup.SetSelected("Computer")
 		} else {
 			Player2RadioGroup.SetSelected("People")
 		}
 		Entry1 := widget.NewEntry()
-		Entry1.SetText(config.Conf.AI1Name)
+		Entry1.SetText(Conf.AI1Name)
 		Entry2 := widget.NewEntry()
-		Entry2.SetText(config.Conf.AI2Name)
+		Entry2.SetText(Conf.AI2Name)
 		PlayLocalButtonSettingDialog := dialog.NewForm("Play Local", "Start", "Cancel", []*widget.FormItem{
 			widget.NewFormItem("Player1:", Player1RadioGroup),
 			widget.NewFormItem("Player2:", Player2RadioGroup),
@@ -121,8 +120,8 @@ func ShowStartMenu() {
 			} else {
 				TmpConfig.AI2Name = Entry2.Text
 			}
-			config.Conf = TmpConfig
-			if err := config.Conf.Save(); err != nil {
+			Conf = TmpConfig
+			if err := Conf.Save(); err != nil {
 				dialog.NewError(err, MainWindow).Show()
 			}
 			if started {

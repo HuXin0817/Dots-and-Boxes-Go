@@ -1,4 +1,4 @@
-package ui
+package main
 
 import (
 	"fmt"
@@ -7,19 +7,16 @@ import (
 	"time"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/audio"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/gen"
+	"github.com/HuXin0817/dots-and-boxes/app/assets/gen"
+	"github.com/HuXin0817/dots-and-boxes/src/audio"
+	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/config"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
-	"github.com/HuXin0817/dots-and-boxes/src/model/board"
 )
-
-var MainWindow = app.NewWithID("io.github.dotsandboxes").NewWindow("Dots and Boxes")
 
 type GameInterface struct {
 	Board         board.BoardV2

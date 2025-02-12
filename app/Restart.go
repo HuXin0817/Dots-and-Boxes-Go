@@ -1,4 +1,4 @@
-package ui
+package main
 
 import (
 	"fmt"
@@ -8,14 +8,13 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/x/fyne/widget"
-	"github.com/HuXin0817/dots-and-boxes/app/internal/config"
 	"github.com/HuXin0817/dots-and-boxes/server/api"
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
 	"github.com/HuXin0817/dots-and-boxes/src/mock"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
 )
 
-var cli = api.New(config.ServerAddr)
+var cli = api.New(ServerAddr)
 
 func restart(Online bool) {
 	go func() {
@@ -114,21 +113,21 @@ func restart(Online bool) {
 				}()
 			}
 		} else {
-			AI1, err := ai.New(config.Conf.AI1Name)
+			AI1, err := ai.New(Conf.AI1Name)
 			if err != nil {
 				dialog.NewError(err, MainWindow).Show()
 			}
-			AI2, err := ai.New(config.Conf.AI2Name)
+			AI2, err := ai.New(Conf.AI2Name)
 			if err != nil {
 				dialog.NewError(err, MainWindow).Show()
 			}
 			UI := NewGameInterface()
 			func1 := UI.GetUserEdge
 			func2 := UI.GetUserEdge
-			if config.Conf.AI1 {
+			if Conf.AI1 {
 				func1 = func() model.Edge { return AI1(UI.CurrentBoard()) }
 			}
-			if config.Conf.AI2 {
+			if Conf.AI2 {
 				func2 = func() model.Edge { return AI2(UI.CurrentBoard()) }
 			}
 			go func() {

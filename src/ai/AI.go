@@ -2,8 +2,8 @@ package ai
 
 import (
 	"github.com/HuXin0817/dots-and-boxes/src/ai/internal"
+	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
-	"github.com/HuXin0817/dots-and-boxes/src/model/board"
 	"github.com/jefflund/stones/pkg/hjkl/rand"
 )
 

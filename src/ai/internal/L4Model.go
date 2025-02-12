@@ -4,9 +4,9 @@ import (
 	"runtime"
 	"sync"
 
+	"github.com/HuXin0817/dots-and-boxes/src/board"
+	"github.com/HuXin0817/dots-and-boxes/src/container"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
-	"github.com/HuXin0817/dots-and-boxes/src/model/board"
-	"github.com/HuXin0817/dots-and-boxes/src/model/container"
 )
 
 type L4Model []L3Model

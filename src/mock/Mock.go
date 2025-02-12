@@ -4,8 +4,8 @@ import (
 	"sync"
 
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
+	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
-	"github.com/HuXin0817/dots-and-boxes/src/model/board"
 )
 
 func Run(b *board.BoardV2, NotOver func() bool, Add func(model.Edge), GetEdge1, GetEdge2 func() model.Edge) {

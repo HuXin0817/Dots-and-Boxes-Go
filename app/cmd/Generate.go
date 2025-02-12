@@ -57,7 +57,7 @@ var GenerateList = map[string]string{
 	"assets/music/Win.MP3":                   "Win",
 }
 
-var Dir = filepath.Join("internal", "gen")
+var Dir = filepath.Join("assets", "gen")
 
 func Exec() (err error) {
 	if err = os.RemoveAll(Dir); err != nil {
