@@ -7,7 +7,7 @@ import (
 	"fyne.io/fyne/v2/canvas"
 )
 
-func fade(d, wait time.Duration, Container *fyne.Container, StartA uint8) <-chan time.Time {
+func Fade(d, wait time.Duration, Container *fyne.Container, StartA uint8) <-chan time.Time {
 	BackgroundColor := *StartMenuBackgroundColor()
 	BackgroundColor.A = StartA
 	Rectangle := canvas.NewRectangle(&BackgroundColor)
@@ -30,10 +30,10 @@ func fade(d, wait time.Duration, Container *fyne.Container, StartA uint8) <-chan
 	return time.After(d + wait)
 }
 
-func fadeOut(d, wait time.Duration, Container *fyne.Container) <-chan time.Time {
-	return fade(d, wait, Container, 0)
+func FadeOut(d, wait time.Duration, Container *fyne.Container) <-chan time.Time {
+	return Fade(d, wait, Container, 0)
 }
 
-func fadeIn(d, wait time.Duration, Container *fyne.Container) <-chan time.Time {
-	return fade(d, wait, Container, 255)
+func FadeIn(d, wait time.Duration, Container *fyne.Container) <-chan time.Time {
+	return Fade(d, wait, Container, 255)
 }

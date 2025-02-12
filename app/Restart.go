@@ -19,7 +19,7 @@ var cli = api.New(ServerAddr)
 func restart(Online bool) {
 	go func() {
 		Container := MainWindow.Content().(*fyne.Container)
-		<-fadeOut(700*time.Millisecond, 0, Container)
+		<-FadeOut(700*time.Millisecond, 0, Container)
 		if Online {
 			SpinnerCanvas, err := widget.NewAnimatedGifFromResource(SpinnerGIFResource())
 			if err != nil {
@@ -34,7 +34,7 @@ func restart(Online bool) {
 			MatchingTimeText.Resize(fyne.NewSize(200, 50))
 			MatchingTimeText.Alignment = fyne.TextAlignCenter
 			MatchingTimeText.TextSize = 20
-			MatchingTimeText.FontSource = TimesNewRomanBold
+			MatchingTimeText.FontSource = TimesNewRomanBoldResource
 			Size = Container.Size()
 			SpinnerCanvas.Move(fyne.NewPos(Size.Width/2-35, Size.Height/2-55))
 			MatchingTimeText.Move(fyne.NewPos(Size.Height/2-100, Size.Height/2+15))

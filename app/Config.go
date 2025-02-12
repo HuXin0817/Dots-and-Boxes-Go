@@ -17,15 +17,14 @@ type Config struct {
 	AI2Name string
 }
 
-var configFilePath = func() string {
+var ConfigFilePath = func() string {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		return "config.json"
 	}
 	dir := filepath.Join(home, ".dots-and-boxes")
 	if _, err = os.Stat(dir); os.IsNotExist(err) {
-		err := os.MkdirAll(dir, os.ModePerm)
-		if err != nil {
+		if err := os.MkdirAll(dir, os.ModePerm); err != nil {
 			return "config.json"
 		}
 	} else if err != nil {
@@ -42,7 +41,7 @@ func (c *Config) Save() error {
 	if err != nil {
 		return err
 	}
-	if err = os.WriteFile(configFilePath, content, 0644); err != nil {
+	if err = os.WriteFile(ConfigFilePath, content, 0644); err != nil {
 		return err
 	}
 	return nil
@@ -55,9 +54,8 @@ var defaultConf = Config{
 	AI2Name: "L4",
 }
 
-var Conf = func() Config {
-	var c Config
-	content, err := os.ReadFile(configFilePath)
+var Conf = func() (c Config) {
+	content, err := os.ReadFile(ConfigFilePath)
 	if err != nil {
 		return defaultConf
 	}

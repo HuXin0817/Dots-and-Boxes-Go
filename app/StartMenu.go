@@ -19,37 +19,37 @@ func ShowStartMenu() {
 	Container := container.NewWithoutLayout()
 	MenuSize := fyne.NewSize(612, 600)
 	Container.Resize(MenuSize)
-	IconCanvas := canvas.NewImageFromResource(Icon)
-	IconCanvas.Resize(fyne.NewSize(200, 200))
-	IconCanvas.Move(fyne.NewPos(206, 50))
-	Container.Add(IconCanvas)
-	TitleText := canvas.NewText("Dots and Boxes", TextColor())
-	TitleText.Alignment = fyne.TextAlignCenter
-	TitleText.TextSize = 26
-	TitleText.FontSource = TimesNewRomanBold
-	TitleText.Resize(fyne.NewSize(200, 50))
-	TitleText.Move(fyne.NewPos(206, 250))
-	Container.Add(TitleText)
-	GameLink := canvas.NewText("https://github.com/HuXin0817/Dots-and-Boxes", LinkColor)
-	GameLink.Resize(fyne.NewSize(200, 50))
-	GameLink.Alignment = fyne.TextAlignCenter
-	GameLink.TextSize = 17
-	GameLink.TextStyle = fyne.TextStyle{Bold: true, Italic: true}
-	GameLink.FontSource = TimesNewRomanItalic
-	GameLink.Move(fyne.NewPos(206, 285))
-	Container.Add(GameLink)
-	SpinnerCanvas, err := widgetx.NewAnimatedGifFromResource(SpinnerGIFResource())
+	Icon := canvas.NewImageFromResource(IconResource)
+	Icon.Resize(fyne.NewSize(200, 200))
+	Icon.Move(fyne.NewPos(206, 50))
+	Container.Add(Icon)
+	Title := canvas.NewText("Dots and Boxes", TextColor())
+	Title.Alignment = fyne.TextAlignCenter
+	Title.TextSize = 26
+	Title.FontSource = TimesNewRomanBoldResource
+	Title.Resize(fyne.NewSize(200, 50))
+	Title.Move(fyne.NewPos(206, 250))
+	Container.Add(Title)
+	Link := canvas.NewText("https://github.com/HuXin0817/Dots-and-Boxes", LinkColor)
+	Link.Resize(fyne.NewSize(200, 50))
+	Link.Alignment = fyne.TextAlignCenter
+	Link.TextSize = 17
+	Link.TextStyle = fyne.TextStyle{Bold: true, Italic: true}
+	Link.FontSource = TimesNewRomanItalicResource
+	Link.Move(fyne.NewPos(206, 285))
+	Container.Add(Link)
+	Spinner, err := widgetx.NewAnimatedGifFromResource(SpinnerGIFResource())
 	if err != nil {
 		dialog.NewError(err, MainWindow).Show()
 		return
 	}
-	SpinnerCanvas.Start()
-	SpinnerCanvas.Resize(fyne.NewSize(70, 70))
-	SpinnerCanvas.Move(fyne.NewPos(271, 335))
-	Container.Add(SpinnerCanvas)
+	Spinner.Start()
+	Spinner.Resize(fyne.NewSize(70, 70))
+	Spinner.Move(fyne.NewPos(271, 335))
+	Container.Add(Spinner)
 	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{
-		gif:   SpinnerCanvas,
-		title: TitleText,
+		gif:   Spinner,
+		title: Title,
 	})
 	started := false
 	PlayOnlineButton := widget.NewButton("Play Online", func() {
@@ -141,7 +141,7 @@ func ShowStartMenu() {
 		Min: MenuSize,
 	}, Container)
 	MainContainer.Resize(MenuSize)
-	fadeIn(time.Second, 300*time.Millisecond, MainContainer)
+	FadeIn(time.Second, 300*time.Millisecond, MainContainer)
 	MainWindow.SetContent(MainContainer)
 	MainWindow.Canvas().SetOnTypedKey(func(e *fyne.KeyEvent) {
 		if e.Name == fyne.KeyM {

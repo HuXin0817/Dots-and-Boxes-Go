@@ -18,23 +18,22 @@ const (
 	MinMargin    = EdgeWidth / 3 * 2
 )
 
-func convertPosition(x int) float32 { return MinMargin + float32(x)*EdgeWidth }
+func ConvertPosition(x int) float32 { return MinMargin + float32(x)*EdgeWidth }
 
 func NewDotCanvas(d model.Dot) *canvas.Image {
 	r := canvas.NewImageFromResource(CircleResource())
 	r.Resize(fyne.NewSize(DotWidth*math.Sqrt2, DotWidth*math.Sqrt2))
-	x := convertPosition(d.X()) - DotWidth*(math.Sqrt2-1)/2
-	y := convertPosition(d.Y()) - DotWidth*(math.Sqrt2-1)/2
-	p := fyne.NewPos(x, y)
-	r.Move(p)
+	x := ConvertPosition(d.X()) - DotWidth*(math.Sqrt2-1)/2
+	y := ConvertPosition(d.Y()) - DotWidth*(math.Sqrt2-1)/2
+	r.Move(fyne.NewPos(x, y))
 	return r
 }
 
 func NewEdgeCanvas(e model.Edge, c color.Color) *canvas.Line {
-	x1 := convertPosition(e.Dot1().X()) + HalfDotWidth
-	y1 := convertPosition(e.Dot1().Y()) + HalfDotWidth
-	x2 := convertPosition(e.Dot2().X()) + HalfDotWidth
-	y2 := convertPosition(e.Dot2().Y()) + HalfDotWidth
+	x1 := ConvertPosition(e.Dot1().X()) + HalfDotWidth
+	y1 := ConvertPosition(e.Dot1().Y()) + HalfDotWidth
+	x2 := ConvertPosition(e.Dot2().X()) + HalfDotWidth
+	y2 := ConvertPosition(e.Dot2().Y()) + HalfDotWidth
 	nc := *c.(*color.NRGBA)
 	l := canvas.NewLine(&nc)
 	l.Position1 = fyne.NewPos(x1, y1)
@@ -45,13 +44,11 @@ func NewEdgeCanvas(e model.Edge, c color.Color) *canvas.Line {
 
 func NewBoxCanvas(b model.Box) *canvas.Rectangle {
 	d := b.LeftTopDot()
-	x := convertPosition(d.X()) + DotWidth - 1
-	y := convertPosition(d.Y()) + DotWidth - 1
+	x := ConvertPosition(d.X()) + DotWidth - 1
+	y := ConvertPosition(d.Y()) + DotWidth - 1
 	r := canvas.NewRectangle(&color.NRGBA{})
-	p := fyne.NewPos(x, y)
-	r.Move(p)
-	s := fyne.NewSize(BoxWidth+1, BoxWidth+1)
-	r.Resize(s)
+	r.Move(fyne.NewPos(x, y))
+	r.Resize(fyne.NewSize(BoxWidth+1, BoxWidth+1))
 	return r
 }
 
@@ -64,15 +61,12 @@ func NewButtonCanvas(e model.Edge, tapped func()) *widget.Button {
 		s = fyne.NewSize(EdgeWidth, DotWidth)
 	}
 	b.Resize(s)
-	x1 := convertPosition(e.Dot1().X())
-	x2 := convertPosition(e.Dot2().X())
-	y1 := convertPosition(e.Dot1().Y())
-	y2 := convertPosition(e.Dot2().Y())
-	mx := (x1 + x2) / 2
-	my := (y1 + y2) / 2
-	x := mx - s.Width/2 + HalfDotWidth
-	y := my - s.Height/2 + HalfDotWidth
-	p := fyne.NewPos(x, y)
-	b.Move(p)
+	x1 := ConvertPosition(e.Dot1().X())
+	x2 := ConvertPosition(e.Dot2().X())
+	y1 := ConvertPosition(e.Dot1().Y())
+	y2 := ConvertPosition(e.Dot2().Y())
+	x := (x1+x2)/2 - s.Width/2 + HalfDotWidth
+	y := (y1+y2)/2 - s.Height/2 + HalfDotWidth
+	b.Move(fyne.NewPos(x, y))
 	return b
 }

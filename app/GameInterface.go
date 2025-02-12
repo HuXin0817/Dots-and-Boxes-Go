@@ -22,13 +22,13 @@ type GameInterface struct {
 	Board         board.BoardV2
 	UserInputEdge model.Edge
 	LastEdge      model.Edge
-	Dialog        dialog.Dialog
 	End           bool
 	Paused        bool
-	IsFirst       bool
 	Online        bool
+	IsFirst       bool
 	TimeOut       int
 	Container     *fyne.Container
+	Dialog        dialog.Dialog
 	DotCanvases   [model.MaxDot]*canvas.Image
 	EdgeCanvases  [model.MaxEdge]*canvas.Line
 	EdgeAnimation [model.MaxEdge]*fyne.Animation
@@ -72,7 +72,7 @@ func NewGameInterface() *GameInterface {
 		Min: fyne.NewSize(EdgeWidth*model.DotsHeight+MinMargin, EdgeWidth*model.DotsWidth+MinMargin),
 	}, w)
 	go func() {
-		<-fadeIn(700*time.Millisecond, 0, game.Container)
+		<-FadeIn(700*time.Millisecond, 0, game.Container)
 		game.UpdateTitle()
 	}()
 	MainWindow.SetContent(game.Container)
@@ -218,14 +218,14 @@ func (game *GameInterface) Add(e model.Edge) {
 			audio.Play(gen.NormalMove)
 		}
 	}
-	RePrompt := false
+	t := false
 	for box := range model.MaxBox {
 		if game.Board.EdgeCountOfBox[box] == 3 && !game.BoxTipped[box] {
-			RePrompt = true
+			t = true
 			break
 		}
 	}
-	if RePrompt {
+	if t {
 		for box := range model.MaxBox {
 			if game.Board.EdgeCountOfBox[box] == 3 {
 				if game.BoxTipped[box] {

@@ -10,11 +10,11 @@ import (
 )
 
 var (
-	Icon                = fyne.NewStaticResource("Icon", gen.Icon)
-	TimesNewRomanItalic = fyne.NewStaticResource("TimesNewRomanItalic", gen.TimesNewRomanItalic)
-	TimesNewRomanBold   = fyne.NewStaticResource("TimesNewRomanBold", gen.TimesNewRomanBold)
-	SpinnerDark         = fyne.NewStaticResource("SpinnerDark", gen.SpinnerDark)
-	SpinnerLight        = fyne.NewStaticResource("SpinnerLight", gen.SpinnerLight)
+	IconResource                = fyne.NewStaticResource("Icon", gen.Icon)
+	TimesNewRomanItalicResource = fyne.NewStaticResource("TimesNewRomanItalic", gen.TimesNewRomanItalic)
+	TimesNewRomanBoldResource   = fyne.NewStaticResource("TimesNewRomanBold", gen.TimesNewRomanBold)
+	SpinnerDarkResource         = fyne.NewStaticResource("SpinnerDark", gen.SpinnerDark)
+	SpinnerLightResource        = fyne.NewStaticResource("SpinnerLight", gen.SpinnerLight)
 )
 
 func CircleResource() fyne.Resource {
@@ -32,8 +32,8 @@ func CircleResource() fyne.Resource {
 
 func SpinnerGIFResource() fyne.Resource {
 	if fyne.CurrentApp().Settings().ThemeVariant() == theme.VariantDark {
-		return SpinnerDark
+		return SpinnerDarkResource
 	} else {
-		return SpinnerLight
+		return SpinnerLightResource
 	}
 }
