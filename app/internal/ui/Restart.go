@@ -22,7 +22,7 @@ func restart(Online bool) {
 		Container := MainWindow.Content().(*fyne.Container)
 		<-fadeOut(700*time.Millisecond, 0, Container)
 		if Online {
-			SpinnerCanvas, err := widget.NewAnimatedGifFromResource(SpinnerGIFResource)
+			SpinnerCanvas, err := widget.NewAnimatedGifFromResource(SpinnerGIFResource())
 			if err != nil {
 				dialog.NewError(err, MainWindow).Show()
 				return

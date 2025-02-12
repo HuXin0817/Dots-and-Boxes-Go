@@ -21,7 +21,7 @@ const (
 func convertPosition(x int) float32 { return MinMargin + float32(x)*EdgeWidth }
 
 func NewDotCanvas(d model.Dot) *canvas.Image {
-	r := canvas.NewImageFromResource(CircleResource)
+	r := canvas.NewImageFromResource(CircleResource())
 	r.Resize(fyne.NewSize(DotWidth*math.Sqrt2, DotWidth*math.Sqrt2))
 	x := convertPosition(d.X()) - DotWidth*(math.Sqrt2-1)/2
 	y := convertPosition(d.Y()) - DotWidth*(math.Sqrt2-1)/2

@@ -17,7 +17,6 @@ import (
 
 func ShowStartMenu() {
 	MainWindow.SetTitle("Dots and Boxes")
-	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{})
 	Container := container.NewWithoutLayout()
 	MenuSize := fyne.NewSize(612, 600)
 	Container.Resize(MenuSize)
@@ -40,14 +39,19 @@ func ShowStartMenu() {
 	GameLink.FontSource = TimesNewRomanItalic
 	GameLink.Move(fyne.NewPos(206, 285))
 	Container.Add(GameLink)
-	SpinnerCanvas, err := widgetx.NewAnimatedGifFromResource(SpinnerGIFResource)
+	SpinnerCanvas, err := widgetx.NewAnimatedGifFromResource(SpinnerGIFResource())
 	if err != nil {
 		dialog.NewError(err, MainWindow).Show()
+		return
 	}
 	SpinnerCanvas.Start()
 	SpinnerCanvas.Resize(fyne.NewSize(70, 70))
 	SpinnerCanvas.Move(fyne.NewPos(271, 335))
 	Container.Add(SpinnerCanvas)
+	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{
+		gif:   SpinnerCanvas,
+		title: TitleText,
+	})
 	started := false
 	PlayOnlineButton := widget.NewButton("Play Online", func() {
 		if started {

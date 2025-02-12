@@ -11,7 +11,6 @@ import (
 )
 
 func ShowIntroduceInterface() {
-	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{})
 	Container := container.NewWithoutLayout()
 	MenuSize := fyne.NewSize(612, 600)
 	Container.Resize(MenuSize)
@@ -26,6 +25,9 @@ func ShowIntroduceInterface() {
 	TitleText.Resize(fyne.NewSize(250, 70))
 	TitleText.Move(fyne.NewPos(280, 265))
 	Container.Add(TitleText)
+	fyne.CurrentApp().Settings().SetTheme(&StartMenuTheme{
+		title: TitleText,
+	})
 	MainContainer := container.New(&CenterLayout{
 		Min: MenuSize,
 	}, Container)

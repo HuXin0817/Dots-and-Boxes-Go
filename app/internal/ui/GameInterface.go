@@ -47,14 +47,16 @@ func NewGameInterface() *GameInterface {
 		Board:    *board.NewBoardV2(),
 		LastEdge: -1,
 	}
-	fyne.CurrentApp().Settings().SetTheme(&GameTheme{})
+	fyne.CurrentApp().Settings().SetTheme(&GameTheme{
+		game: game,
+	})
 	w := container.NewWithoutLayout()
 	for b := range model.MaxBox {
 		game.BoxCanvases[b] = NewBoxCanvas(b)
 		w.Add(game.BoxCanvases[b])
 	}
 	for e := range model.MaxEdge {
-		game.EdgeCanvases[e] = NewEdgeCanvas(e, EmptyEdgeColor)
+		game.EdgeCanvases[e] = NewEdgeCanvas(e, EmptyEdgeColor())
 		w.Add(game.EdgeCanvases[e])
 	}
 	for e := range model.MaxEdge {
@@ -232,8 +234,8 @@ func (game *GameInterface) Add(e model.Edge) {
 				if game.BoxTipped[box] {
 					game.BoxAnimation[box].Stop()
 				}
-				BoxStartColor := *BackGroundColor
-				BoxEndColor := *BoxTipsColor
+				BoxStartColor := *BackGroundColor()
+				BoxEndColor := *BoxTipsColor()
 				game.BoxAnimation[box] = fyne.NewAnimation(1200*time.Millisecond, func(f float32) {
 					game.BoxCanvases[box].FillColor = InterpolationColor(BoxStartColor, BoxEndColor, f)
 					game.BoxCanvases[box].Refresh()

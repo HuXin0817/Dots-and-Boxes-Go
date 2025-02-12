@@ -3,6 +3,7 @@ package ui
 import (
 	"image/color"
 
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/theme"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
 )
@@ -33,26 +34,36 @@ func InterpolationColor(start, end color.NRGBA, f float32) *color.NRGBA {
 }
 
 func GetColor(lightColor, darkColor *color.NRGBA) *color.NRGBA {
-	if ThemeVariant == theme.VariantDark {
+	if fyne.CurrentApp().Settings().ThemeVariant() == theme.VariantDark {
 		return darkColor
 	} else {
 		return lightColor
 	}
 }
 
-var (
-	BackGroundColor          = GetColor(LightThemeGameInterfaceBackGroundColor, DarkThemeGameInterfaceBackGroundColor)
-	EmptyEdgeColor           = GetColor(LightThemeEmptyEdgeColor, DarkThemeEmptyEdgeColor)
-	BoxTipsColor             = GetColor(LightThemeScoreableTipsColor, DarkThemeScoreableTipsColor)
-	StartMenuBackgroundColor = GetColor(LightThemeStartMenuBackgroundColor, DarkThemeStartMenuBackgroundColor)
-	TextColor                = func() color.Color {
-		if ThemeVariant == theme.VariantDark {
-			return color.White
-		} else {
-			return color.Black
-		}
+func BackGroundColor() *color.NRGBA {
+	return GetColor(LightThemeGameInterfaceBackGroundColor, DarkThemeGameInterfaceBackGroundColor)
+}
+
+func EmptyEdgeColor() *color.NRGBA {
+	return GetColor(LightThemeEmptyEdgeColor, DarkThemeEmptyEdgeColor)
+}
+
+func BoxTipsColor() *color.NRGBA {
+	return GetColor(LightThemeScoreableTipsColor, DarkThemeScoreableTipsColor)
+}
+
+func StartMenuBackgroundColor() *color.NRGBA {
+	return GetColor(LightThemeStartMenuBackgroundColor, DarkThemeStartMenuBackgroundColor)
+}
+
+func TextColor() color.Color {
+	if fyne.CurrentApp().Settings().ThemeVariant() == theme.VariantDark {
+		return color.White
+	} else {
+		return color.Black
 	}
-)
+}
 
 func BoxFilledColor(turn int) *color.NRGBA {
 	if turn == model.Player1Turn {

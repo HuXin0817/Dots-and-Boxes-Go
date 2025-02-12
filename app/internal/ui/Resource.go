@@ -17,23 +17,23 @@ var (
 	SpinnerLight        = fyne.NewStaticResource("SpinnerLight", gen.SpinnerLight)
 )
 
-var CircleResource = func() fyne.Resource {
+func CircleResource() fyne.Resource {
 	var buf bytes.Buffer
 	canvas := svg.New(&buf)
 	canvas.Start(200, 200)
-	if ThemeVariant == theme.VariantDark {
+	if fyne.CurrentApp().Settings().ThemeVariant() == theme.VariantDark {
 		canvas.Circle(100, 100, 80, "fill:rgb(202, 202, 202)")
 	} else {
 		canvas.Circle(100, 100, 80, "fill:rgb(255, 255, 255)")
 	}
 	canvas.End()
 	return fyne.NewStaticResource("Icon", buf.Bytes())
-}()
+}
 
-var SpinnerGIFResource = func() fyne.Resource {
-	if ThemeVariant == theme.VariantDark {
+func SpinnerGIFResource() fyne.Resource {
+	if fyne.CurrentApp().Settings().ThemeVariant() == theme.VariantDark {
 		return SpinnerDark
 	} else {
 		return SpinnerLight
 	}
-}()
+}

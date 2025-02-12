@@ -8,7 +8,7 @@ import (
 )
 
 func fade(d, wait time.Duration, Container *fyne.Container, StartA uint8) <-chan time.Time {
-	BackgroundColor := *StartMenuBackgroundColor
+	BackgroundColor := *StartMenuBackgroundColor()
 	BackgroundColor.A = StartA
 	Rectangle := canvas.NewRectangle(&BackgroundColor)
 	Rectangle.Resize(MainWindow.Canvas().Size())
