@@ -7,20 +7,20 @@ import (
 
 var (
 	matcher *uint64
-	lock    uintptr
+	l       uintptr
 )
 
-func Lock() {
-	for !atomic.CompareAndSwapUintptr(&lock, 0, 1) {
+func lock() {
+	for !atomic.CompareAndSwapUintptr(&l, 0, 1) {
 		runtime.Gosched()
 	}
 }
 
-func Unlock() { atomic.StoreUintptr(&lock, 0) }
+func unlock() { atomic.StoreUintptr(&l, 0) }
 
 func Match(id uint64) (success bool, player uint64) {
-	Lock()
-	defer Unlock()
+	lock()
+	defer unlock()
 
 	success = matcher != nil
 	if success {
