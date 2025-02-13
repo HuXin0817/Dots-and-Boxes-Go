@@ -79,6 +79,9 @@ func NewGameInterface() *GameInterface {
 	MainWindow.Canvas().SetOnTypedKey(func(event *fyne.KeyEvent) {
 		switch event.Name {
 		case fyne.KeyR:
+			if game.End {
+				return
+			}
 			if game.Dialog != nil {
 				return
 			}
@@ -93,6 +96,9 @@ func NewGameInterface() *GameInterface {
 			game.Dialog.SetOnClosed(func() { game.Dialog = nil })
 			game.Dialog.Show()
 		case fyne.KeyZ:
+			if game.End {
+				return
+			}
 			if game.Dialog != nil {
 				return
 			}
