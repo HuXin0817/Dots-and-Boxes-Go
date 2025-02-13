@@ -11,6 +11,11 @@ import (
 )
 
 func ShowIntroduceInterface() {
+	MainWindow.Canvas().SetOnTypedKey(func(event *fyne.KeyEvent) {
+		if event.Name == fyne.KeyM {
+			audio.On = !audio.On
+		}
+	})
 	Container := container.NewWithoutLayout()
 	MenuSize := fyne.NewSize(612, 600)
 	Container.Resize(MenuSize)
