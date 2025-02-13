@@ -8,7 +8,7 @@ import (
 
 type EdgeQueue struct {
 	m          [model.MaxEdge]model.Edge
-	front, end int64
+	front, end int
 }
 
 func (l *EdgeQueue) Clear() { l.front, l.end = 0, 0 }
@@ -25,6 +25,9 @@ func (l *EdgeQueue) Pop() model.Edge {
 }
 
 func (l *EdgeQueue) Append(e model.Edge) {
+	if config.DEBUG {
+		assert.True(nil, l.end < int(model.MaxEdge))
+	}
 	l.m[l.end] = e
 	l.end++
 }

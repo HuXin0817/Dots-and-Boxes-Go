@@ -1,12 +1,14 @@
 package container
 
 import (
+	"github.com/HuXin0817/dots-and-boxes/src/config"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
+	"github.com/stretchr/testify/assert"
 )
 
 type EdgeList struct {
 	m   [model.MaxEdge]model.Edge
-	len int64
+	len int
 }
 
 func (l *EdgeList) Clear() { l.len = 0 }
@@ -19,6 +21,9 @@ func (l *EdgeList) Reset(e model.Edge) {
 func (l *EdgeList) Empty() bool { return l.len == 0 }
 
 func (l *EdgeList) Append(e model.Edge) {
+	if config.DEBUG {
+		assert.True(nil, l.len < int(model.MaxEdge))
+	}
 	l.m[l.len] = e
 	l.len++
 }
