@@ -63,7 +63,7 @@ require (
 	github.com/yuin/goldmark v1.7.8 // indirect
 	golang.org/x/arch v0.14.0 // indirect
 	golang.org/x/crypto v0.33.0 // indirect
-	golang.org/x/exp/shiny v0.0.0-20230817173708-d852ddb80c63 // indirect
+	golang.org/x/exp/shiny v0.0.0-20250210185358-939b2ce775ac // indirect
 	golang.org/x/image v0.24.0 // indirect
 	golang.org/x/mobile v0.0.0-20250210185054-b38b8813d607 // indirect
 	golang.org/x/net v0.35.0 // indirect
