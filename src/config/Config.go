@@ -4,10 +4,7 @@ import (
 	"time"
 )
 
-const (
-	BoardHeight = 6
-	BoardWidth  = 6
-)
+const BoardSize = 6
 
 // -ldflags "-X github.com/HuXin0817/dots-and-boxes/config.debug=true"
 var debug string

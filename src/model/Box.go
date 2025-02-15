@@ -4,19 +4,19 @@ import "github.com/HuXin0817/dots-and-boxes/src/config"
 
 type Box int
 
-const MaxBox Box = config.BoardHeight * config.BoardWidth
+const MaxBox Box = config.BoardSize * config.BoardSize
 
-func newBox(x, y int) Box { return Box(x*config.BoardWidth + y) }
+func newBox(x, y int) Box { return Box(x*config.BoardSize + y) }
 
 func (b Box) LeftTopDot() Dot {
-	x := int(b / config.BoardWidth)
-	y := int(b % config.BoardWidth)
+	x := int(b / config.BoardSize)
+	y := int(b % config.BoardSize)
 	return newDot(x, y)
 }
 
 func (b Box) edges() [4]Edge {
-	x := int(b / config.BoardWidth)
-	y := int(b % config.BoardWidth)
+	x := int(b / config.BoardSize)
+	y := int(b % config.BoardSize)
 	d00 := newDot(x, y)
 	d01 := newDot(x+1, y)
 	d10 := newDot(x, y+1)

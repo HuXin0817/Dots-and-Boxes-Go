@@ -5,13 +5,12 @@ import "github.com/HuXin0817/dots-and-boxes/src/config"
 type Dot int
 
 const (
-	DotsHeight     = config.BoardHeight + 1
-	DotsWidth      = config.BoardWidth + 1
-	MaxDot     Dot = DotsHeight * DotsWidth
+	DotSize     = config.BoardSize + 1
+	MaxDot  Dot = DotSize * DotSize
 )
 
-func newDot(x, y int) Dot { return Dot(x*DotsWidth + y) }
+func newDot(x, y int) Dot { return Dot(x*DotSize + y) }
 
-func (d Dot) X() int { return int(d) / DotsWidth }
+func (d Dot) X() int { return int(d) / DotSize }
 
-func (d Dot) Y() int { return int(d) % DotsWidth }
+func (d Dot) Y() int { return int(d) % DotSize }

@@ -69,7 +69,7 @@ func NewGameInterface() *GameInterface {
 		w.Add(game.DotCanvases[d])
 	}
 	game.Container = container.New(&CenterLayout{
-		Min: fyne.NewSize(EdgeWidth*model.DotsHeight+MinMargin, EdgeWidth*model.DotsWidth+MinMargin),
+		Min: fyne.NewSize(EdgeWidth*model.DotSize+MinMargin, EdgeWidth*model.DotSize+MinMargin),
 	}, w)
 	go func() {
 		<-FadeIn(700*time.Millisecond, 0, game.Container)

@@ -4,23 +4,23 @@ import "github.com/HuXin0817/dots-and-boxes/src/config"
 
 type Edge int
 
-const MaxEdge Edge = config.BoardHeight*(config.BoardWidth+1) + (config.BoardHeight+1)*config.BoardWidth
+const MaxEdge Edge = 2 * config.BoardSize * (config.BoardSize + 1)
 
 func edgeDotMapper() ([MaxDot][MaxDot]Edge, [MaxEdge]Dot, [MaxEdge]Dot) {
 	var dTe [MaxDot][MaxDot]Edge
 	var eTd1, eTd2 [MaxEdge]Dot
 	e := Edge(0)
-	for x := range DotsHeight {
-		for y := range DotsWidth {
+	for x := range DotSize {
+		for y := range DotSize {
 			d1 := newDot(x, y)
-			if x1 := x + 1; x1 < DotsHeight {
+			if x1 := x + 1; x1 < DotSize {
 				d2 := newDot(x1, y)
 				dTe[d1][d2] = e
 				eTd1[e] = d1
 				eTd2[e] = d2
 				e++
 			}
-			if y1 := y + 1; y1 < DotsWidth {
+			if y1 := y + 1; y1 < DotSize {
 				d2 := newDot(x, y1)
 				dTe[d1][d2] = e
 				eTd1[e] = d1
@@ -47,7 +47,7 @@ func (e Edge) nearBoxes() []Box {
 	}
 	x = e.Dot1().X()
 	y = e.Dot1().Y()
-	if x < config.BoardHeight && y < config.BoardWidth {
+	if x < config.BoardSize && y < config.BoardSize {
 		b = append(b, newBox(x, y))
 	}
 	return b
