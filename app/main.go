@@ -20,7 +20,7 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
-	widgetx "fyne.io/x/fyne/widget"
+	widget2 "fyne.io/x/fyne/widget"
 	"github.com/HuXin0817/dots-and-boxes/server/api"
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
 	"github.com/HuXin0817/dots-and-boxes/src/audio"
@@ -294,7 +294,7 @@ func (t *GameTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) c
 type StartMenuTheme struct {
 	fyneDefaultTheme
 	variant fyne.ThemeVariant
-	gif     *widgetx.AnimatedGif
+	gif     *widget2.AnimatedGif
 	title   *canvas.Text
 }
 
@@ -822,7 +822,7 @@ func ShowStartMenu() {
 	Link.FontSource = TimesNewRomanItalicResource
 	Link.Move(fyne.NewPos(206, 285))
 	Container.Add(Link)
-	Spinner, err := widgetx.NewAnimatedGifFromResource(SpinnerGIFResource())
+	Spinner, err := widget2.NewAnimatedGifFromResource(SpinnerGIFResource())
 	if err != nil {
 		dialog.NewError(err, MainWindow).Show()
 		return
@@ -940,7 +940,7 @@ func Restart(Online bool) {
 		Container := MainWindow.Content().(*fyne.Container)
 		<-FadeOut(700*time.Millisecond, 0, Container)
 		if Online {
-			SpinnerCanvas, err := widgetx.NewAnimatedGifFromResource(SpinnerGIFResource())
+			SpinnerCanvas, err := widget2.NewAnimatedGifFromResource(SpinnerGIFResource())
 			if err != nil {
 				dialog.NewError(err, MainWindow).Show()
 				return
@@ -1071,7 +1071,7 @@ func Restart(Online bool) {
 
 var handled bool
 
-func handleSigs() {
+func HandleSignal() {
 	if handled {
 		return
 	}
@@ -1086,10 +1086,10 @@ func main() {
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGHUP, syscall.SIGABRT, syscall.SIGUSR1, syscall.SIGUSR2)
 	go func() {
 		sig := <-sigs
-		handleSigs()
+		HandleSignal()
 		os.Exit(int(sig.(syscall.Signal)))
 	}()
 	ShowIntroduceInterface()
-	MainWindow.SetOnClosed(handleSigs)
+	MainWindow.SetOnClosed(HandleSignal)
 	MainWindow.ShowAndRun()
 }
