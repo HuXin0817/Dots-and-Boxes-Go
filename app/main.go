@@ -4,7 +4,6 @@ import "fyne.io/fyne/v2/app"
 
 var MainWindow = app.NewWithID("io.github.dotsandboxes").NewWindow("Dots and Boxes")
 
-//go:generate go run cmd/generate.go
 func main() {
 	ShowIntroduceInterface()
 	MainWindow.ShowAndRun()

@@ -6,7 +6,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
-	"github.com/HuXin0817/dots-and-boxes/app/assets/gen"
 	"github.com/HuXin0817/dots-and-boxes/src/audio"
 )
 
@@ -41,7 +40,7 @@ func ShowIntroduceInterface() {
 	MainWindow.SetContent(MainContainer)
 	go func() {
 		time.Sleep(800 * time.Millisecond)
-		audio.Play(gen.EnterGame)
+		audio.Play(EnterGameMusic)
 		<-c
 		<-FadeOut(time.Second, 700*time.Millisecond, MainContainer)
 		ShowStartMenu()

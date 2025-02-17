@@ -9,7 +9,6 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 	widgetx "fyne.io/x/fyne/widget"
-	"github.com/HuXin0817/dots-and-boxes/app/assets/gen"
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
 	"github.com/HuXin0817/dots-and-boxes/src/audio"
 )
@@ -57,7 +56,7 @@ func ShowStartMenu() {
 			return
 		}
 		started = true
-		audio.Play(gen.TouchButton)
+		audio.Play(TouchButtonMusic)
 		restart(true)
 	})
 	PlayOnlineButton.Resize(fyne.NewSize(200, 50))
@@ -128,7 +127,7 @@ func ShowStartMenu() {
 				return
 			}
 			started = true
-			audio.Play(gen.TouchButton)
+			audio.Play(TouchButtonMusic)
 			restart(false)
 		}, MainWindow)
 		PlayLocalButtonSettingDialog.Resize(fyne.NewSize(300, 360))

@@ -35,10 +35,10 @@ $ git clone https://github.com/HuXin0817/dots-and-boxes.git
 $ cd dots-and-boxes
 ```
 
-2. Generate code && Install the dependencies:
+2. Install the dependencies:
 
 ```bash
-$ go generate ./... && go mod tidy
+$ go mod tidy
 ```
 
 3. Run server:

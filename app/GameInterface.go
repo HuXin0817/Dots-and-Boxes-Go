@@ -11,7 +11,6 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
-	"github.com/HuXin0817/dots-and-boxes/app/assets/gen"
 	"github.com/HuXin0817/dots-and-boxes/src/audio"
 	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/config"
@@ -219,9 +218,9 @@ func (game *GameInterface) Add(e model.Edge) {
 	score := game.Board.Add(e)
 	if !game.End {
 		if score > 0 {
-			audio.Play(gen.Score)
+			audio.Play(ScoreMusic)
 		} else {
-			audio.Play(gen.NormalMove)
+			audio.Play(NormalMoveMusic)
 		}
 	}
 	t := false
@@ -305,7 +304,7 @@ func (game *GameInterface) Close() {
 	if game.End {
 		return
 	}
-	audio.Play(gen.Win)
+	audio.Play(WinMusic)
 	game.End = true
 	MainWindow.SetTitle("dots and boxes")
 	game.RemoveHighlight()
