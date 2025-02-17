@@ -1,14 +1,16 @@
 package model
 
+type Turn = bool
+
 const (
-	Player1Turn = 1
-	Player2Turn = -Player1Turn
+	Player1Turn = true
+	Player2Turn = false
 
 	minWinnerScore = int(MaxBox/2 + 1)
 )
 
 type ScoreMap struct {
-	Turn         int
+	Turn
 	Player1Score int
 	Player2Score int
 }
@@ -21,7 +23,7 @@ func (m *ScoreMap) Reset() {
 
 func (m *ScoreMap) Add(s int) {
 	if s == 0 {
-		m.Turn = -m.Turn
+		m.Turn = !m.Turn
 		return
 	}
 	if m.Turn == Player1Turn {
@@ -34,11 +36,5 @@ func (m *ScoreMap) Add(s int) {
 func (m *ScoreMap) Score() int { return m.Player1Score - m.Player2Score }
 
 func (m *ScoreMap) NotOver() bool {
-	if m.Player1Score >= minWinnerScore {
-		return false
-	}
-	if m.Player2Score >= minWinnerScore {
-		return false
-	}
-	return true
+	return m.Player1Score < minWinnerScore && m.Player2Score < minWinnerScore
 }

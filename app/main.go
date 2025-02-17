@@ -185,7 +185,7 @@ func TextColor() color.Color {
 	}
 }
 
-func BoxFilledColor(turn int) *color.NRGBA {
+func BoxFilledColor(turn model.Turn) *color.NRGBA {
 	if turn == model.Player1Turn {
 		return Player1BoxFilledColor
 	} else {
@@ -193,7 +193,7 @@ func BoxFilledColor(turn int) *color.NRGBA {
 	}
 }
 
-func EdgeHighlightColor(turn int) *color.NRGBA {
+func EdgeHighlightColor(turn model.Turn) *color.NRGBA {
 	if turn == model.Player1Turn {
 		return Player1EdgeHighlightColor
 	} else {
