@@ -32,9 +32,9 @@ import (
 	"github.com/bytedance/sonic"
 )
 
-const ServerAddr = "127.0.0.1:8080"
-
 const (
+	ServerAddr = "127.0.0.1:8080"
+
 	EdgeWidth    = 80
 	DotWidth     = EdgeWidth / 5
 	HalfDotWidth = DotWidth / 2
@@ -56,9 +56,7 @@ var (
 	DarkThemeStartMenuBackgroundColor      = &color.NRGBA{R: 16, G: 16, B: 16, A: 255}
 	LightThemeStartMenuBackgroundColor     = &color.NRGBA{R: 255, G: 255, B: 255, A: 255}
 	LinkColor                              = &color.NRGBA{R: 73, G: 148, B: 236, A: 255}
-)
 
-var (
 	//go:embed "assets/font/Times New Roman Bold.ttf"
 	TimesNewRomanBold []byte
 	//go:embed "assets/font/Times New Roman Italic.ttf"
@@ -79,17 +77,13 @@ var (
 	TouchButtonMP3 []byte
 	//go:embed "assets/music/Win.MP3"
 	WinMP3 []byte
-)
 
-var (
 	IconResource                = fyne.NewStaticResource("Icon", IconPng)
 	TimesNewRomanItalicResource = fyne.NewStaticResource("TimesNewRomanItalic", TimesNewRomanItalic)
 	TimesNewRomanBoldResource   = fyne.NewStaticResource("TimesNewRomanBold", TimesNewRomanBold)
 	SpinnerDarkResource         = fyne.NewStaticResource("SpinnerDark", SpinnerDarkGif)
 	SpinnerLightResource        = fyne.NewStaticResource("SpinnerLight", SpinnerLightGif)
-)
 
-var (
 	MyID       *uint64
 	Cli        = api.New(ServerAddr)
 	MainWindow = app.NewWithID("io.github.dotsandboxes").NewWindow("Dots and Boxes")
@@ -1075,18 +1069,27 @@ func Restart(Online bool) {
 	}()
 }
 
+var handled bool
+
+func handleSigs() {
+	if handled {
+		return
+	}
+	handled = true
+	if MyID != nil {
+		_ = Cli.DropID(*MyID)
+	}
+}
+
 func main() {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGHUP, syscall.SIGABRT, syscall.SIGUSR1, syscall.SIGUSR2)
 	go func() {
-		<-sigs
-		if MyID != nil {
-			_ = Cli.DropID(*MyID)
-		}
+		sig := <-sigs
+		handleSigs()
+		os.Exit(int(sig.(syscall.Signal)))
 	}()
 	ShowIntroduceInterface()
+	MainWindow.SetOnClosed(handleSigs)
 	MainWindow.ShowAndRun()
-	if MyID != nil {
-		_ = Cli.DropID(*MyID)
-	}
 }
