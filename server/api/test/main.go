@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"log"
+	"sync/atomic"
 
 	"github.com/HuXin0817/dots-and-boxes/server/api"
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
@@ -55,17 +56,17 @@ func Run(m string) (id uint64, err error) {
 }
 
 func main() {
-	n := 0
+	var runNumber atomic.Uint64
 	for {
-		if n < N {
-			n++
+		if runNumber.Load() < N {
+			runNumber.Add(1)
 			go func() {
+				defer runNumber.Add(-1)
 				if id, err := Run("L0"); err != nil {
 					log.Printf("game %d: %s", id, err)
 				} else {
 					log.Printf("game %d: done", id)
 				}
-				n--
 			}()
 		}
 	}
