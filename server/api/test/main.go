@@ -1,13 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"errors"
 	"log"
-	"sync/atomic"
 
 	"github.com/HuXin0817/dots-and-boxes/server/api"
 	"github.com/HuXin0817/dots-and-boxes/src/ai"
 	"github.com/HuXin0817/dots-and-boxes/src/board"
+	"github.com/HuXin0817/dots-and-boxes/src/mock"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
 )
 
@@ -15,53 +15,55 @@ const N = 100
 
 var Cli = api.New("127.0.0.1:8080")
 
-func Run(gameID int64, m string) (err error) {
+func Run(m string) (id uint64, err error) {
 	b := board.NewBoardV2()
-	id, err := Cli.StartGame()
-	if err != nil {
-		return err
+	if id, err = Cli.StartGame(); err != nil {
+		return id, err
 	}
 	isFirst, err := Cli.WaitJoin(id)
 	if err != nil {
-		return err
+		return id, err
 	}
 	g, err := ai.New(m)
 	if err != nil {
-		return err
+		return id, err
 	}
-	for b.NotOver() {
-		var edge model.Edge
-		var gameExit string
+	var gameExit string
+	getEdge := func() (edge model.Edge) {
 		if (b.Turn == model.Player1Turn && isFirst) || (b.Turn == model.Player2Turn && !isFirst) {
 			edge = g(b)
-			if gameExit, err = Cli.AddEdge(id, edge); err != nil {
-				return err
-			}
+			gameExit, err = Cli.AddEdge(id, edge)
 		} else {
-			if edge, gameExit, err = Cli.GetOnlinePlayerEdge(id, b.Step); err != nil {
-				return err
-			}
+			edge, gameExit, err = Cli.GetOnlinePlayerEdge(id, b.Step)
 		}
-		if gameExit != "" {
-			return fmt.Errorf("game %d: %s", gameID, gameExit)
+		if gameExit != "" || err != nil {
+			return 0
 		}
-		b.Add(edge)
+		return edge
 	}
-	return nil
+	mock.Run(
+		b,
+		func() bool { return err == nil && gameExit == "" && b.NotOver() },
+		func(edge model.Edge) { b.Add(edge) },
+		getEdge,
+		getEdge,
+	)
+	if err == nil && gameExit != "" {
+		err = errors.New(gameExit)
+	}
+	return id, err
 }
 
 func main() {
-	var id atomic.Int64
 	n := 0
 	for {
 		if n < N {
 			n++
 			go func() {
-				i := id.Add(1)
-				if err := Run(i, "L0"); err != nil {
-					log.Println(err)
+				if id, err := Run("L0"); err != nil {
+					log.Printf("game %d: %s", id, err)
 				} else {
-					log.Printf("game %d: done", i)
+					log.Printf("game %d: done", id)
 				}
 				n--
 			}()
