@@ -276,7 +276,7 @@ func main() {
 				IsFirst: isFirst,
 			})
 		})
-		g.POST("dropid", func(c *gin.Context) {
+		g.POST("/dropid", func(c *gin.Context) {
 			Id, ok := c.GetQuery("id")
 			if !ok {
 				c.JSON(http.StatusBadRequest, &model2.DropIDResponse{
