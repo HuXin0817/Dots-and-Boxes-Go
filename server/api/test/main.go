@@ -31,19 +31,19 @@ func Run(gameID int64, m string) (err error) {
 	}
 	for b.NotOver() {
 		var edge model.Edge
-		var timeOut int
+		var gameExit string
 		if (b.Turn == model.Player1Turn && isFirst) || (b.Turn == model.Player2Turn && !isFirst) {
 			edge = g(b)
-			if timeOut, err = Cli.AddEdge(id, edge); err != nil {
+			if gameExit, err = Cli.AddEdge(id, edge); err != nil {
 				return err
 			}
 		} else {
-			if edge, timeOut, err = Cli.GetOnlinePlayerEdge(id, b.Step); err != nil {
+			if edge, gameExit, err = Cli.GetOnlinePlayerEdge(id, b.Step); err != nil {
 				return err
 			}
 		}
-		if timeOut != 0 {
-			return fmt.Errorf("game %d: time out", gameID)
+		if gameExit != "" {
+			return fmt.Errorf("game %d: %s", gameID, gameExit)
 		}
 		b.Add(edge)
 	}

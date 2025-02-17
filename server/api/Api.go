@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	model2 "github.com/HuXin0817/dots-and-boxes/server/internal/model"
+	model2 "github.com/HuXin0817/dots-and-boxes/server/model"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
 	"github.com/bytedance/sonic"
 )
@@ -66,8 +66,11 @@ func (api *Api) waitJoin(id uint64) (isFirst, wait bool, err error) {
 	return FindEnemyResponse.IsFirst, FindEnemyResponse.Waiting, nil
 }
 
-func (api *Api) WaitJoin(id uint64) (isFirst bool, err error) {
+func (api *Api) WaitJoin(id uint64, cancel ...*bool) (isFirst bool, err error) {
 	for range time.Tick(time.Second) {
+		if len(cancel) > 0 && cancel[0] != nil && *cancel[0] == true {
+			return false, nil
+		}
 		var wait bool
 		if isFirst, wait, err = api.waitJoin(id); err != nil {
 			return false, err
@@ -79,64 +82,86 @@ func (api *Api) WaitJoin(id uint64) (isFirst bool, err error) {
 	panic("unreachable")
 }
 
-func (api *Api) getOnlinePlayerEdge(id uint64, step model.Step) (e model.Edge, timeOut int, err error) {
+func (api *Api) getOnlinePlayerEdge(id uint64, step model.Step) (e model.Edge, GameExitMess string, err error) {
 	lock.Lock()
 	defer lock.Unlock()
 	resp, err := http.Get(fmt.Sprintf("http://%s/api/game/sync?id=%d&step=%d", api.addr, id, step))
 	if err != nil {
-		return 0, 0, err
+		return 0, "", err
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return 0, 0, err
+		return 0, "", err
 	}
 	var r model2.GameSyncResponse
 	if err = sonic.Unmarshal(body, &r); err != nil {
-		return 0, 0, err
+		return 0, "", err
 	}
 	if r.Error != "" {
-		return 0, 0, errors.New(r.Error)
+		return 0, "", errors.New(r.Error)
 	}
-	if r.TimeOut != 0 {
-		return 0, r.TimeOut, nil
+	if r.GameExitMess != "" {
+		return 0, r.GameExitMess, nil
 	}
-	return r.UnsyncEdge, 0, nil
+	return r.UnsyncEdge, "", nil
 }
 
-func (api *Api) GetOnlinePlayerEdge(id uint64, step model.Step) (e model.Edge, timeOut int, err error) {
+func (api *Api) GetOnlinePlayerEdge(id uint64, step model.Step) (e model.Edge, GameExitMess string, err error) {
 	for range time.Tick(time.Second) {
-		if e, timeOut, err = api.getOnlinePlayerEdge(id, step); err != nil {
-			return 0, 0, err
+		if e, GameExitMess, err = api.getOnlinePlayerEdge(id, step); err != nil {
+			return 0, "", err
 		}
-		if timeOut != 0 {
-			return 0, timeOut, nil
+		if GameExitMess != "" {
+			return 0, GameExitMess, nil
 		}
 		if e != -1 {
-			return e, 0, nil
+			return e, "", nil
 		}
 	}
-	return 0, 0, nil
+	return 0, "", nil
 }
 
-func (api *Api) AddEdge(id uint64, e model.Edge) (timeOut int, err error) {
+func (api *Api) AddEdge(id uint64, e model.Edge) (GameExitMess string, err error) {
 	lock.Lock()
 	defer lock.Unlock()
 	resp, err := http.Post(fmt.Sprintf("http://%s/api/game/add?id=%d&edge=%d", api.addr, id, e), "application/json", nil)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 	var r model2.AddEdgeResponse
 	if err = sonic.Unmarshal(body, &r); err != nil {
-		return 0, err
+		return "", err
 	}
 	if r.Error != "" {
-		return 0, errors.New(r.Error)
+		return "", errors.New(r.Error)
 	}
-	return r.TimeOut, nil
+	return r.GameExitMess, nil
+}
+
+func (api *Api) DropID(id uint64) (err error) {
+	lock.Lock()
+	defer lock.Unlock()
+	resp, err := http.Post(fmt.Sprintf("http://%s/api/game/dropid?id=%d", api.addr, id), "application/json", nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+	var r model2.DropIDResponse
+	if err = sonic.Unmarshal(body, &r); err != nil {
+		return err
+	}
+	if r.Error != "" {
+		return errors.New(r.Error)
+	}
+	return nil
 }
