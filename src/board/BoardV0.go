@@ -6,14 +6,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type BoardV0 struct {
+type V0 struct {
 	model.Step
 	edges [model.MaxEdge]model.Edge
 	index [model.MaxEdge]int
 }
 
-func NewBoardV0() *BoardV0 {
-	b := &BoardV0{}
+func NewV0() *V0 {
+	b := &V0{}
 	for i := range model.MaxEdge {
 		b.index[i] = int(i)
 		b.edges[i] = i
@@ -21,7 +21,7 @@ func NewBoardV0() *BoardV0 {
 	return b
 }
 
-func (b *BoardV0) Add(e model.Edge) {
+func (b *V0) Add(e model.Edge) {
 	if config.DEBUG {
 		assert.True(nil, b.NotContains(e))
 	}
@@ -33,10 +33,10 @@ func (b *BoardV0) Add(e model.Edge) {
 	b.Step++
 }
 
-func (b *BoardV0) Contains(e model.Edge) bool { return b.index[e] < int(b.Step) }
+func (b *V0) Contains(e model.Edge) bool { return b.index[e] < int(b.Step) }
 
-func (b *BoardV0) NotContains(e model.Edge) bool { return b.index[e] >= int(b.Step) }
+func (b *V0) NotContains(e model.Edge) bool { return b.index[e] >= int(b.Step) }
 
-func (b *BoardV0) EmptyEdges() []model.Edge { return b.edges[b.Step:] }
+func (b *V0) EmptyEdges() []model.Edge { return b.edges[b.Step:] }
 
-func (b *BoardV0) MoveRecord() []model.Edge { return b.edges[:b.Step] }
+func (b *V0) MoveRecord() []model.Edge { return b.edges[:b.Step] }

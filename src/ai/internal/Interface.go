@@ -13,7 +13,7 @@ import (
 )
 
 type Interface interface {
-	BestCandidateEdges(*board.BoardV2) (edges []model.Edge)
+	BestCandidateEdges(*board.V2) (edges []model.Edge)
 }
 
 var ErrModelFormat = errors.New("model format error")

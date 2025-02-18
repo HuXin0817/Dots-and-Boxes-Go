@@ -7,23 +7,23 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type BoardV1 struct {
-	BoardV0
+type V1 struct {
+	V0
 	container.EdgeCountOfBox
 }
 
-func NewBoardV1() *BoardV1 {
-	return &BoardV1{
-		BoardV0: *NewBoardV0(),
+func NewV1() *V1 {
+	return &V1{
+		V0: *NewV0(),
 	}
 }
 
-func (b *BoardV1) Add(e model.Edge) int {
-	b.BoardV0.Add(e)
+func (b *V1) Add(e model.Edge) int {
+	b.V0.Add(e)
 	return b.EdgeCountOfBox.Add(e)
 }
 
-func (b *BoardV1) findNotContainsEdgeInBox(box model.Box) model.Edge {
+func (b *V1) findNotContainsEdgeInBox(box model.Box) model.Edge {
 	if config.DEBUG {
 		assert.Equal(nil, b.EdgeCountOfBox[box], 3)
 	}
@@ -35,7 +35,7 @@ func (b *BoardV1) findNotContainsEdgeInBox(box model.Box) model.Edge {
 	panic("unreachable")
 }
 
-func (b *BoardV1) findScoreableEdge() model.Edge {
+func (b *V1) findScoreableEdge() model.Edge {
 	for box := range model.MaxBox {
 		if b.EdgeCountOfBox[box] == 3 {
 			return b.findNotContainsEdgeInBox(box)

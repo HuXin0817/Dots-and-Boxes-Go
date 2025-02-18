@@ -7,24 +7,24 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type BoardV3 struct {
-	BoardV1
+type V3 struct {
+	V1
 	scoreableEdges container.EdgeQueue
 }
 
-func NewBoardV3() *BoardV3 {
-	return &BoardV3{
-		BoardV1: *NewBoardV1(),
+func NewV3() *V3 {
+	return &V3{
+		V1: *NewV1(),
 	}
 }
 
-func (b *BoardV3) Reset(nb *BoardV1) {
-	b.BoardV1 = *nb
+func (b *V3) Reset(nb *V1) {
+	b.V1 = *nb
 	b.scoreableEdges.Clear()
 }
 
-func (b *BoardV3) Add(e model.Edge) (s int) {
-	s = b.BoardV1.Add(e)
+func (b *V3) Add(e model.Edge) (s int) {
+	s = b.V1.Add(e)
 	for _, box := range model.NearBoxes[e] {
 		if b.EdgeCountOfBox[box] == 3 {
 			b.scoreableEdges.Append(b.findNotContainsEdgeInBox(box))
@@ -33,7 +33,7 @@ func (b *BoardV3) Add(e model.Edge) (s int) {
 	return s
 }
 
-func (b *BoardV3) MaxObtainableScore(minScore int) (s int) {
+func (b *V3) MaxObtainableScore(minScore int) (s int) {
 	for b.Gaming() {
 		if b.scoreableEdges.Empty() {
 			if e := b.findScoreableEdge(); e != -1 {

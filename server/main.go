@@ -32,7 +32,7 @@ var (
 )
 
 type Game struct {
-	board                    board.BoardV2
+	board                    board.V2
 	player1, player2         uint64
 	player1Exit, player2Exit bool
 	lastActive               time.Time
@@ -113,7 +113,7 @@ func NewPlayer() (id uint64) {
 
 func StartGame(player1, player2 uint64) {
 	game := &Game{
-		board:      *board.NewBoardV2(),
+		board:      *board.NewV2(),
 		player1:    player1,
 		player2:    player2,
 		lastActive: time.Now(),

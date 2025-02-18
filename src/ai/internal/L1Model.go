@@ -9,17 +9,17 @@ import (
 
 type L1Model struct {
 	L0       L0Model
-	auxBoard board.BoardV3
+	auxBoard board.V3
 }
 
 func NewL1Model() *L1Model {
 	return &L1Model{
 		L0:       *NewL0Model(),
-		auxBoard: *board.NewBoardV3(),
+		auxBoard: *board.NewV3(),
 	}
 }
 
-func (m *L1Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
+func (m *L1Model) BestCandidateEdges(b *board.V2) []model.Edge {
 	if l := m.L0.BestCandidateEdges(b); !m.L0.EnemyUnscoreableEdges.Empty() || !m.L0.ScoreableEdge.Empty() {
 		return l
 	}
@@ -29,7 +29,7 @@ func (m *L1Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
 		assert.True(nil, Candidate.Empty())
 	}
 	for _, e := range b.EmptyEdges() {
-		m.auxBoard.Reset(&b.BoardV1)
+		m.auxBoard.Reset(&b.V1)
 		if config.DEBUG {
 			assert.Equal(nil, m.auxBoard.Add(e), 0)
 		} else {

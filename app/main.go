@@ -374,7 +374,7 @@ func NewButtonCanvas(e model.Edge, tapped func()) *widget.Button {
 }
 
 type GameInterface struct {
-	Board         board.BoardV2
+	Board         board.V2
 	UserInputEdge model.Edge
 	LastEdge      model.Edge
 	Paused        bool
@@ -396,7 +396,7 @@ type GameInterface struct {
 
 func NewGameInterface() *GameInterface {
 	game := &GameInterface{
-		Board:    *board.NewBoardV2(),
+		Board:    *board.NewV2(),
 		LastEdge: -1,
 	}
 	fyne.CurrentApp().Settings().SetTheme(&GameTheme{

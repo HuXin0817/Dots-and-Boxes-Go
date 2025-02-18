@@ -17,7 +17,7 @@ const N = 100
 var Cli = api.New("127.0.0.1:8080")
 
 func Run(m string) (id uint64, err error) {
-	b := board.NewBoardV2()
+	b := board.NewV2()
 	if id, err = Cli.StartGame(); err != nil {
 		return id, err
 	}

@@ -10,7 +10,7 @@ import (
 type L3Model struct {
 	M            Interface
 	SearchTime   int
-	auxBoard     board.BoardV2
+	auxBoard     board.V2
 	EdgeScoreMap container.EdgeScoreMap
 }
 
@@ -18,19 +18,19 @@ func NewL3Model(searchTime int, M Interface) *L3Model {
 	return &L3Model{
 		M:          M,
 		SearchTime: searchTime,
-		auxBoard:   *board.NewBoardV2(),
+		auxBoard:   *board.NewV2(),
 	}
 }
 
 func DefaultL3Model() *L3Model { return NewL3Model(10000, NewL2Model()) }
 
-func (m *L3Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
+func (m *L3Model) BestCandidateEdges(b *board.V2) []model.Edge {
 	if l := NewL2Model().BestCandidateEdges(b); len(l) == 1 {
 		return l
 	}
 	m.EdgeScoreMap = container.EdgeScoreMap{}
 	for range m.SearchTime/b.RemainStep() + 1 {
-		m.auxBoard.Reset(&b.BoardV1)
+		m.auxBoard.Reset(&b.V1)
 		e := rand.Choice(m.M.BestCandidateEdges(&m.auxBoard))
 		m.auxBoard.Add(e)
 		for m.auxBoard.Gaming() {

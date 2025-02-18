@@ -8,7 +8,7 @@ import (
 	"github.com/HuXin0817/dots-and-boxes/src/model"
 )
 
-func Run(b *board.BoardV2, NotOver func() bool, Add func(model.Edge), GetEdge1, GetEdge2 func() model.Edge) {
+func Run(b *board.V2, NotOver func() bool, Add func(model.Edge), GetEdge1, GetEdge2 func() model.Edge) {
 	for NotOver() {
 		if b.Turn == model.Player1Turn {
 			Add(GetEdge1())
@@ -18,8 +18,8 @@ func Run(b *board.BoardV2, NotOver func() bool, Add func(model.Edge), GetEdge1, 
 	}
 }
 
-func RunAILocal(m1, m2 func(v2 *board.BoardV2) model.Edge) (Player1Score, Player2Score int) {
-	b := board.NewBoardV2()
+func RunAILocal(m1, m2 func(v2 *board.V2) model.Edge) (Player1Score, Player2Score int) {
+	b := board.NewV2()
 	Run(b, b.NotOver,
 		func(edge model.Edge) { b.Add(edge) },
 		func() model.Edge { return m1(b) },
@@ -28,7 +28,7 @@ func RunAILocal(m1, m2 func(v2 *board.BoardV2) model.Edge) (Player1Score, Player
 	return b.Player1Score, b.Player2Score
 }
 
-func RunAILocalN(m1, m2 func(v2 *board.BoardV2) model.Edge, N int) (Player1Score, Player2Score int) {
+func RunAILocalN(m1, m2 func(v2 *board.V2) model.Edge, N int) (Player1Score, Player2Score int) {
 	for range N {
 		s1, s2 := RunAILocal(m1, m2)
 		Player1Score += s1

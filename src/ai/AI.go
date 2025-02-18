@@ -7,12 +7,12 @@ import (
 	"github.com/jefflund/stones/pkg/hjkl/rand"
 )
 
-func New(name string) (func(v2 *board.BoardV2) model.Edge, error) {
+func New(name string) (func(v2 *board.V2) model.Edge, error) {
 	M, err := internal.NewInterface(name)
 	if err != nil {
 		return nil, err
 	}
-	return func(v2 *board.BoardV2) model.Edge {
+	return func(v2 *board.V2) model.Edge {
 		return rand.Choice(M.BestCandidateEdges(v2))
 	}, nil
 }

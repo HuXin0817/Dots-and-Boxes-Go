@@ -15,7 +15,7 @@ func NewL0Model() *L0Model {
 	return &L0Model{}
 }
 
-func (m *L0Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
+func (m *L0Model) BestCandidateEdges(b *board.V2) []model.Edge {
 	m.ScoreableEdge.Clear()
 	m.EnemyUnscoreableEdges.Clear()
 	for _, edge := range b.EmptyEdges() {

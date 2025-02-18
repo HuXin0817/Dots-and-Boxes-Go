@@ -10,25 +10,25 @@ import (
 
 type L2Model struct {
 	L1          L1Model
-	auxBoard    board.BoardV2
+	auxBoard    board.V2
 	SearchEdges container.EdgeList
 }
 
 func NewL2Model() *L2Model {
 	return &L2Model{
 		L1:       *NewL1Model(),
-		auxBoard: *board.NewBoardV2(),
+		auxBoard: *board.NewV2(),
 	}
 }
 
-func (m *L2Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
+func (m *L2Model) BestCandidateEdges(b *board.V2) []model.Edge {
 	if l := m.L1.BestCandidateEdges(b); !m.L1.L0.EnemyUnscoreableEdges.Empty() {
 		return l
 	}
 	m.SearchEdges.Clear()
 	maxs := -int(model.MaxBox + 1)
 	for _, e := range b.EmptyEdges() {
-		m.auxBoard.Reset(&b.BoardV1)
+		m.auxBoard.Reset(&b.V1)
 		m.auxBoard.Add(e)
 		for m.auxBoard.Gaming() {
 			edge := m.L1.BestCandidateEdges(&m.auxBoard)[0]

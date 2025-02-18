@@ -21,7 +21,7 @@ func NewL4Model(newM func() *L3Model) *L4Model {
 
 func DefaultL4Model() *L4Model { return NewL4Model(DefaultL3Model) }
 
-func (m *L4Model) BestCandidateEdges(b *board.BoardV2) []model.Edge {
+func (m *L4Model) BestCandidateEdges(b *board.V2) []model.Edge {
 	if l := NewL2Model().BestCandidateEdges(b); len(l) == 1 {
 		return l
 	}
