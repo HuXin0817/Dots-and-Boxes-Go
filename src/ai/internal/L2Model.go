@@ -33,13 +33,7 @@ func (m *L2Model) BestCandidateEdges(b *board.V2) []model.Edge {
 		for m.auxBoard.Gaming() {
 			edge := m.L1.BestCandidateEdges(&m.auxBoard)[0]
 			if config.DEBUG {
-				haveUpper1 := false
-				for _, box := range model.NearBoxes[edge] {
-					if m.auxBoard.EdgeCountOfBox[box] > 1 {
-						haveUpper1 = true
-					}
-				}
-				assert.True(nil, haveUpper1)
+				assert.True(nil, b.MaxCount(edge) > 1)
 			}
 			m.auxBoard.Add(edge)
 		}

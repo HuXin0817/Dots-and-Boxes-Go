@@ -20,3 +20,10 @@ func (b *EdgeCountOfBox) Add(e model.Edge) (s int) {
 	}
 	return s
 }
+
+func (b *EdgeCountOfBox) MaxCount(e model.Edge) (c int) {
+	for _, box := range model.NearBoxes[e] {
+		c = max(c, b[box])
+	}
+	return c
+}
