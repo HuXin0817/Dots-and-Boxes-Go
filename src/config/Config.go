@@ -6,7 +6,7 @@ import (
 
 const BoardSize = 6
 
-// -ldflags "-X github.com/HuXin0817/dots-and-boxes/config.debug=true"
+// -ldflags "-X github.com/HuXin0817/dots-and-boxes/src/config.debug=true"
 var debug string
 var DEBUG = debug == "true"
 
