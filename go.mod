@@ -6,7 +6,7 @@ require (
 	fyne.io/fyne/v2 v2.5.4
 	fyne.io/x/fyne v0.0.0-20250106132206-3228f6c50107
 	github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b
-	github.com/bytedance/sonic v1.12.8
+	github.com/bytedance/sonic v1.12.9
 	github.com/faiface/beep v1.1.0
 	github.com/gin-contrib/cors v1.7.3
 	github.com/gin-gonic/gin v1.10.0
@@ -63,9 +63,9 @@ require (
 	github.com/yuin/goldmark v1.7.8 // indirect
 	golang.org/x/arch v0.14.0 // indirect
 	golang.org/x/crypto v0.33.0 // indirect
-	golang.org/x/exp/shiny v0.0.0-20250215185904-eff6e970281f // indirect
+	golang.org/x/exp/shiny v0.0.0-20250218142911-aa4b98e5adaa // indirect
 	golang.org/x/image v0.24.0 // indirect
-	golang.org/x/mobile v0.0.0-20250210185054-b38b8813d607 // indirect
+	golang.org/x/mobile v0.0.0-20250218173827-cd096645fcd3 // indirect
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
