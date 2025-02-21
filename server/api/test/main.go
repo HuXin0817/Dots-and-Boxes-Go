@@ -56,7 +56,7 @@ func Run(m string) (id uint64, err error) {
 }
 
 func main() {
-	var runNumber atomic.Uint64
+	var runNumber atomic.Int64
 	for {
 		if runNumber.Load() < N {
 			runNumber.Add(1)
