@@ -18,7 +18,7 @@ type GameSyncResponse struct {
 	Error        string     `json:"error"`
 }
 
-type DropIDResponse struct {
+type DropIdResponse struct {
 	Error string `json:"error"`
 }
 

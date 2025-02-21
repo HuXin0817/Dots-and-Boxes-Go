@@ -32,19 +32,21 @@ var (
 )
 
 type Game struct {
-	board                    board.V2
-	player1, player2         uint64
-	player1Exit, player2Exit bool
-	lastActive               time.Time
+	board       board.V2
+	player1Id   uint64
+	player2Id   uint64
+	player1Exit bool
+	player2Exit bool
+	lastActive  time.Time
 }
 
 var (
 	matcher   *uint64
 	matchlock uintptr
 
-	lastId  atomic.Uint64
-	gameMap = make(map[uint64]*Game)
-	lock    sync.RWMutex
+	Id          atomic.Uint64
+	gameMap     = make(map[uint64]*Game)
+	gameMapLock sync.RWMutex
 )
 
 func matchLock() {
@@ -84,8 +86,8 @@ func Drop(id uint64) bool {
 }
 
 func clean() {
-	lock.Lock()
-	defer lock.Unlock()
+	gameMapLock.Lock()
+	defer gameMapLock.Unlock()
 	for id, game := range gameMap {
 		if time.Since(game.lastActive) > 5*time.Minute {
 			delete(gameMap, id)
@@ -102,7 +104,7 @@ func init() {
 }
 
 func NewPlayer() (id uint64) {
-	id = lastId.Add(1)
+	id = Id.Add(1)
 	go func() {
 		if ok, player := Match(id); ok {
 			StartGame(id, player)
@@ -114,51 +116,51 @@ func NewPlayer() (id uint64) {
 func StartGame(player1, player2 uint64) {
 	game := &Game{
 		board:      *board.NewV2(),
-		player1:    player1,
-		player2:    player2,
+		player1Id:  player1,
+		player2Id:  player2,
 		lastActive: time.Now(),
 	}
-	lock.Lock()
+	gameMapLock.Lock()
 	gameMap[player1] = game
 	gameMap[player2] = game
-	lock.Unlock()
+	gameMapLock.Unlock()
 }
 
 func QueryMatch(id uint64) (matched, isFirst bool, err error) {
 	now := time.Now()
-	lock.RLock()
+	gameMapLock.RLock()
 	game, ok := gameMap[id]
-	lock.RUnlock()
+	gameMapLock.RUnlock()
 	if ok {
 		game.lastActive = now
-		return true, game.player1 == id, nil
+		return true, game.player1Id == id, nil
 	}
 	return false, false, nil
 }
 
 func checkGameStatus(game *Game, id uint64) (mess string, err error) {
 	if game.player1Exit {
-		if id == game.player1 {
+		if id == game.player1Id {
 			return "you exit", nil
 		} else {
 			return "enemy exit", nil
 		}
 	}
 	if game.player2Exit {
-		if id == game.player2 {
+		if id == game.player2Id {
 			return "you exit", nil
 		} else {
 			return "enemy exit", nil
 		}
 	}
 	if time.Since(game.lastActive) > config.PlayerTimeOut {
-		if id == game.player1 {
+		if id == game.player1Id {
 			if game.board.Turn == model.Player1Turn {
 				return "your time out", nil
 			} else {
 				return "enemy time out", nil
 			}
-		} else if id == game.player2 {
+		} else if id == game.player2Id {
 			if game.board.Turn == model.Player2Turn {
 				return "your time out", nil
 			} else {
@@ -170,13 +172,13 @@ func checkGameStatus(game *Game, id uint64) (mess string, err error) {
 }
 
 func DropPlayer(id uint64) error {
-	lock.RLock()
+	gameMapLock.RLock()
 	game, ok := gameMap[id]
-	lock.RUnlock()
+	gameMapLock.RUnlock()
 	if !ok {
 		return ErrGameNotExist
 	}
-	if game.player1 == id {
+	if game.player1Id == id {
 		game.player1Exit = true
 	} else {
 		game.player2Exit = true
@@ -185,9 +187,9 @@ func DropPlayer(id uint64) error {
 }
 
 func AddEdge(id uint64, e model.Edge) (mess string, err error) {
-	lock.RLock()
+	gameMapLock.RLock()
 	game, ok := gameMap[id]
-	lock.RUnlock()
+	gameMapLock.RUnlock()
 	if !ok {
 		return "", ErrGameNotExist
 	}
@@ -197,10 +199,10 @@ func AddEdge(id uint64, e model.Edge) (mess string, err error) {
 	if !game.board.NotOver() {
 		return "", ErrGameAlreadyOver
 	}
-	if game.board.Turn == model.Player1Turn && game.player1 != id {
+	if game.board.Turn == model.Player1Turn && game.player1Id != id {
 		return "", ErrNotPlayerTurn
 	}
-	if game.board.Turn == model.Player2Turn && game.player2 != id {
+	if game.board.Turn == model.Player2Turn && game.player2Id != id {
 		return "", ErrNotPlayerTurn
 	}
 	if e < 0 || e >= model.MaxEdge {
@@ -215,9 +217,9 @@ func AddEdge(id uint64, e model.Edge) (mess string, err error) {
 }
 
 func Sync(id uint64, step model.Step) (edge model.Edge, mess string, err error) {
-	lock.RLock()
+	gameMapLock.RLock()
 	game, ok := gameMap[id]
-	lock.RUnlock()
+	gameMapLock.RUnlock()
 	if !ok {
 		return 0, "", ErrGameNotExist
 	}
@@ -279,29 +281,29 @@ func main() {
 		g.POST("/dropid", func(c *gin.Context) {
 			Id, ok := c.GetQuery("id")
 			if !ok {
-				c.JSON(http.StatusBadRequest, &model2.DropIDResponse{
+				c.JSON(http.StatusBadRequest, &model2.DropIdResponse{
 					Error: "id not found",
 				})
 				return
 			}
 			id, err := strconv.ParseUint(Id, 10, 64)
 			if err != nil {
-				c.JSON(http.StatusBadRequest, &model2.DropIDResponse{
+				c.JSON(http.StatusBadRequest, &model2.DropIdResponse{
 					Error: err.Error(),
 				})
 				return
 			}
 			if Drop(id) {
-				c.JSON(http.StatusOK, &model2.DropIDResponse{})
+				c.JSON(http.StatusOK, &model2.DropIdResponse{})
 				return
 			}
 			if err = DropPlayer(id); err != nil {
-				c.JSON(http.StatusBadRequest, &model2.DropIDResponse{
+				c.JSON(http.StatusBadRequest, &model2.DropIdResponse{
 					Error: err.Error(),
 				})
 				return
 			}
-			c.JSON(http.StatusOK, &model2.DropIDResponse{})
+			c.JSON(http.StatusOK, &model2.DropIdResponse{})
 			return
 		})
 		g.POST("/add", func(c *gin.Context) {

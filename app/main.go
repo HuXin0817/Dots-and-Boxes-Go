@@ -84,9 +84,9 @@ var (
 	SpinnerDarkResource         = fyne.NewStaticResource("SpinnerDark", SpinnerDarkGif)
 	SpinnerLightResource        = fyne.NewStaticResource("SpinnerLight", SpinnerLightGif)
 
-	MyID       *uint64
+	MyId       *uint64
 	Cli        = api.New(ServerAddr)
-	MainWindow = app.NewWithID("io.github.dotsandboxes").NewWindow("Dots and Boxes")
+	MainWindow = app.NewWithId("io.github.dotsandboxes").NewWindow("Dots and Boxes")
 )
 
 type Config struct {
@@ -444,8 +444,8 @@ func NewGameInterface() *GameInterface {
 			game.Dialog = dialog.NewCustomConfirm("Restart?", "Yes", "No", game.ScoreLabel(), func(b bool) {
 				if b {
 					game.GameExit = "restarted"
-					if game.Online && MyID != nil {
-						_ = Cli.DropID(*MyID)
+					if game.Online && MyId != nil {
+						_ = Cli.DropId(*MyId)
 					}
 					Restart(game.Online)
 				}
@@ -465,8 +465,8 @@ func NewGameInterface() *GameInterface {
 				if b {
 					game.Container.Hide()
 					game.GameExit = "return"
-					if game.Online && MyID != nil {
-						_ = Cli.DropID(*MyID)
+					if game.Online && MyId != nil {
+						_ = Cli.DropId(*MyId)
 					}
 					ShowStartMenu()
 				}
@@ -500,8 +500,8 @@ func NewGameInterface() *GameInterface {
 			game.Dialog = dialog.NewCustomConfirm("Quit?", "Yes", "No", game.ScoreLabel(), func(b bool) {
 				if b {
 					MainWindow.Close()
-					if game.Online && MyID != nil {
-						_ = Cli.DropID(*MyID)
+					if game.Online && MyId != nil {
+						_ = Cli.DropId(*MyId)
 					}
 				}
 				game.Paused = false
@@ -935,7 +935,7 @@ func ShowStartMenu() {
 }
 
 func Restart(Online bool) {
-	MyID = nil
+	MyId = nil
 	go func() {
 		Container := MainWindow.Content().(*fyne.Container)
 		<-FadeOut(700*time.Millisecond, 0, Container)
@@ -975,12 +975,12 @@ func Restart(Online bool) {
 				}
 			}()
 			id, err := Cli.StartGame()
-			MyID = &id
+			MyId = &id
 			cancel := false
 			MainWindow.Canvas().SetOnTypedKey(func(ev *fyne.KeyEvent) {
 				if ev.Name == fyne.KeyZ {
 					cancel = true
-					_ = Cli.DropID(id)
+					_ = Cli.DropId(id)
 					ShowStartMenu()
 				}
 			})
@@ -1076,8 +1076,8 @@ func HandleSignal() {
 		return
 	}
 	handled = true
-	if MyID != nil {
-		_ = Cli.DropID(*MyID)
+	if MyId != nil {
+		_ = Cli.DropId(*MyId)
 	}
 }
 

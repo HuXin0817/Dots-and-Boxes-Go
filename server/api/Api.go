@@ -144,7 +144,7 @@ func (api *Api) AddEdge(id uint64, e model.Edge) (GameExitMess string, err error
 	return r.GameExitMess, nil
 }
 
-func (api *Api) DropID(id uint64) (err error) {
+func (api *Api) DropId(id uint64) (err error) {
 	lock.Lock()
 	defer lock.Unlock()
 	resp, err := http.Post(fmt.Sprintf("http://%s/api/game/dropid?id=%d", api.addr, id), "application/json", nil)
@@ -156,7 +156,7 @@ func (api *Api) DropID(id uint64) (err error) {
 	if err != nil {
 		return err
 	}
-	var r model2.DropIDResponse
+	var r model2.DropIdResponse
 	if err = sonic.Unmarshal(body, &r); err != nil {
 		return err
 	}
