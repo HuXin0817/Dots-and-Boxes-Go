@@ -44,13 +44,13 @@ $ go mod tidy
 3. Run server:
 
 ```bash
-$ go run github.com/HuXin0817/dots-and-boxes/server -f server/etc/config.yaml
+$ go run ./server -f server/etc/config.yaml
 ```
 
 4. Run app:
 
 ```bash
-$ go run github.com/HuXin0817/dots-and-boxes/app
+$ go run ./app
 ```
 
 ### License
