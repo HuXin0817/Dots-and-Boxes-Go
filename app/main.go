@@ -86,7 +86,7 @@ var (
 
 	MyId       *uint64
 	Cli        = api.New(ServerAddr)
-	MainWindow = app.NewWithId("io.github.dotsandboxes").NewWindow("Dots and Boxes")
+	MainWindow = app.NewWithID("io.github.dotsandboxes").NewWindow("Dots and Boxes")
 )
 
 type Config struct {
