@@ -1,4 +1,4 @@
-package internal
+package ai
 
 import (
 	"testing"
@@ -90,7 +90,7 @@ func TestParser(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			_, err := NewInterface(tt.input)
+			_, err := New(tt.input)
 			if tt.errNil {
 				assert.Nil(t, err)
 			} else {

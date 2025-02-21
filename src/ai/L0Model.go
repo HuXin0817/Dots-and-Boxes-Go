@@ -1,4 +1,4 @@
-package internal
+package ai
 
 import (
 	"github.com/HuXin0817/dots-and-boxes/src/board"

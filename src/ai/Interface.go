@@ -1,4 +1,4 @@
-package internal
+package ai
 
 import (
 	"errors"
@@ -9,6 +9,7 @@ import (
 
 	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
+	"github.com/jefflund/stones/pkg/hjkl/rand"
 	"gopkg.in/Knetic/govaluate.v2"
 )
 
@@ -22,8 +23,6 @@ func NewInterface(s string) (Interface, error) {
 	for len(s) >= 2 && s[0] == '(' && s[len(s)-1] == ')' {
 		s = s[1 : len(s)-1]
 	}
-	s = strings.ToUpper(s)
-	s = regexp.MustCompile(`\s+`).ReplaceAllString(s, "")
 	switch s {
 	case "L0", "L0()":
 		return NewL0Model(), nil
@@ -101,4 +100,16 @@ func NewInterface(s string) (Interface, error) {
 		}), nil
 	}
 	return nil, ErrModelFormat
+}
+
+func New(s string) (func(v2 *board.V2) model.Edge, error) {
+	s = strings.ToUpper(s)
+	s = regexp.MustCompile(`\s+`).ReplaceAllString(s, "")
+	M, err := NewInterface(s)
+	if err != nil {
+		return nil, err
+	}
+	return func(v2 *board.V2) model.Edge {
+		return rand.Choice(M.BestCandidateEdges(v2))
+	}, nil
 }
