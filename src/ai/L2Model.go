@@ -37,8 +37,7 @@ func (m *L2Model) BestCandidateEdges(b *board.V2) []model.Edge {
 			}
 			m.auxBoard.Add(edge)
 		}
-		s := m.auxBoard.Score()
-		if s > maxs {
+		if s := m.auxBoard.Score(); s > maxs {
 			maxs = s
 			m.SearchEdges.Reset(e)
 		} else if s == maxs {

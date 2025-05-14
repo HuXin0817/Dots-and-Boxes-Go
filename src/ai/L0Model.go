@@ -19,8 +19,7 @@ func (m *L0Model) BestCandidateEdges(b *board.V2) []model.Edge {
 	m.ScoreableEdge.Clear()
 	m.EnemyUnscoreableEdges.Clear()
 	for _, edge := range b.EmptyEdges() {
-		maxCount := b.MaxCount(edge)
-		if maxCount == 3 {
+		if maxCount := b.MaxCount(edge); maxCount == 3 {
 			m.ScoreableEdge.Append(edge)
 		} else if maxCount < 2 {
 			m.EnemyUnscoreableEdges.Append(edge)
