@@ -892,18 +892,8 @@ func ShowStartMenu() {
 			if !b {
 				return
 			}
-			if _, err := ai.New(Entry1.Text); err != nil {
-				dialog.NewError(err, MainWindow).Show()
-				return
-			} else {
-				TmpConfig.AI1Name = Entry1.Text
-			}
-			if _, err := ai.New(Entry2.Text); err != nil {
-				dialog.NewError(err, MainWindow).Show()
-				return
-			} else {
-				TmpConfig.AI2Name = Entry2.Text
-			}
+			TmpConfig.AI1Name = Entry1.Text
+			TmpConfig.AI2Name = Entry2.Text
 			Conf = TmpConfig
 			if err := Conf.Save(); err != nil {
 				dialog.NewError(err, MainWindow).Show()
@@ -1044,14 +1034,8 @@ func Restart(Online bool) {
 				}()
 			}
 		} else {
-			AI1, err := ai.New(Conf.AI1Name)
-			if err != nil {
-				dialog.NewError(err, MainWindow).Show()
-			}
-			AI2, err := ai.New(Conf.AI2Name)
-			if err != nil {
-				dialog.NewError(err, MainWindow).Show()
-			}
+			AI1 := ai.New(Conf.AI1Name)
+			AI2 := ai.New(Conf.AI2Name)
 			UI := NewGameInterface()
 			func1 := UI.GetUserEdge
 			func2 := UI.GetUserEdge

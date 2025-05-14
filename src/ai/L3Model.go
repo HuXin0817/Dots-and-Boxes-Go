@@ -8,21 +8,19 @@ import (
 )
 
 type L3Model struct {
-	M            Interface
+	M            L2Model
 	SearchTime   int
 	auxBoard     board.V2
 	EdgeScoreMap container.EdgeScoreMap
 }
 
-func NewL3Model(searchTime int, M Interface) *L3Model {
+func NewL3Model() *L3Model {
 	return &L3Model{
-		M:          M,
-		SearchTime: searchTime,
+		M:          *NewL2Model(),
+		SearchTime: 10000,
 		auxBoard:   *board.NewV2(),
 	}
 }
-
-func DefaultL3Model() *L3Model { return NewL3Model(10000, NewL2Model()) }
 
 func (m *L3Model) BestCandidateEdges(b *board.V2) []model.Edge {
 	if l := NewL2Model().BestCandidateEdges(b); len(l) == 1 {

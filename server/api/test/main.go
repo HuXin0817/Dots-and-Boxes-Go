@@ -25,10 +25,7 @@ func Run(m string) (id uint64, err error) {
 	if err != nil {
 		return id, err
 	}
-	g, err := ai.New(m)
-	if err != nil {
-		return id, err
-	}
+	g := ai.New(m)
 	var gameExit string
 	getEdge := func() (edge model.Edge) {
 		if (b.Turn == model.Player1Turn && isFirst) || (b.Turn == model.Player2Turn && !isFirst) {

@@ -38,15 +38,7 @@ func RunAILocalN(m1, m2 func(v2 *board.V2) model.Edge, N int) (Player1Score, Pla
 }
 
 func RunAILocalM(m1, m2 string, N int) (Player1Score, Player2Score int) {
-	l1, err := ai.New(m1)
-	if err != nil {
-		panic(err)
-	}
-	l2, err := ai.New(m2)
-	if err != nil {
-		panic(err)
-	}
-	return RunAILocalN(l1, l2, N)
+	return RunAILocalN(ai.New(m1), ai.New(m2), N)
 }
 
 func RunAILocalMParallel(m1, m2 string, N int, T int) (Player1Score, Player2Score int) {

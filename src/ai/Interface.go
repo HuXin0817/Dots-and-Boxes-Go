@@ -1,115 +1,30 @@
 package ai
 
 import (
-	"errors"
-	"fmt"
-	"regexp"
-	"strconv"
-	"strings"
-
 	"github.com/HuXin0817/dots-and-boxes/src/board"
 	"github.com/HuXin0817/dots-and-boxes/src/model"
 	"github.com/jefflund/stones/pkg/hjkl/rand"
-	"gopkg.in/Knetic/govaluate.v2"
 )
 
 type Interface interface {
 	BestCandidateEdges(*board.V2) (edges []model.Edge)
 }
 
-var ErrModelFormat = errors.New("model format error")
-
-func NewInterface(s string) (Interface, error) {
-	for len(s) >= 2 && s[0] == '(' && s[len(s)-1] == ')' {
-		s = s[1 : len(s)-1]
-	}
+func New(s string) func(v2 *board.V2) model.Edge {
+	var f func(v2 *board.V2) []model.Edge
 	switch s {
 	case "L0", "L0()":
-		return NewL0Model(), nil
+		f = NewL0Model().BestCandidateEdges
 	case "L1", "L1()":
-		return NewL1Model(), nil
+		f = NewL1Model().BestCandidateEdges
 	case "L2", "L2()":
-		return NewL2Model(), nil
+		f = NewL2Model().BestCandidateEdges
 	case "L3", "L3()":
-		return DefaultL3Model(), nil
+		f = NewL3Model().BestCandidateEdges
 	case "L4", "L4()":
-		return DefaultL4Model(), nil
-	}
-	if len(s) <= 4 {
-		return nil, ErrModelFormat
-	}
-	if s[2] != '(' || s[len(s)-1] != ')' {
-		return nil, ErrModelFormat
-	}
-	switch s[:2] {
-	case "L3":
-		p1 := 3
-		lpCount := 0
-		rpCount := 0
-		for p1 < len(s) {
-			if s[p1] == '(' {
-				lpCount++
-			}
-			if s[p1] == ')' {
-				rpCount++
-			}
-			if s[p1] == ',' && lpCount == rpCount {
-				break
-			}
-			p1++
-		}
-		arg1 := s[3:p1]
-		if p1 == len(s) {
-			arg1 = s[3 : p1-1]
-		}
-		exp, err := govaluate.NewEvaluableExpression(arg1)
-		if err != nil {
-			return nil, err
-		}
-		result, err := exp.Evaluate(nil)
-		if err != nil {
-			return nil, err
-		}
-		f, err := strconv.ParseFloat(fmt.Sprint(result), 64)
-		if err != nil {
-			return nil, err
-		}
-		if p1 == len(s) {
-			return NewL3Model(int(f), NewL2Model()), nil
-		}
-		if p1+1 >= len(s) {
-			return nil, ErrModelFormat
-		}
-		arg2 := s[p1+1 : len(s)-1]
-		M, err := NewInterface(arg2)
-		if err != nil {
-			return nil, err
-		}
-		return NewL3Model(int(f), M), nil
-	case "L4":
-		M, err := NewInterface(s[3 : len(s)-1])
-		if err != nil {
-			return nil, err
-		}
-		if _, ok := M.(*L3Model); !ok {
-			return nil, ErrModelFormat
-		}
-		return NewL4Model(func() *L3Model {
-			M, _ = NewInterface(s[3 : len(s)-1])
-			return M.(*L3Model)
-		}), nil
-	}
-	return nil, ErrModelFormat
-}
-
-func New(s string) (func(v2 *board.V2) model.Edge, error) {
-	s = strings.ToUpper(s)
-	s = regexp.MustCompile(`\s+`).ReplaceAllString(s, "")
-	M, err := NewInterface(s)
-	if err != nil {
-		return nil, err
+		f = NewL4Model().BestCandidateEdges
 	}
 	return func(v2 *board.V2) model.Edge {
-		return rand.Choice(M.BestCandidateEdges(v2))
-	}, nil
+		return rand.Choice(f(v2))
+	}
 }
