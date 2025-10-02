@@ -10,31 +10,19 @@ class EdgeList {
   EdgeList() = default;
 
   void
-  Reset(Edge e) {
-    m[0] = e;
-    len = 1;
-  }
+  Reset(Edge e);
 
   void
-  Clear() {
-    len = 0;
-  }
+  Clear();
 
   [[nodiscard]] bool
-  Empty() const {
-    return len == 0;
-  }
+  Empty() const;
 
   void
-  Append(Edge e) {
-    assert(len < Edge::Max);
-    m[len++] = e;
-  }
+  Append(Edge e);
 
   [[nodiscard]] std::span<const Edge>
-  Export() const {
-    return {m.begin(), m.begin() + len};
-  }
+  Export() const;
 
   private:
   std::array<Edge, Edge::Max> m;

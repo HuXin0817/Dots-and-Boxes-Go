@@ -1,5 +1,26 @@
 #include "Edge.h"
 
+Edge::Edge(int v) : v(v) {
+}
+
+Edge::Edge(Dot dot1, Dot dot2) : v(std::get<0>(DotMapper)[dot1][dot2]) {
+}
+
+[[nodiscard]] Dot
+Edge::dot1() const {
+  return std::get<1>(DotMapper)[v];
+}
+
+[[nodiscard]] Dot
+Edge::dot2() const {
+  return std::get<2>(DotMapper)[v];
+}
+
+Edge::
+operator int() const {
+  return v;
+}
+
 inline std::tuple<std::array<std::array<int, Dot::Max>, Dot::Max>,
                   std::array<Dot, Edge::Max>,
                   std::array<Dot, Edge::Max>>

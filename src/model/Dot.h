@@ -6,29 +6,21 @@ class Dot {
   public:
   Dot() = default;
 
-  Dot(int v) : v(v) {
-  }
+  Dot(int v);
 
-  Dot(int x, int y) : v(x * Size + y) {
-  }
+  Dot(int x, int y);
 
   [[nodiscard]] int
-  X() const {
-    return v / Size;
-  }
+  X() const;
 
   [[nodiscard]] int
-  Y() const {
-    return v % Size;
-  }
+  Y() const;
 
   static constexpr int Size = BoardSize + 1;
 
   static constexpr int Max = Size * Size;
 
-  operator int() const {
-    return v;
-  }
+  operator int() const;
 
   private:
   int v = 0;

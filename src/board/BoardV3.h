@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "../model/Edge.h"
 #include "../model/EdgeQueue.h"
 #include "BoardV1.h"

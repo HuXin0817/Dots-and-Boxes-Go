@@ -6,18 +6,14 @@ class Box {
   public:
   Box() = default;
 
-  Box(int v) : v(v) {
-  }
+  Box(int v);
 
-  Box(int x, int y) : v(x * BoardSize + y) {
-  }
+  Box(int x, int y);
 
   static constexpr int Size = BoardSize;
   static constexpr int Max = Size * Size;
 
-  operator int() const {
-    return v;
-  }
+  operator int() const;
 
   private:
   int v = 0;

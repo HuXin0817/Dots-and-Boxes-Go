@@ -11,25 +11,17 @@ class Edge {
 
   Edge() = default;
 
-  Edge(int v) : v(v) {
-  }
+  Edge(int v);
 
-  Edge(Dot dot1, Dot dot2) : v(std::get<0>(DotMapper)[dot1][dot2]) {
-  }
+  Edge(Dot dot1, Dot dot2);
 
   [[nodiscard]] Dot
-  dot1() const {
-    return std::get<1>(DotMapper)[v];
-  }
+  dot1() const;
 
   [[nodiscard]] Dot
-  dot2() const {
-    return std::get<2>(DotMapper)[v];
-  }
+  dot2() const;
 
-  operator int() const {
-    return v;
-  }
+  operator int() const;
 
   private:
   int v = 0;
