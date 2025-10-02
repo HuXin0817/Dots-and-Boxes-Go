@@ -18,7 +18,7 @@
 #include "EdgeButtonLayer.h"
 #include "EdgeCanvasLayer.h"
 
-class MainWindow : public QWidget {
+class MainWindow : public BaseCanvasLayer {
   Q_OBJECT
   public:
   MainWindow(bool OpenAIPlayer1,

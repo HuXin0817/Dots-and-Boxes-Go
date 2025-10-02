@@ -1,6 +1,6 @@
 #include "BoxCanvasLayer.h"
 
-BoxCanvasLayer::BoxCanvasLayer(QWidget* parent) : QWidget(parent) {
+BoxCanvasLayer::BoxCanvasLayer(QWidget* parent) : BaseCanvasLayer(parent) {
   resize(WindowSize, WindowSize);
   for (int i = 0; i < Box::Max; i++) {
     BoxCanvases[i] = std::make_unique<BoxCanvas>(this);

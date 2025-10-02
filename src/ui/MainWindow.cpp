@@ -5,7 +5,7 @@ MainWindow::MainWindow(bool OpenAIPlayer1,
                        AIInterface* AIPlayer1,
                        AIInterface* AIPlayer2,
                        QWidget* parent)
-    : QWidget(parent),
+    : BaseCanvasLayer(parent),
       OpenAIPlayer1(OpenAIPlayer1),
       OpenAIPlayer2(OpenAIPlayer2),
       AIPlayer1(AIPlayer1),

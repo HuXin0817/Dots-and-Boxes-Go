@@ -1,6 +1,6 @@
 #include "EdgeCanvasLayer.h"
 
-EdgeCanvasLayer::EdgeCanvasLayer(QWidget* parent) : QWidget(parent) {
+EdgeCanvasLayer::EdgeCanvasLayer(QWidget* parent) : BaseCanvasLayer(parent) {
   resize(WindowSize, WindowSize);
 
   for (int i = 0; i < Edge::Max; i++) {

@@ -1,6 +1,6 @@
 #include "DotCanvasLayer.h"
 
-DotCanvasLayer::DotCanvasLayer(QWidget* parent) : QWidget(parent) {
+DotCanvasLayer::DotCanvasLayer(QWidget* parent) : BaseCanvasLayer(parent) {
   resize(WindowSize, WindowSize);
   for (int i = 0; i < Dot::Max; i++) {
     DotCanvases[i] = std::make_unique<DotCanvas>(this);

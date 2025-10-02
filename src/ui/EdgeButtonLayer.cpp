@@ -2,7 +2,7 @@
 
 EdgeButtonLayer::EdgeButtonLayer(const std::function<std::function<void()>(Edge)>& CallBackFactory,
                                  QWidget* parent)
-    : QWidget(parent) {
+    : BaseCanvasLayer(parent) {
   resize(WindowSize, WindowSize);
 
   for (int i = 0; i < Edge::Max; i++) {

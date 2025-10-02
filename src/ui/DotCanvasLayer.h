@@ -6,11 +6,11 @@
 #include <memory>
 
 #include "../model/Dot.h"
+#include "BaseCanvasLayer.h"
 #include "DotCanvas.h"
 #include "EdgeCanvas.h"
-#include "config.h"
 
-class DotCanvasLayer final : public QWidget {
+class DotCanvasLayer final : public BaseCanvasLayer {
   friend class MainWindow;
 
   Q_OBJECT
