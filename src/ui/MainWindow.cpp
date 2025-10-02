@@ -14,9 +14,9 @@ MainWindow::MainWindow(bool OpenAIPlayer1,
   setMinimumSize(WindowSize, WindowSize);
 
   board = std::make_unique<BoardV2>();
-  boxLayer = std::make_unique<BoxLayer>(this);
-  edgeLayer = std::make_unique<EdgeLayer>(this);
-  dotLayer = std::make_unique<DotLayer>(this);
+  boxLayer = std::make_unique<BoxCanvasLayer>(this);
+  edgeLayer = std::make_unique<EdgeCanvasLayer>(this);
+  dotLayer = std::make_unique<DotCanvasLayer>(this);
   edgeButtonLayer = std::make_unique<EdgeButtonLayer>(
       [=, this](Edge e) {
         return [=, this] {

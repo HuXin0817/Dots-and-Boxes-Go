@@ -5,23 +5,23 @@
 #include <array>
 #include <memory>
 
-#include "../model/Dot.h"
+#include "../model/Edge.h"
 #include "DotCanvas.h"
 #include "EdgeCanvas.h"
 #include "config.h"
 
-class DotLayer final : public QWidget {
+class EdgeCanvasLayer final : public QWidget {
   friend class MainWindow;
 
   Q_OBJECT
 
   public:
-  explicit DotLayer(QWidget* parent = nullptr);
+  explicit EdgeCanvasLayer(QWidget* parent = nullptr);
 
   protected:
   void
   resizeEvent(QResizeEvent* event) override;
 
   private:
-  std::array<std::unique_ptr<DotCanvas>, Dot::Max> DotCanvases;
+  std::array<std::unique_ptr<EdgeCanvas>, Edge::Max> EdgeCanvases;
 };

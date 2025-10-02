@@ -7,9 +7,6 @@
 #include <QSystemTrayIcon>
 
 #include "src/ai/L4Model.h"
-#include "src/ui/BoxLayer.h"
-#include "src/ui/DotLayer.h"
-#include "src/ui/EdgeLayer.h"
 #include "src/ui/MainWindow.h"
 
 int

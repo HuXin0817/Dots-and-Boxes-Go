@@ -1,6 +1,6 @@
-#include "EdgeLayer.h"
+#include "EdgeCanvasLayer.h"
 
-EdgeLayer::EdgeLayer(QWidget* parent) : QWidget(parent) {
+EdgeCanvasLayer::EdgeCanvasLayer(QWidget* parent) : QWidget(parent) {
   resize(WindowSize, WindowSize);
 
   for (int i = 0; i < Edge::Max; i++) {
@@ -13,7 +13,7 @@ EdgeLayer::EdgeLayer(QWidget* parent) : QWidget(parent) {
 }
 
 void
-EdgeLayer::resizeEvent(QResizeEvent* event) {
+EdgeCanvasLayer::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);
 
   int x0 = (width() - BoardWindowSize) / 2 - DotCanvas::R;

@@ -1,6 +1,6 @@
-#include "BoxLayer.h"
+#include "BoxCanvasLayer.h"
 
-BoxLayer::BoxLayer(QWidget* parent) : QWidget(parent) {
+BoxCanvasLayer::BoxCanvasLayer(QWidget* parent) : QWidget(parent) {
   resize(WindowSize, WindowSize);
   for (int i = 0; i < Box::Max; i++) {
     BoxCanvases[i] = std::make_unique<BoxCanvas>(this);
@@ -8,7 +8,7 @@ BoxLayer::BoxLayer(QWidget* parent) : QWidget(parent) {
 }
 
 void
-BoxLayer::resizeEvent(QResizeEvent* event) {
+BoxCanvasLayer::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);
 
   int x0 = (width() - BoardWindowSize) / 2 + DotCanvas::R;

@@ -1,6 +1,6 @@
-#include "DotLayer.h"
+#include "DotCanvasLayer.h"
 
-DotLayer::DotLayer(QWidget* parent) : QWidget(parent) {
+DotCanvasLayer::DotCanvasLayer(QWidget* parent) : QWidget(parent) {
   resize(WindowSize, WindowSize);
   for (int i = 0; i < Dot::Max; i++) {
     DotCanvases[i] = std::make_unique<DotCanvas>(this);
@@ -8,7 +8,7 @@ DotLayer::DotLayer(QWidget* parent) : QWidget(parent) {
 }
 
 void
-DotLayer::resizeEvent(QResizeEvent* event) {
+DotCanvasLayer::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);
 
   int x0 = (width() - BoardWindowSize) / 2 - DotCanvas::R;

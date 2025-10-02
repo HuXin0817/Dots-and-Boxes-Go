@@ -1,4 +1,4 @@
-#include "ButtonLayer.h"
+#include "EdgeButtonLayer.h"
 
 EdgeButtonLayer::EdgeButtonLayer(const std::function<std::function<void()>(Edge)>& CallBackFactory,
                                  QWidget* parent)

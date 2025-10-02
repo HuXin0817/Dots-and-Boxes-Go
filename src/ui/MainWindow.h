@@ -13,10 +13,10 @@
 #include <thread>
 
 #include "../ai/L4Model.h"
-#include "BoxLayer.h"
-#include "ButtonLayer.h"
-#include "DotLayer.h"
-#include "EdgeLayer.h"
+#include "BoxCanvasLayer.h"
+#include "DotCanvasLayer.h"
+#include "EdgeButtonLayer.h"
+#include "EdgeCanvasLayer.h"
 
 class MainWindow : public QWidget {
   Q_OBJECT
@@ -53,9 +53,9 @@ class MainWindow : public QWidget {
   AIInterface* AIPlayer2;
   Edge PlayerMoveEdge;
   std::unique_ptr<BoardV2> board;
-  std::unique_ptr<BoxLayer> boxLayer;
-  std::unique_ptr<EdgeLayer> edgeLayer;
-  std::unique_ptr<DotLayer> dotLayer;
+  std::unique_ptr<BoxCanvasLayer> boxLayer;
+  std::unique_ptr<EdgeCanvasLayer> edgeLayer;
+  std::unique_ptr<DotCanvasLayer> dotLayer;
   std::unique_ptr<EdgeButtonLayer> edgeButtonLayer;
   Edge lastEdge;
 };
