@@ -19,7 +19,7 @@ DotCanvas::paintEvent(QPaintEvent* event) {
 
   QPainter painter(this);
 
-  painter.setRenderHint(QPainter::Antialiasing, true);
+  painter.setRenderHint(QPainter::Antialiasing);
   painter.setBrush(QBrush(Color()));
   painter.setPen(Qt::NoPen);
 
