@@ -1,9 +1,5 @@
 #include "L4Model.h"
 
-#include "../board/BoardV2.h"
-#include "../model/EdgeScoreMap.h"
-#include "L2Model.h"
-
 std::span<const Edge>
 L4Model::BestCandidateEdges(const BoardV2& board) {
   if (auto l = L2Model().BestCandidateEdges(board); l.size() == 1) {

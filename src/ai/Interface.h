@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 #include "../board/BoardV2.h"
 #include "../model/Edge.h"
 

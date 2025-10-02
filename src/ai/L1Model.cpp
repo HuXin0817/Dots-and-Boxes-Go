@@ -1,8 +1,5 @@
 #include "L1Model.h"
 
-#include "../board/BoardV2.h"
-#include "../model/Box.h"
-
 std::span<const Edge>
 L1Model::BestCandidateEdges(const BoardV2& board) {
   if (auto l = SubModel.BestCandidateEdges(board);

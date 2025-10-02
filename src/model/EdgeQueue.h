@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cassert>
-
 #include "Edge.h"
 
 class EdgeQueue {

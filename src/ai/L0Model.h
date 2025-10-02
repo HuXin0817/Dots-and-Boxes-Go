@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 #include "../model/EdgeList.h"
 #include "Interface.h"
 

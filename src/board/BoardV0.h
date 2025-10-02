@@ -1,8 +1,8 @@
 #pragma once
 
-#include <cassert>
 #include <span>
 
+#include "../model/Edge.h"
 #include "../model/Step.h"
 
 class BoardV0 : public Step {

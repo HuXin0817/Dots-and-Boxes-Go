@@ -1,8 +1,5 @@
 #include "BoardV3.h"
 
-#include "../model/Edge.h"
-#include "../model/EdgeBoxMapper.h"
-
 void
 BoardV3::Reset(const BoardV1& nb) {
   GetBoardV1() = nb;

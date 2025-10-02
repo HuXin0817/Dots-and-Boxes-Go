@@ -1,7 +1,5 @@
 #include "BoardV2.h"
 
-#include "../model/Edge.h"
-
 void
 BoardV2::Reset(const BoardV1& nb) {
   GetBoardV1() = nb;

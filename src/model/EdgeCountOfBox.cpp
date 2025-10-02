@@ -1,8 +1,5 @@
 #include "EdgeCountOfBox.h"
 
-#include "Box.h"
-#include "Edge.h"
-
 int
 EdgeCountOfBox::Add(Edge e) {
   int s = 0;

@@ -1,9 +1,5 @@
 #include "BoardV1.h"
 
-#include "../model/Box.h"
-#include "../model/Edge.h"
-#include "../model/EdgeBoxMapper.h"
-
 int
 BoardV1::Add(Edge edge) {
   BoardV0::Add(edge);

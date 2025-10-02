@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../board/BoardV2.h"
 #include "../model/EdgeScoreMap.h"
 #include "L2Model.h"
 

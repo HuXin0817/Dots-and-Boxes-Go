@@ -1,7 +1,5 @@
 #include "EdgeScoreMap.h"
 
-#include "Edge.h"
-
 void
 EdgeScoreMap::Reset() {
   Time = std::array<int, Edge::Max>{};

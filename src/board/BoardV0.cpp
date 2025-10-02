@@ -1,7 +1,5 @@
 #include "BoardV0.h"
 
-#include "../model/Edge.h"
-
 BoardV0::BoardV0() {
   for (int i = 0; i < Edge::Max; i++) {
     EdgeIndexes[i] = i;

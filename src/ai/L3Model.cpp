@@ -1,8 +1,5 @@
 #include "L3Model.h"
 
-#include "../board/BoardV2.h"
-#include "../defs.h"
-
 std::span<const Edge>
 L3Model::BestCandidateEdges(const BoardV2& board) {
   if (auto l = SubModel.BestCandidateEdges(board); l.size() == 1) {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../model/Box.h"
+#include "../model/Edge.h"
 #include "../model/EdgeCountOfBox.h"
 #include "BoardV0.h"
 
