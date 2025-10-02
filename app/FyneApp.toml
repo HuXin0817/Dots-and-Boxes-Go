@@ -1,8 +1,0 @@
-Website = "https://github.com/HuXin0817/Dots-and-Boxes/"
-
-[Details]
-  Icon = "assets/icon/icon.png"
-  Name = "Dots and Boxes"
-  ID = "com.github.dotsandboxes"
-  Version = "1.0.0"
-  Build = 1
