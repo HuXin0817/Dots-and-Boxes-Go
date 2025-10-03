@@ -34,17 +34,17 @@ class EdgeButtonLayer final : public BaseCanvasLayer {
   resizeEvent(QResizeEvent* event) override {
     QWidget::resizeEvent(event);
 
-    int x0 = (width() - BoardWindowSize) / 2 - DotCanvas::R;
-    int y0 = (height() - BoardWindowSize) / 2 - DotCanvas::R;
+    int x0 = (width() - BoardWindowSize) / 2 - BaseCanvas::R;
+    int y0 = (height() - BoardWindowSize) / 2 - BaseCanvas::R;
 
     for (int i = 0; i < Edge::Max; i++) {
       Edge e(i);
       int x = x0 + e.Dot1().X() * EdgeButton::B;
       int y = y0 + e.Dot1().Y() * EdgeButton::B;
       if (e.Dot1().X() == e.Dot2().X()) {
-        y += DotCanvas::R;
+        y += BaseCanvas::R;
       } else {
-        x += DotCanvas::R;
+        x += BaseCanvas::R;
       }
       EdgeButtons.At(e)->move(x, y);
     }

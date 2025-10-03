@@ -2,19 +2,17 @@
 
 #include <QPaintEvent>
 #include <QPainter>
-#include <QWidget>
 
-#include "Common.h"
+#include "BaseCanvas.h"
 
-class DotCanvas final : public QWidget {
+class DotCanvas final : public BaseCanvas {
   Q_OBJECT
 
   public:
-  static constexpr int R = 8;
   static constexpr int A = 2 * R;
 
-  static QColor
-  Color() {
+  QColor
+  Color() const override {
     if (isDarkMode()) {
       return {202, 202, 202, 255};
     } else {
@@ -22,13 +20,13 @@ class DotCanvas final : public QWidget {
     }
   }
 
-  explicit DotCanvas(QWidget* parent = nullptr) : QWidget(parent) {
+  explicit DotCanvas(QWidget* parent = nullptr) : BaseCanvas(parent) {
     setFixedSize(A, A);
   }
 
   void
   paintEvent(QPaintEvent* event) override {
-    QWidget::paintEvent(event);
+    BaseCanvas::paintEvent(event);
 
     QPainter painter(this);
 

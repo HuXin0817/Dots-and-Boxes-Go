@@ -2,17 +2,17 @@
 
 #include "DotCanvas.h"
 
-class EdgeButton final : public QWidget {
+class EdgeButton final : public BaseCanvas {
   Q_OBJECT
 
   public:
-  static constexpr int A = DotCanvas::R * 2;
+  static constexpr int A = R * 2;
   static constexpr int B = A * 5;
 
   std::function<void()> CallBack;
 
   explicit EdgeButton(bool rotate, std::function<void()> CallBack, QWidget* parent = nullptr)
-      : QWidget(parent), CallBack(std::move(CallBack)), Rotate(rotate) {
+      : BaseCanvas(parent), CallBack(std::move(CallBack)), Rotate(rotate) {
     if (!rotate) {
       resize(QSize(A, B));
     } else {
@@ -25,7 +25,7 @@ class EdgeButton final : public QWidget {
   protected:
   void
   mousePressEvent(QMouseEvent* event) override {
-    QWidget::mousePressEvent(event);
+    BaseCanvas::mousePressEvent(event);
 
     CallBack();
   }

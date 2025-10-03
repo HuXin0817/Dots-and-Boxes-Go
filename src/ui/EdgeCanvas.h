@@ -1,16 +1,15 @@
 #pragma once
 
-#include "Common.h"
 #include "DotCanvas.h"
 
-class EdgeCanvas final : public QWidget {
+class EdgeCanvas final : public BaseCanvas {
   Q_OBJECT
 
   public:
-  static constexpr int A = DotCanvas::R * 2;
+  static constexpr int A = R * 2;
   static constexpr int B = A * 5;
 
-  explicit EdgeCanvas(bool rotate, QWidget* parent = nullptr) : QWidget(parent), Rotate(rotate) {
+  explicit EdgeCanvas(bool rotate, QWidget* parent = nullptr) : BaseCanvas(parent), Rotate(rotate) {
     if (!rotate) {
       resize(QSize(A, B));
     } else {
@@ -23,7 +22,7 @@ class EdgeCanvas final : public QWidget {
   bool Rotate = false;
 
   QColor
-  Color() const {
+  Color() const override {
     if (state == State::Free) {
       if (isDarkMode()) {
         return {65, 65, 65, 255};
@@ -52,7 +51,7 @@ class EdgeCanvas final : public QWidget {
   protected:
   void
   paintEvent(QPaintEvent* event) override {
-    QWidget::paintEvent(event);
+    BaseCanvas::paintEvent(event);
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);

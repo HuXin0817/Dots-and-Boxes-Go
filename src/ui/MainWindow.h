@@ -53,7 +53,7 @@ class MainWindow final : public BaseCanvasLayer {
   }
 
   QColor
-  BackGroundColor() {
+  Color() const override {
     if (isDarkMode()) {
       return {43, 43, 43, 255};
     } else {
@@ -97,7 +97,7 @@ class MainWindow final : public BaseCanvasLayer {
   void
   paintEvent(QPaintEvent* event) override {
     QPainter painter(this);
-    painter.fillRect(rect(), BackGroundColor());
+    painter.fillRect(rect(), Color());
   }
 
   void

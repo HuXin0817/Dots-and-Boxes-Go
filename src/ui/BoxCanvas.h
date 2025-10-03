@@ -1,23 +1,23 @@
 #pragma once
 
-#include "Common.h"
+#include "BaseCanvas.h"
 #include "DotCanvas.h"
 #include "EdgeCanvas.h"
 
-class BoxCanvas final : public QWidget {
+class BoxCanvas final : public BaseCanvas {
   Q_OBJECT
 
   public:
-  static constexpr int A = EdgeCanvas::B - 2 * DotCanvas::R;
+  static constexpr int A = EdgeCanvas::B - 2 * R;
 
-  explicit BoxCanvas(QWidget* parent = nullptr) : QWidget(parent) {
+  explicit BoxCanvas(QWidget* parent = nullptr) : BaseCanvas(parent) {
     resize(QSize(A, A));
   }
 
   State state = State::Free;
 
   QColor
-  Color() const {
+  Color() const override {
     if (state == State::Free) {
       return {0, 0, 0, 0};
     }
@@ -34,7 +34,7 @@ class BoxCanvas final : public QWidget {
   protected:
   void
   paintEvent(QPaintEvent* event) override {
-    QWidget::paintEvent(event);
+    BaseCanvas::paintEvent(event);
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
