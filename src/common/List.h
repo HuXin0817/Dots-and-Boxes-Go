@@ -11,28 +11,33 @@ class List {
   void
   Reset(T e) {
     Data.At(0) = e;
-    Size = 1;
+    Len = 1;
   }
 
   void
   Clear() {
-    Size = 0;
+    Len = 0;
   }
 
   bool
   Empty() const {
-    return Size == 0;
+    return Len == 0;
   }
 
   void
   Append(T e) {
     assert(Size < Cap);
-    Data.At(Size++) = e;
+    Data.At(Len++) = e;
   }
 
   Span<T>
   Export() const {
-    return {Data.begin(), Data.begin() + Size};
+    return {Data.begin(), Data.begin() + Len};
+  }
+
+  int
+  Size() const {
+    return Len;
   }
 
   auto
@@ -42,7 +47,7 @@ class List {
 
   auto
   end() {
-    return Data.begin() + Size;
+    return Data.begin() + Len;
   }
 
   auto
@@ -52,10 +57,10 @@ class List {
 
   auto
   end() const {
-    return Data.begin() + Size;
+    return Data.begin() + Len;
   }
 
   private:
   Array<T, Cap> Data;
-  int Size = 0;
+  int Len = 0;
 };

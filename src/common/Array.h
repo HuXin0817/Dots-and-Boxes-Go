@@ -7,18 +7,18 @@ class Array {
   public:
   T&
   At(int i) {
-    return data[i];
+    return Data[i];
   }
 
   const T&
   At(int i) const {
-    return data[i];
+    return Data[i];
   }
 
   Array&
   operator=(const Array& other) {
     if (this != &other) {
-      std::memcpy(data, other.data, Size * sizeof(T));
+      std::memcpy(Data, other.Data, Size * sizeof(T));
     }
     return *this;
   }
@@ -28,7 +28,7 @@ class Array {
     int i = 0;
     for (const auto& item : init) {
       if (i < Size) {
-        data[i++] = item;
+        Data[i++] = item;
       }
     }
     return *this;
@@ -36,24 +36,24 @@ class Array {
 
   auto
   begin() {
-    return data;
+    return Data;
   }
 
   auto
   end() {
-    return data + Size;
+    return Data + Size;
   }
 
   auto
   begin() const {
-    return data;
+    return Data;
   }
 
   auto
   end() const {
-    return data + Size;
+    return Data + Size;
   }
 
   private:
-  T data[Size] = {};
+  T Data[Size] = {};
 };

@@ -11,18 +11,18 @@ class Queue {
   void
   Clear() {
     Begin = 0;
-    end = 0;
+    End = 0;
   }
 
   bool
   Empty() const {
-    return Begin == end;
+    return Begin == End;
   }
 
   void
-  Append(T e) {
-    assert(end < Cap);
-    Data.At(end++) = e;
+  AppEnd(T e) {
+    assert(End < Cap);
+    Data.At(End++) = e;
   }
 
   T
@@ -35,12 +35,12 @@ class Queue {
 
   Span<T>
   Export() const {
-    return {Data.begin() + Begin, Data.begin() + end};
+    return {Data.begin() + Begin, Data.begin() + End};
   }
 
   bool
   Contains(T e) const {
-    for (int i = Begin; i < end; i++) {
+    for (int i = Begin; i < End; i++) {
       if (Data.At(i) == e) {
         return true;
       }
@@ -51,5 +51,5 @@ class Queue {
   private:
   Array<T, Cap> Data;
   int Begin = 0;
-  int end = 0;
+  int End = 0;
 };

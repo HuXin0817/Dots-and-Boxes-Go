@@ -3,50 +3,50 @@
 template <typename T>
 class Vector {
   public:
-  explicit Vector(int size) : size(size) {
-    data = new T[size];
+  explicit Vector(int Len) : Len(Len) {
+    Data = new T[Len];
   }
 
   ~Vector() {
-    delete[] data;
+    delete[] Data;
   }
 
   T&
   At(int i) {
-    return data[i];
+    return Data[i];
   }
 
   const T&
   At(int i) const {
-    return data[i];
+    return Data[i];
   }
 
   auto
   begin() {
-    return data;
+    return Data;
   }
 
   auto
   end() {
-    return data + size;
+    return Data + Len;
   }
 
   auto
   begin() const {
-    return data;
+    return Data;
   }
 
   auto
   end() const {
-    return data + size;
+    return Data + Len;
   }
 
   int
   Size() const {
-    return size;
+    return Len;
   }
 
   private:
-  T* data;
-  int size;
+  T* Data;
+  int Len;
 };
