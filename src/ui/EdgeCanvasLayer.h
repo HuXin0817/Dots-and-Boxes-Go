@@ -19,11 +19,7 @@ class EdgeCanvasLayer final : public EdgeLayer<EdgeCanvas> {
     resize(WindowSize, WindowSize);
 
     for (int edge = 0; edge < Edge::Max; edge++) {
-      if (Edge(edge).Dot1().X() == Edge(edge).Dot2().X()) {
-        Canvases.At(edge) = std::make_unique<EdgeCanvas>(false, this);
-      } else {
-        Canvases.At(edge) = std::make_unique<EdgeCanvas>(true, this);
-      }
+      Canvases.At(edge) = std::make_unique<EdgeCanvas>(Edge(edge).Rotate(), this);
     }
   }
 };

@@ -22,6 +22,11 @@ class Edge {
     return std::get<2>(DotMapper).At(v);
   }
 
+  bool
+  Rotate() {
+    return Dot1().Y() == Dot2().Y();
+  }
+
   V(Edge)
 
   static std::tuple<Array<Array<int, Dot::Max>, Dot::Max>, Array<Dot, Max>, Array<Dot, Max>>
