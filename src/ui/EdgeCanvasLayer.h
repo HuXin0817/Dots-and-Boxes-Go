@@ -18,8 +18,8 @@ class EdgeCanvasLayer final : public EdgeLayer<EdgeCanvas> {
   explicit EdgeCanvasLayer(QWidget* parent = nullptr) : EdgeLayer(parent) {
     resize(WindowSize, WindowSize);
 
-    for (int edge = 0; edge < Edge::Max; edge++) {
-      Canvases.At(edge) = std::make_unique<EdgeCanvas>(Edge(edge).Rotate(), this);
+    for (Edge edge = 0; edge < Edge::Max; edge++) {
+      Canvases.At(edge) = std::make_unique<EdgeCanvas>(edge.Rotate(), this);
     }
   }
 };

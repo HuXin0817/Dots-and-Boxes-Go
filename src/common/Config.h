@@ -9,6 +9,10 @@ static constexpr int BoardSize = 6;
   Class(int v) : v(v) {  \
   }                      \
                          \
+  void operator++(int) { \
+    v++;                 \
+  }                      \
+                         \
   operator int() const { \
     return v;            \
   }                      \
