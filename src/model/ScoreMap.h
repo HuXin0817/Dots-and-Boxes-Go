@@ -5,7 +5,7 @@
 static constexpr bool Player1Turn = true;
 static constexpr bool Player2Turn = !Player1Turn;
 
-static int MinWinnerScore = Box::Max / 2 + 1;
+static constexpr int MinWinnerScore = Box::Max / 2 + 1;
 
 class ScoreMap {
   public:
