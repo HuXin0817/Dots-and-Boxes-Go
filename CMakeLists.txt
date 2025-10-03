@@ -18,9 +18,9 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+file(GLOB_RECURSE HEADERS "src/*.h")
 
-add_executable(Dots_and_Boxes main.cpp ${SOURCES})
+add_executable(Dots_and_Boxes main.cpp ${HEADERS})
 
 set_target_properties(Dots_and_Boxes PROPERTIES
         AUTOMOC ON

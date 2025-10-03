@@ -16,11 +16,29 @@ class DotCanvasLayer final : public BaseCanvasLayer {
   Q_OBJECT
 
   public:
-  explicit DotCanvasLayer(QWidget* parent = nullptr);
+  explicit DotCanvasLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
+    resize(WindowSize, WindowSize);
+    for (int i = 0; i < Dot::Max; i++) {
+      DotCanvases.At(i) = std::make_unique<DotCanvas>(this);
+    }
+  }
 
   protected:
   void
-  resizeEvent(QResizeEvent* event) override;
+  resizeEvent(QResizeEvent* event) override {
+    QWidget::resizeEvent(event);
+
+    int x0 = (width() - BoardWindowSize) / 2 - DotCanvas::R;
+    int y0 = (height() - BoardWindowSize) / 2 - DotCanvas::R;
+
+    for (int i = 0; i < Dot::Size; i++) {
+      for (int j = 0; j < Dot::Size; j++) {
+        int x = x0 + i * EdgeCanvas::B;
+        int y = y0 + j * EdgeCanvas::B;
+        DotCanvases.At(Dot(i, j))->move(x, y);
+      }
+    }
+  }
 
   private:
   Array<std::unique_ptr<DotCanvas>, Dot::Max> DotCanvases;

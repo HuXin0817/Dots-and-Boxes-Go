@@ -5,16 +5,24 @@
 class Step {
   public:
   [[nodiscard]] bool
-  Gaming() const;
+  Gaming() const {
+    return v < Edge::Max;
+  }
 
   [[nodiscard]] int
-  RemainStep() const;
+  RemainStep() const {
+    return Edge::Max - v;
+  }
 
   [[nodiscard]] int
-  NowStep() const;
+  NowStep() const {
+    return v;
+  }
 
   void
-  Go();
+  Go() {
+    v++;
+  }
 
   private:
   int v = 0;

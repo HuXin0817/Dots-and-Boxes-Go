@@ -9,22 +9,44 @@ static int MinWinnerScore = Box::Max / 2 + 1;
 
 class ScoreMap {
   public:
-  ScoreMap();
+  ScoreMap() {
+    Reset();
+  }
 
   void
-  Reset();
+  Reset() {
+    Player1Score = 0;
+    Player2Score = 0;
+    Turn = Player1Turn;
+  }
 
   void
-  Add(int s);
+  Add(int s) {
+    if (s == 0) {
+      Turn = !Turn;
+      return;
+    }
+    if (Turn == Player1Turn) {
+      Player1Score += s;
+    } else {
+      Player2Score += s;
+    }
+  }
 
   [[nodiscard]] int
-  Score() const;
+  Score() const {
+    return Player1Score - Player2Score;
+  }
 
   [[nodiscard]] int
-  GetScore(int player) const;
+  GetScore(int player) const {
+    return (player == 0) ? Player1Score : Player2Score;
+  }
 
   [[nodiscard]] bool
-  Gaming() const;
+  Gaming() const {
+    return Player1Score < MinWinnerScore && Player2Score < MinWinnerScore;
+  }
 
   int Player1Score = 0;
   int Player2Score = 0;
