@@ -5,9 +5,9 @@ EdgeCanvasLayer::EdgeCanvasLayer(QWidget* parent) : BaseCanvasLayer(parent) {
 
   for (int i = 0; i < Edge::Max; i++) {
     if (Edge(i).dot1().X() == Edge(i).dot2().X()) {
-      EdgeCanvases[i] = std::make_unique<EdgeCanvas>(false, this);
+      EdgeCanvases.At(i) = std::make_unique<EdgeCanvas>(false, this);
     } else {
-      EdgeCanvases[i] = std::make_unique<EdgeCanvas>(true, this);
+      EdgeCanvases.At(i) = std::make_unique<EdgeCanvas>(true, this);
     }
   }
 }
@@ -28,6 +28,6 @@ EdgeCanvasLayer::resizeEvent(QResizeEvent* event) {
     } else {
       x += DotCanvas::R;
     }
-    EdgeCanvases[e]->move(x, y);
+    EdgeCanvases.At(e)->move(x, y);
   }
 }

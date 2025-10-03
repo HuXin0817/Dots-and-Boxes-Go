@@ -8,8 +8,8 @@ BoardV1::Add(Edge edge) {
 
 [[nodiscard]] Edge
 BoardV1::FindNotContainsEdgeInBox(Box box) const {
-  assert(EdgeCountOfBox::operator[](box) == 3);
-  for (auto edge : EdgeBoxMapper::BoxNearEdges[box]) {
+  assert(EdgeCountOfBox::At(box) == 3);
+  for (auto edge : EdgeBoxMapper::BoxNearEdges.At(box)) {
     if (NotContains(edge)) {
       return edge;
     }
@@ -21,7 +21,7 @@ BoardV1::FindNotContainsEdgeInBox(Box box) const {
 [[nodiscard]] Edge
 BoardV1::FindScoreableEdge() const {
   for (int box = 0; box < Box::Max; box++) {
-    if (EdgeCountOfBox::operator[](box) == 3) {
+    if (EdgeCountOfBox::At(box) == 3) {
       return FindNotContainsEdgeInBox(Box(box));
     }
   }

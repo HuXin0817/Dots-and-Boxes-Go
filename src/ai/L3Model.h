@@ -11,7 +11,7 @@ class L3Model final : public AIInterface {
   explicit L3Model(int SearchTime = 10000) : SearchTime(SearchTime) {
   }
 
-  std::span<const Edge>
+  Span<const Edge>
   BestCandidateEdges(const BoardV2& board) override;
 
   private:

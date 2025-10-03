@@ -1,8 +1,8 @@
 #pragma once
 
 #include <tuple>
-#include <vector>
 
+#include "../common/Array.h"
 #include "Dot.h"
 
 class Edge {
@@ -26,8 +26,6 @@ class Edge {
   private:
   int v = 0;
 
-  static std::tuple<std::array<std::array<int, Dot::Max>, Dot::Max>,
-                    std::array<Dot, Max>,
-                    std::array<Dot, Max>>
+  static std::tuple<Array<Array<int, Dot::Max>, Dot::Max>, Array<Dot, Max>, Array<Dot, Max>>
       DotMapper;
 };

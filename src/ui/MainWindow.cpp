@@ -39,20 +39,20 @@ void
 MainWindow::Add(Edge e) {
   auto Turn = board->Turn;
   if (board->NowStep() > 0) {
-    edgeLayer->EdgeCanvases[lastEdge]->highLight = false;
+    edgeLayer->EdgeCanvases.At(lastEdge)->highLight = false;
   }
-  edgeLayer->EdgeCanvases[e]->state = StateFromTurn(Turn);
-  edgeLayer->EdgeCanvases[e]->raise();
+  edgeLayer->EdgeCanvases.At(e)->state = StateFromTurn(Turn);
+  edgeLayer->EdgeCanvases.At(e)->raise();
 
-  for (auto box : EdgeBoxMapper::EdgeNearBoxes[e]) {
+  for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(e)) {
     int c = 0;
-    for (auto nearEdge : EdgeBoxMapper::BoxNearEdges[box]) {
+    for (auto nearEdge : EdgeBoxMapper::BoxNearEdges.At(box)) {
       if (board->Contains(nearEdge)) {
         c++;
       }
     }
     if (c == 3) {
-      boxLayer->BoxCanvases[box]->state = StateFromTurn(Turn);
+      boxLayer->BoxCanvases.At(box)->state = StateFromTurn(Turn);
     }
   }
 
@@ -130,7 +130,7 @@ MainWindow::showEvent(QShowEvent* event) {
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(2));
-    edgeLayer->EdgeCanvases[lastEdge]->highLight = false;
+    edgeLayer->EdgeCanvases.At(lastEdge)->highLight = false;
     update();
 
     std::this_thread::sleep_for(std::chrono::seconds(2));

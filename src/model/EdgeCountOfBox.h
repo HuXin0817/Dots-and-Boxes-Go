@@ -1,10 +1,9 @@
 #pragma once
 
-#include <array>
-
+#include "../common/Array.h"
 #include "EdgeBoxMapper.h"
 
-class EdgeCountOfBox : public std::array<int, Box::Max> {
+class EdgeCountOfBox : public Array<int, Box::Max> {
   public:
   EdgeCountOfBox() = default;
 

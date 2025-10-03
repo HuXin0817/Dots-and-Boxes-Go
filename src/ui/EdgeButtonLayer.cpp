@@ -7,9 +7,9 @@ EdgeButtonLayer::EdgeButtonLayer(const std::function<std::function<void()>(Edge)
 
   for (int i = 0; i < Edge::Max; i++) {
     if (Edge(i).dot1().X() == Edge(i).dot2().X()) {
-      EdgeButtons[i] = std::make_unique<EdgeButton>(false, CallBackFactory(i), this);
+      EdgeButtons.At(i) = std::make_unique<EdgeButton>(false, CallBackFactory(i), this);
     } else {
-      EdgeButtons[i] = std::make_unique<EdgeButton>(true, CallBackFactory(i), this);
+      EdgeButtons.At(i) = std::make_unique<EdgeButton>(true, CallBackFactory(i), this);
     }
   }
 }
@@ -30,6 +30,6 @@ EdgeButtonLayer::resizeEvent(QResizeEvent* event) {
     } else {
       x += DotCanvas::R;
     }
-    EdgeButtons[e]->move(x, y);
+    EdgeButtons.At(e)->move(x, y);
   }
 }

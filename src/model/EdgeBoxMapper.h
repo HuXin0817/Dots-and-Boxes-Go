@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../common/Array.h"
 #include "Box.h"
 #include "Edge.h"
 
@@ -8,6 +9,6 @@ class EdgeBoxMapper {
   friend class Edge;
 
   public:
-  static std::array<std::array<Edge, 4>, Box::Max> BoxNearEdges;
-  static std::array<std::vector<Box>, Edge::Max> EdgeNearBoxes;
+  static Array<Array<Edge, 4>, Box::Max> BoxNearEdges;
+  static Array<std::vector<Box>, Edge::Max> EdgeNearBoxes;
 };

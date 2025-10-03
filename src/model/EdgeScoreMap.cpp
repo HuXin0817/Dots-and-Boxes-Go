@@ -2,32 +2,32 @@
 
 void
 EdgeScoreMap::Reset() {
-  Time = std::array<int, Edge::Max>{};
-  Score = std::array<int, Edge::Max>{};
+  Time = Array<int, Edge::Max>{};
+  Score = Array<int, Edge::Max>{};
   BestEdges.Clear();
 }
 
 void
 EdgeScoreMap::Add(Edge edge, int score) {
-  Time[edge]++;
-  Score[edge] += score;
+  Time.At(edge)++;
+  Score.At(edge) += score;
 }
 
 EdgeScoreMap
 EdgeScoreMap::operator+=(const EdgeScoreMap& other) {
   for (int i = 0; i < Edge::Max; i++) {
-    Time[i] += other.Time[i];
-    Score[i] += other.Score[i];
+    Time.At(i) += other.Time.At(i);
+    Score.At(i) += other.Score.At(i);
   }
   return *this;
 }
 
-std::span<const Edge>
+Span<const Edge>
 EdgeScoreMap::Export() {
   float maxs = 0.0;
   for (int e = 0; e < Edge::Max; e++) {
-    if (Time[e] > 0) {
-      float s = static_cast<float>(Score[e]) / static_cast<float>(Time[e]);
+    if (Time.At(e) > 0) {
+      float s = static_cast<float>(Score.At(e)) / static_cast<float>(Time.At(e));
       if (s > maxs || BestEdges.Empty()) {
         maxs = s;
         BestEdges.Reset(e);

@@ -3,7 +3,7 @@
 BoxCanvasLayer::BoxCanvasLayer(QWidget* parent) : BaseCanvasLayer(parent) {
   resize(WindowSize, WindowSize);
   for (int i = 0; i < Box::Max; i++) {
-    BoxCanvases[i] = std::make_unique<BoxCanvas>(this);
+    BoxCanvases.At(i) = std::make_unique<BoxCanvas>(this);
   }
 }
 
@@ -18,7 +18,7 @@ BoxCanvasLayer::resizeEvent(QResizeEvent* event) {
     for (int j = 0; j < Box::Size; j++) {
       int x = x0 + i * EdgeCanvas::B;
       int y = y0 + j * EdgeCanvas::B;
-      BoxCanvases[Box(i, j)]->move(x, y);
+      BoxCanvases.At(Box(i, j))->move(x, y);
     }
   }
 }

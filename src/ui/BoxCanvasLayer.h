@@ -2,9 +2,9 @@
 
 #include <QResizeEvent>
 #include <QWidget>
-#include <array>
 #include <memory>
 
+#include "../common/Array.h"
 #include "../model/Box.h"
 #include "BaseCanvasLayer.h"
 #include "BoxCanvas.h"
@@ -24,5 +24,5 @@ class BoxCanvasLayer final : public BaseCanvasLayer {
   resizeEvent(QResizeEvent* event) override;
 
   private:
-  std::array<std::unique_ptr<BoxCanvas>, Box::Max> BoxCanvases;
+  Array<std::unique_ptr<BoxCanvas>, Box::Max> BoxCanvases;
 };

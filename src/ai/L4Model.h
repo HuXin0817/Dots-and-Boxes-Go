@@ -14,7 +14,7 @@ class L4Model final : public AIInterface {
   explicit L4Model(int GroupNumber = 100) : GroupNumber(GroupNumber) {
   }
 
-  std::span<const Edge>
+  Span<const Edge>
   BestCandidateEdges(const BoardV2& board) override;
 
   private:

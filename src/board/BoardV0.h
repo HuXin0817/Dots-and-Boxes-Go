@@ -1,7 +1,7 @@
 #pragma once
 
-#include <span>
-
+#include "../common/Array.h"
+#include "../common/Span.h"
 #include "../model/Edge.h"
 #include "../model/Step.h"
 
@@ -18,13 +18,13 @@ class BoardV0 : public Step {
   bool
   NotContains(Edge e) const;
 
-  [[nodiscard]] std::span<const Edge>
+  [[nodiscard]] Span<const Edge>
   EmptyEdges() const;
 
-  [[nodiscard]] std::span<const Edge>
+  [[nodiscard]] Span<const Edge>
   MoveRecord() const;
 
   private:
-  std::array<Edge, Edge::Max> Edges;
-  std::array<int, Edge::Max> EdgeIndexes{};
+  Array<Edge, Edge::Max> Edges;
+  Array<int, Edge::Max> EdgeIndexes{};
 };

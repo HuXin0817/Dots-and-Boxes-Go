@@ -1,6 +1,6 @@
 #include "L1Model.h"
 
-std::span<const Edge>
+Span<const Edge>
 L1Model::BestCandidateEdges(const BoardV2& board) {
   if (auto l = SubModel.BestCandidateEdges(board);
       !SubModel.EnemyUnscoreableEdges.Empty() || !SubModel.ScoreableEdges.Empty()) {

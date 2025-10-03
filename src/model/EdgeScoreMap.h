@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../common/Array.h"
+#include "../common/List.h"
+#include "../common/Span.h"
 #include "Edge.h"
 
 class EdgeScoreMap {
@@ -13,11 +16,11 @@ class EdgeScoreMap {
   EdgeScoreMap
   operator+=(const EdgeScoreMap& other);
 
-  std::span<const Edge>
+  Span<const Edge>
   Export();
 
   private:
-  std::array<int, Edge::Max> Time{};
-  std::array<int, Edge::Max> Score{};
+  Array<int, Edge::Max> Time{};
+  Array<int, Edge::Max> Score{};
   List<Edge, Edge::Max> BestEdges;
 };

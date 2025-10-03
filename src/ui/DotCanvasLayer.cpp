@@ -3,7 +3,7 @@
 DotCanvasLayer::DotCanvasLayer(QWidget* parent) : BaseCanvasLayer(parent) {
   resize(WindowSize, WindowSize);
   for (int i = 0; i < Dot::Max; i++) {
-    DotCanvases[i] = std::make_unique<DotCanvas>(this);
+    DotCanvases.At(i) = std::make_unique<DotCanvas>(this);
   }
 }
 
@@ -18,7 +18,7 @@ DotCanvasLayer::resizeEvent(QResizeEvent* event) {
     for (int j = 0; j < Dot::Size; j++) {
       int x = x0 + i * EdgeCanvas::B;
       int y = y0 + j * EdgeCanvas::B;
-      DotCanvases[Dot(i, j)]->move(x, y);
+      DotCanvases.At(Dot(i, j))->move(x, y);
     }
   }
 }

@@ -9,8 +9,8 @@ BoardV3::Reset(const BoardV1& nb) {
 int
 BoardV3::Add(Edge edge) {
   int score = BoardV1::Add(edge);
-  for (auto box : EdgeBoxMapper::EdgeNearBoxes[edge]) {
-    if (EdgeCountOfBox::operator[](box) == 3) {
+  for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
+    if (EdgeCountOfBox::At(box) == 3) {
       Edge edgeToAdd = FindNotContainsEdgeInBox(box);
       ScoreableEdges.Append(edgeToAdd);
     }

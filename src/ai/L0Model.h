@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../common/List.h"
+#include "../common/Span.h"
 #include "Interface.h"
 
 class L0Model final : public AIInterface {
@@ -9,7 +11,7 @@ class L0Model final : public AIInterface {
   public:
   L0Model() = default;
 
-  std::span<const Edge>
+  Span<const Edge>
   BestCandidateEdges(const BoardV2& board) override;
 
   private:

@@ -2,9 +2,9 @@
 
 #include <QResizeEvent>
 #include <QWidget>
-#include <array>
 #include <memory>
 
+#include "../common/Array.h"
 #include "../model/Dot.h"
 #include "BaseCanvasLayer.h"
 #include "DotCanvas.h"
@@ -23,5 +23,5 @@ class DotCanvasLayer final : public BaseCanvasLayer {
   resizeEvent(QResizeEvent* event) override;
 
   private:
-  std::array<std::unique_ptr<DotCanvas>, Dot::Max> DotCanvases;
+  Array<std::unique_ptr<DotCanvas>, Dot::Max> DotCanvases;
 };

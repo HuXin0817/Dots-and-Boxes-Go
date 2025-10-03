@@ -1,9 +1,9 @@
 #include "EdgeBoxMapper.h"
 
-std::array<std::array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
+Array<Array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
   [[maybe_unused]] Edge dummy(0);
 
-  std::array<std::array<Edge, 4>, Box::Max> BoxNearEdges;
+  Array<Array<Edge, 4>, Box::Max> BoxNearEdges;
 
   for (int i = 0; i < Box::Max; i++) {
     int x = i / BoardSize;
@@ -12,7 +12,7 @@ std::array<std::array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
     Dot d01(x + 1, y);
     Dot d10(x, y + 1);
     Dot d11(x + 1, y + 1);
-    BoxNearEdges[i] = {
+    BoxNearEdges.At(i) = {
         Edge(d00, d01),
         Edge(d00, d10),
         Edge(d10, d11),
@@ -23,7 +23,7 @@ std::array<std::array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
   return BoxNearEdges;
 }();
 
-std::array<std::vector<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
+Array<std::vector<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
   auto nearBoxes = [](Edge e) {
     std::vector<Box> boxes;
     int x = e.dot2().X() - 1;
@@ -40,9 +40,9 @@ std::array<std::vector<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
     return boxes;
   };
 
-  std::array<std::vector<Box>, Edge::Max> mapper;
+  Array<std::vector<Box>, Edge::Max> mapper;
   for (int e = 0; e < Edge::Max; e++) {
-    mapper[e] = nearBoxes(Edge(e));
+    mapper.At(e) = nearBoxes(Edge(e));
   }
   return mapper;
 }();

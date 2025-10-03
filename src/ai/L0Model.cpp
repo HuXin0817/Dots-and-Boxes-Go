@@ -2,7 +2,7 @@
 
 #include "../board/BoardV2.h"
 
-std::span<const Edge>
+Span<const Edge>
 L0Model::BestCandidateEdges(const BoardV2& board) {
   EnemyUnscoreableEdges.Clear();
   ScoreableEdges.Clear();

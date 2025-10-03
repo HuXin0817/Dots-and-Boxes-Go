@@ -3,10 +3,10 @@
 int
 EdgeCountOfBox::Add(Edge e) {
   int s = 0;
-  for (auto box : EdgeBoxMapper::EdgeNearBoxes[e]) {
-    at(box)++;
-    assert(at(box) <= 4);
-    if (operator[](box) == 4) {
+  for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(e)) {
+    At(box)++;
+    assert(At(box) <= 4);
+    if (At(box) == 4) {
       s++;
     }
   }
@@ -16,8 +16,8 @@ EdgeCountOfBox::Add(Edge e) {
 int
 EdgeCountOfBox::MaxCount(Edge e) const {
   int c = 0;
-  for (auto box : EdgeBoxMapper::EdgeNearBoxes[e]) {
-    c = std::max(c, operator[](box));
+  for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(e)) {
+    c = std::max(c, At(box));
   }
   return c;
 }

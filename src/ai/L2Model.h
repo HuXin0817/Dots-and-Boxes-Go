@@ -1,12 +1,14 @@
 #pragma once
 
+#include "../common/List.h"
+#include "../common/Span.h"
 #include "L1Model.h"
 
 class L2Model final : public AIInterface {
   public:
   L2Model() = default;
 
-  std::span<const Edge>
+  Span<const Edge>
   BestCandidateEdges(const BoardV2& board) override;
 
   private:

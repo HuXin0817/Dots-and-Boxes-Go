@@ -2,9 +2,9 @@
 
 #include <QResizeEvent>
 #include <QWidget>
-#include <array>
 #include <memory>
 
+#include "../common/Array.h"
 #include "../model/Edge.h"
 #include "BaseCanvasLayer.h"
 #include "DotCanvas.h"
@@ -24,5 +24,5 @@ class EdgeButtonLayer final : public BaseCanvasLayer {
   resizeEvent(QResizeEvent* event) override;
 
   private:
-  std::array<std::unique_ptr<EdgeButton>, Edge::Max> EdgeButtons;
+  Array<std::unique_ptr<EdgeButton>, Edge::Max> EdgeButtons;
 };

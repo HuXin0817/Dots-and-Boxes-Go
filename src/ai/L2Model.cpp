@@ -1,6 +1,6 @@
 #include "L2Model.h"
 
-std::span<const Edge>
+Span<const Edge>
 L2Model::BestCandidateEdges(const BoardV2& board) {
   if (auto l = SubModel.BestCandidateEdges(board);
       !SubModel.SubModel.EnemyUnscoreableEdges.Empty()) {
@@ -13,7 +13,7 @@ L2Model::BestCandidateEdges(const BoardV2& board) {
     AuxBoard.Reset(board.GetBoardV1());
     AuxBoard.Add(e);
     while (AuxBoard.Gaming()) {
-      auto edge = SubModel.BestCandidateEdges(AuxBoard)[0];
+      auto edge = SubModel.BestCandidateEdges(AuxBoard).At(0);
       assert(board.MaxCount(edge) > 1);
       AuxBoard.Add(edge);
     }
