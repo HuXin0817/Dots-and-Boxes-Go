@@ -9,8 +9,8 @@ class EdgeScoreMap {
   public:
   void
   Reset() {
-    Time = Array<int, Edge::Max>{};
-    Score = Array<int, Edge::Max>{};
+    std::memset(Time.begin(), 0, sizeof(Time));
+    std::memset(Score.begin(), 0, sizeof(Score));
     BestEdges.Clear();
   }
 

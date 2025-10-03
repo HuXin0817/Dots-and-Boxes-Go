@@ -4,6 +4,7 @@
 
 #include <thread>
 
+#include "../common/Vector.h"
 #include "Interface.h"
 #include "L3Model.h"
 
@@ -11,7 +12,7 @@ class L4Model final : public AIInterface {
   public:
   static constexpr int SubModelSearchTime = 1000;
 
-  explicit L4Model(int GroupNumber = 100) : GroupNumber(GroupNumber) {
+  explicit L4Model(int GroupNumber = 100) : SearchResults(GroupNumber) {
   }
 
   Span<Edge>
@@ -20,11 +21,11 @@ class L4Model final : public AIInterface {
       return l;
     }
 
-    std::vector<EdgeScoreMap> SearchResults(GroupNumber);
     thread_local L3Model model(SubModelSearchTime);
 
 #pragma omp parallel for
     for (auto& r : SearchResults) {
+      r.Reset();
       model.BestCandidateEdges(board);
       r = model.ScoreMap;
     }
@@ -38,5 +39,5 @@ class L4Model final : public AIInterface {
   }
 
   private:
-  int GroupNumber;
+  Vector<EdgeScoreMap> SearchResults;
 };
