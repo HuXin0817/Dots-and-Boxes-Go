@@ -12,5 +12,5 @@ class L2Model final : public AIInterface {
   private:
   L1Model SubModel;
   BoardV2 AuxBoard;
-  EdgeList SearchEdges;
+  List<Edge, Edge::Max> SearchEdges;
 };

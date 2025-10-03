@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../model/Edge.h"
-#include "../model/EdgeQueue.h"
 #include "BoardV1.h"
 
 class BoardV3 : public BoardV1 {
@@ -21,5 +20,5 @@ class BoardV3 : public BoardV1 {
   ScoreableEdgesEmpty() const;
 
   private:
-  EdgeQueue ScoreableEdges;
+  Queue<Edge, Edge::Max> ScoreableEdges;
 };

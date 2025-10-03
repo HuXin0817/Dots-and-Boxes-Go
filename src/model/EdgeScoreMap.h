@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Edge.h"
-#include "EdgeList.h"
 
 class EdgeScoreMap {
   public:
@@ -20,5 +19,5 @@ class EdgeScoreMap {
   private:
   std::array<int, Edge::Max> Time{};
   std::array<int, Edge::Max> Score{};
-  EdgeList BestEdges;
+  List<Edge, Edge::Max> BestEdges;
 };

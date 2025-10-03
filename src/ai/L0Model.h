@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../model/EdgeList.h"
 #include "Interface.h"
 
 class L0Model final : public AIInterface {
@@ -14,6 +13,6 @@ class L0Model final : public AIInterface {
   BestCandidateEdges(const BoardV2& board) override;
 
   private:
-  EdgeList EnemyUnscoreableEdges;
-  EdgeList ScoreableEdges;
+  List<Edge, Edge::Max> EnemyUnscoreableEdges;
+  List<Edge, Edge::Max> ScoreableEdges;
 };
