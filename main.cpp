@@ -14,8 +14,8 @@ main(int argc, char* argv[]) {
   QApplication::setOrganizationName("Dots and Boxes");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 
-  AIModelType player1Model = AIModelType::L4;
-  AIModelType player2Model = AIModelType::L4;
+  auto player1Model = AIModelType::L4;
+  auto player2Model = AIModelType::L4;
   bool aiPlayer1 = true;
   bool aiPlayer2 = true;
 

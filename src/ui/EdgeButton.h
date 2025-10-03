@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DotCanvas.h"
+#include "BaseCanvas.h"
 
 class EdgeButton final : public BaseCanvas {
   Q_OBJECT

@@ -6,7 +6,6 @@
 #include "../common/Array.h"
 #include "../model/Edge.h"
 #include "BaseCanvasLayer.h"
-#include "DotCanvas.h"
 #include "EdgeCanvas.h"
 
 class EdgeCanvasLayer final : public BaseCanvasLayer {

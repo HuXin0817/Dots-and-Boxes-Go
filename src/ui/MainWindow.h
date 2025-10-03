@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QColor>
 #include <QTimer>
-#include <QWidget>
 #include <chrono>
 #include <memory>
 #include <thread>
