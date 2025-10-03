@@ -8,7 +8,7 @@ class L2Model final : public AIInterface {
   public:
   L2Model() = default;
 
-  Span<const Edge>
+  Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
     if (auto l = SubModel.BestCandidateEdges(board);
         !SubModel.SubModel.EnemyUnscoreableEdges.Empty()) {

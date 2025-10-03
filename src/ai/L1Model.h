@@ -9,7 +9,7 @@ class L1Model final : public AIInterface {
   friend class L2Model;
 
   public:
-  Span<const Edge>
+  Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
     if (auto l = SubModel.BestCandidateEdges(board);
         !SubModel.EnemyUnscoreableEdges.Empty() || !SubModel.ScoreableEdges.Empty()) {

@@ -12,7 +12,7 @@ class L0Model final : public AIInterface {
   public:
   L0Model() = default;
 
-  Span<const Edge>
+  Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
     EnemyUnscoreableEdges.Clear();
     ScoreableEdges.Clear();

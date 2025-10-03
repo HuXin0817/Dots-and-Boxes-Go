@@ -15,7 +15,7 @@ class BoardV1 : public BoardV0, public EdgeCountOfBox {
     return EdgeCountOfBox::Add(edge);
   }
 
-  [[nodiscard]] Edge
+  Edge
   FindNotContainsEdgeInBox(Box box) const {
     assert(EdgeCountOfBox::At(box) == 3);
     for (auto edge : EdgeBoxMapper::BoxNearEdges.At(box)) {
@@ -27,7 +27,7 @@ class BoardV1 : public BoardV0, public EdgeCountOfBox {
     return -1;
   }
 
-  [[nodiscard]] Edge
+  Edge
   FindScoreableEdge() const {
     for (int box = 0; box < Box::Max; box++) {
       if (EdgeCountOfBox::At(box) == 3) {
@@ -37,12 +37,12 @@ class BoardV1 : public BoardV0, public EdgeCountOfBox {
     return -1;
   }
 
-  [[nodiscard]] BoardV1&
+  BoardV1&
   GetBoardV1() {
     return *this;
   }
 
-  [[nodiscard]] const BoardV1&
+  const BoardV1&
   GetBoardV1() const {
     return *this;
   }

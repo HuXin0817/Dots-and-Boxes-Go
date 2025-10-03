@@ -16,7 +16,7 @@ class BoxCanvas final : public QWidget {
 
   State state = State::Free;
 
-  [[nodiscard]] QColor
+  QColor
   Color() const {
     if (state == State::Free) {
       return {0, 0, 0, 0};

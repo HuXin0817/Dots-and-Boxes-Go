@@ -19,7 +19,7 @@ class List {
     Size = 0;
   }
 
-  [[nodiscard]] bool
+  bool
   Empty() const {
     return Size == 0;
   }
@@ -30,12 +30,7 @@ class List {
     Data.At(Size++) = e;
   }
 
-  [[nodiscard]] Span<T>
-  Export() {
-    return {Data.begin(), Data.begin() + Size};
-  }
-
-  [[nodiscard]] Span<const T>
+  Span<T>
   Export() const {
     return {Data.begin(), Data.begin() + Size};
   }

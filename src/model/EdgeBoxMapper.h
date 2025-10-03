@@ -12,7 +12,7 @@ class EdgeBoxMapper {
 
   public:
   static Array<Array<Edge, 4>, Box::Max> BoxNearEdges;
-  static Array<Span<const Box>, Edge::Max> EdgeNearBoxes;
+  static Array<Span<Box>, Edge::Max> EdgeNearBoxes;
 };
 
 inline Array<Array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
@@ -38,11 +38,11 @@ inline Array<Array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
   return BoxNearEdges;
 }();
 
-inline Array<Span<const Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
+inline Array<Span<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
   static Array<Box, 2 * Edge::Max - BoardSize * 4> NearBoxes;
   int index = 0;
 
-  auto nearBoxes = [&index](Edge e) -> Span<const Box> {
+  auto nearBoxes = [&index](Edge e) -> Span<Box> {
     auto start = NearBoxes.begin() + index;
 
     int x = e.dot2().X() - 1;
@@ -62,7 +62,7 @@ inline Array<Span<const Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
     return {start, end};
   };
 
-  Array<Span<const Box>, Edge::Max> mapper;
+  Array<Span<Box>, Edge::Max> mapper;
   for (int e = 0; e < Edge::Max; e++) {
     mapper.At(e) = nearBoxes(Edge(e));
   }

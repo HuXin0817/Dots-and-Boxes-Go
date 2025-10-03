@@ -8,6 +8,6 @@ class AIInterface {
   public:
   virtual ~AIInterface() = default;
 
-  virtual Span<const Edge>
+  virtual Span<Edge>
   BestCandidateEdges(const BoardV2& board) = 0;
 };

@@ -51,7 +51,7 @@ class BoardV3 : public BoardV1 {
     return score;
   }
 
-  [[nodiscard]] bool
+  bool
   ScoreableEdgesEmpty() const {
     return ScoreableEdges.Empty();
   }

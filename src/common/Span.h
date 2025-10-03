@@ -7,65 +7,41 @@ class Span {
   public:
   Span() = default;
 
-  Span(T* beg, T* end) : _begin(beg), _end(end) {
+  Span(const T* beg, const T* end) : Begin(beg), End(end) {
   }
 
-  template <typename U>
-  Span(const Span<U>& other) : _begin(other.begin()), _end(other.end()) {
-  }
-
-  auto
-  begin() {
-    return _begin;
-  }
-
-  auto
-  end() {
-    return _end;
-  }
-
-  auto
+  const T*
   begin() const {
-    return _begin;
+    return Begin;
   }
 
-  auto
+  const T*
   end() const {
-    return _end;
+    return End;
   }
 
-  auto
+  int
   Size() const {
-    return _end - _begin;
-  }
-
-  auto
-  size() const {
-    return Size();
-  }
-
-  T&
-  At(int i) {
-    return _begin[i];
+    return End - Begin;
   }
 
   const T&
   At(int i) const {
-    return _begin[i];
+    return Begin[i];
   }
 
   bool
   Empty() const {
-    return _end == _begin;
+    return End == Begin;
   }
 
   private:
-  T* _begin = nullptr;
-  T* _end = nullptr;
+  const T* Begin = nullptr;
+  const T* End = nullptr;
 };
 
 template <typename T>
-[[nodiscard]] const T&
+const T&
 RandomChoice(const Span<T>& data) {
   assert(!data.Empty());
 

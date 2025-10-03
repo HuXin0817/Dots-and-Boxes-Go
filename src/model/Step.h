@@ -4,17 +4,17 @@
 
 class Step {
   public:
-  [[nodiscard]] bool
+  bool
   Gaming() const {
     return v < Edge::Max;
   }
 
-  [[nodiscard]] int
+  int
   RemainStep() const {
     return Edge::Max - v;
   }
 
-  [[nodiscard]] int
+  int
   NowStep() const {
     return v;
   }

@@ -29,7 +29,7 @@ class EdgeScoreMap {
     return *this;
   }
 
-  Span<const Edge>
+  Span<Edge>
   Export() {
     float maxs = 0.0;
     for (int e = 0; e < Edge::Max; e++) {

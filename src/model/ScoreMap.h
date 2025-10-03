@@ -33,17 +33,17 @@ class ScoreMap {
     }
   }
 
-  [[nodiscard]] int
+  int
   Score() const {
     return Player1Score - Player2Score;
   }
 
-  [[nodiscard]] int
+  int
   GetScore(int player) const {
     return (player == 0) ? Player1Score : Player2Score;
   }
 
-  [[nodiscard]] bool
+  bool
   Gaming() const {
     return Player1Score < MinWinnerScore && Player2Score < MinWinnerScore;
   }

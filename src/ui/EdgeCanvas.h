@@ -24,7 +24,7 @@ class EdgeCanvas final : public QWidget {
   bool highLight = true;
   bool Rotate = false;
 
-  [[nodiscard]] QColor
+  QColor
   Color() const {
     if (state == State::Free) {
       if (isDarkMode()) {

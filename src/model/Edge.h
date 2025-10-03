@@ -17,12 +17,12 @@ class Edge {
   Edge(Dot dot1, Dot dot2) : v(std::get<0>(DotMapper).At(dot1).At(dot2)) {
   }
 
-  [[nodiscard]] Dot
+  Dot
   dot1() const {
     return std::get<1>(DotMapper).At(v);
   }
 
-  [[nodiscard]] Dot
+  Dot
   dot2() const {
     return std::get<2>(DotMapper).At(v);
   }

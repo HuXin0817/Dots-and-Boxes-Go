@@ -36,12 +36,12 @@ class BoardV0 : public Step {
     return EdgeIndexes.At(e) >= NowStep();
   }
 
-  [[nodiscard]] Span<const Edge>
+  Span<Edge>
   EmptyEdges() const {
     return {Edges.begin() + NowStep(), Edges.begin() + Edge::Max};
   }
 
-  [[nodiscard]] Span<const Edge>
+  Span<Edge>
   MoveRecord() const {
     return {Edges.begin(), Edges.begin() + NowStep()};
   }

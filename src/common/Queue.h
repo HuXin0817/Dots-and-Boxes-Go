@@ -14,7 +14,7 @@ class Queue {
     end = 0;
   }
 
-  [[nodiscard]] bool
+  bool
   Empty() const {
     return Begin == end;
   }
@@ -33,12 +33,12 @@ class Queue {
     return e;
   }
 
-  [[nodiscard]] Span<T>
+  Span<T>
   Export() const {
     return {Data.begin() + Begin, Data.begin() + end};
   }
 
-  [[nodiscard]] bool
+  bool
   Contains(T e) const {
     for (int i = Begin; i < end; i++) {
       if (Data.At(i) == e) {

@@ -14,9 +14,9 @@ class L4Model final : public AIInterface {
   explicit L4Model(int GroupNumber = 100) : GroupNumber(GroupNumber) {
   }
 
-  Span<const Edge>
+  Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
-    if (auto l = L2Model().BestCandidateEdges(board); l.size() == 1) {
+    if (auto l = L2Model().BestCandidateEdges(board); l.Size() == 1) {
       return l;
     }
 

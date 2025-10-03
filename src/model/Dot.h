@@ -12,12 +12,12 @@ class Dot {
   Dot(int x, int y) : v(x * Size + y) {
   }
 
-  [[nodiscard]] int
+  int
   X() const {
     return v / Size;
   }
 
-  [[nodiscard]] int
+  int
   Y() const {
     return v % Size;
   }

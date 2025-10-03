@@ -11,9 +11,9 @@ class L3Model final : public AIInterface {
   explicit L3Model(int SearchTime = 10000) : SearchTime(SearchTime) {
   }
 
-  Span<const Edge>
+  Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
-    if (auto l = SubModel.BestCandidateEdges(board); l.size() == 1) {
+    if (auto l = SubModel.BestCandidateEdges(board); l.Size() == 1) {
       return l;
     }
 
