@@ -10,57 +10,57 @@ class List {
   public:
   void
   Reset(T e) {
-    m.At(0) = e;
-    len = 1;
+    Data.At(0) = e;
+    Size = 1;
   }
 
   void
   Clear() {
-    len = 0;
+    Size = 0;
   }
 
   [[nodiscard]] bool
   Empty() const {
-    return len == 0;
+    return Size == 0;
   }
 
   void
   Append(T e) {
     assert(len < Cap);
-    m.At(len++) = e;
+    Data.At(Size++) = e;
   }
 
   [[nodiscard]] Span<T>
   Export() {
-    return {m.begin(), m.begin() + len};
+    return {Data.begin(), Data.begin() + Size};
   }
 
   [[nodiscard]] Span<const T>
   Export() const {
-    return {m.begin(), m.begin() + len};
+    return {Data.begin(), Data.begin() + Size};
   }
 
   auto
   begin() {
-    return m.begin();
+    return Data.begin();
   }
 
   auto
   end() {
-    return m.begin() + len;
+    return Data.begin() + Size;
   }
 
   auto
   begin() const {
-    return m.begin();
+    return Data.begin();
   }
 
   auto
   end() const {
-    return m.begin() + len;
+    return Data.begin() + Size;
   }
 
   private:
-  Array<T, Cap> m;
-  int len = 0;
+  Array<T, Cap> Data;
+  int Size = 0;
 };
