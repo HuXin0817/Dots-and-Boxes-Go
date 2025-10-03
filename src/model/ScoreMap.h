@@ -40,7 +40,7 @@ class ScoreMap {
 
   int
   GetScore(int player) const {
-    return (player == 0) ? Player1Score : Player2Score;
+    return player == 0 ? Player1Score : Player2Score;
   }
 
   bool

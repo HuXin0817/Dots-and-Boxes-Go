@@ -32,17 +32,17 @@ class EdgeCanvasLayer final : public BaseCanvasLayer {
   resizeEvent(QResizeEvent* event) override {
     QWidget::resizeEvent(event);
 
-    int x0 = (width() - BoardWindowSize) / 2 - BaseCanvas::R;
-    int y0 = (height() - BoardWindowSize) / 2 - BaseCanvas::R;
+    int x0 = (width() - BoardWindowSize) / 2 - R;
+    int y0 = (height() - BoardWindowSize) / 2 - R;
 
     for (int i = 0; i < Edge::Max; i++) {
       Edge e(i);
       int x = x0 + e.Dot1().X() * EdgeCanvas::B;
       int y = y0 + e.Dot1().Y() * EdgeCanvas::B;
       if (e.Dot1().X() == e.Dot2().X()) {
-        y += BaseCanvas::R;
+        y += R;
       } else {
-        x += BaseCanvas::R;
+        x += R;
       }
       EdgeCanvases.At(e)->move(x, y);
     }
