@@ -2,10 +2,6 @@
 
 #include <QApplication>
 #include <QColor>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QResizeEvent>
-#include <QShowEvent>
 #include <QTimer>
 #include <QWidget>
 #include <chrono>

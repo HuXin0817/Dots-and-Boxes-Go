@@ -1,8 +1,5 @@
 #pragma once
 
-#include <QPaintEvent>
-
-#include "Common.h"
 #include "DotCanvas.h"
 
 class EdgeButton final : public QWidget {

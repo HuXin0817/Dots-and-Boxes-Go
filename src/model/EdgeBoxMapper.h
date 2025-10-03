@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../common/Array.h"
-#include "../common/List.h"
 #include "../common/Span.h"
 #include "Box.h"
 #include "Edge.h"

@@ -1,10 +1,6 @@
 #include <QApplication>
-#include <QIcon>
-#include <QMessageBox>
 #include <QString>
-#include <QStyle>
 #include <QStyleFactory>
-#include <QSystemTrayIcon>
 
 #include "src/ai/AIConfig.h"
 #include "src/ui/MainWindow.h"
