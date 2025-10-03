@@ -34,22 +34,10 @@ class MainWindow final : public BaseCanvasLayer {
     boxLayer = std::make_unique<BoxCanvasLayer>(this);
     edgeLayer = std::make_unique<EdgeCanvasLayer>(this);
     dotLayer = std::make_unique<DotCanvasLayer>(this);
-    edgeButtonLayer = std::make_unique<EdgeButtonLayer>(
-        [=, this](Edge e) {
-          return [=, this] {
-            if (board->Contains(e)) {
-              return;
-            }
-            if (OpenAIPlayer1 && board->Turn == Player1Turn) {
-              return;
-            }
-            if (OpenAIPlayer2 && board->Turn == Player2Turn) {
-              return;
-            }
-            PlayerMoveEdge = e;
-          };
-        },
-        this);
+    std::function<std::function<void()>(Edge)> CallBackFactory = [this](Edge e) {
+      return [e, this] { return setPlayerMoveEdge(e); };
+    };
+    edgeButtonLayer = std::make_unique<EdgeButtonLayer>(CallBackFactory, this);
   }
 
   QColor
@@ -173,4 +161,18 @@ class MainWindow final : public BaseCanvasLayer {
   std::unique_ptr<DotCanvasLayer> dotLayer;
   std::unique_ptr<EdgeButtonLayer> edgeButtonLayer;
   Edge lastEdge;
+
+  void
+  setPlayerMoveEdge(Edge e) {
+    if (board->Contains(e)) {
+      return;
+    }
+    if (OpenAIPlayer1 && board->Turn == Player1Turn) {
+      return;
+    }
+    if (OpenAIPlayer2 && board->Turn == Player2Turn) {
+      return;
+    }
+    PlayerMoveEdge = e;
+  }
 };
