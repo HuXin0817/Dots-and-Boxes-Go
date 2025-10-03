@@ -20,7 +20,7 @@ class L1Model final : public AIInterface {
     auto& candidateEdges = SubModel.EnemyUnscoreableEdges;
     assert(candidateEdges.Empty());
 
-    for (auto edge : board.EmptyEdges()) {
+    for (Edge edge : board.EmptyEdges()) {
       AuxBoard.Reset(board.GetBoardV1());
 #ifdef NDEBUG
       AuxBoard.Add(edge);

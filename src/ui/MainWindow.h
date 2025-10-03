@@ -55,16 +55,16 @@ class MainWindow final : public BaseCanvasLayer {
   public slots:
   void
   Add(Edge edge) {
-    auto Turn = board->Turn;
+    bool Turn = board->Turn;
     if (board->NowStep() > 0) {
       edgeLayer->Canvases.At(lastEdge)->highLight = false;
     }
     edgeLayer->Canvases.At(edge)->state = StateFromTurn(Turn);
     edgeLayer->Canvases.At(edge)->raise();
 
-    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
+    for (Box box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
       int count = 0;
-      for (auto nearEdge : EdgeBoxMapper::BoxNearEdges.At(box)) {
+      for (Edge nearEdge : EdgeBoxMapper::BoxNearEdges.At(box)) {
         if (board->Contains(nearEdge)) {
           count++;
         }

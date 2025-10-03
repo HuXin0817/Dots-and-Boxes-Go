@@ -17,11 +17,11 @@ class L2Model final : public AIInterface {
 
     SearchEdges.Clear();
     int maxScore = -(Box::Max + 1);
-    for (auto emptyEdge : board.EmptyEdges()) {
+    for (Edge emptyEdge : board.EmptyEdges()) {
       AuxBoard.Reset(board.GetBoardV1());
       AuxBoard.Add(emptyEdge);
       while (AuxBoard.Gaming()) {
-        auto edge = SubModel.BestCandidateEdges(AuxBoard).At(0);
+        Edge edge = SubModel.BestCandidateEdges(AuxBoard).At(0);
         assert(board.MaxCount(edge) > 1);
         AuxBoard.Add(edge);
       }

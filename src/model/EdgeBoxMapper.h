@@ -42,7 +42,7 @@ inline Array<Span<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
   int index = 0;
 
   auto nearBoxes = [&index](Edge edge) -> Span<Box> {
-    auto start = NearBoxes.begin() + index;
+    Box* start = NearBoxes.begin() + index;
 
     int x = edge.Dot2().X() - 1;
     int y = edge.Dot2().Y() - 1;
@@ -56,7 +56,7 @@ inline Array<Span<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
       NearBoxes.At(index++) = Box(x, y);
     }
 
-    auto end = NearBoxes.begin() + index;
+    Box* end = NearBoxes.begin() + index;
 
     return {start, end};
   };

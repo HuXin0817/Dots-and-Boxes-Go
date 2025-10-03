@@ -18,7 +18,7 @@ class BoardV1 : public BoardV0, public EdgeCountOfBox {
   Edge
   FindNotContainsEdgeInBox(Box box) const {
     assert(EdgeCountOfBox::At(box) == 3);
-    for (auto edge : EdgeBoxMapper::BoxNearEdges.At(box)) {
+    for (Edge edge : EdgeBoxMapper::BoxNearEdges.At(box)) {
       if (NotContains(edge)) {
         return edge;
       }

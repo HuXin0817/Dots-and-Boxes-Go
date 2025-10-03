@@ -16,9 +16,9 @@ class L0Model final : public AIInterface {
   BestCandidateEdges(const BoardV2& board) override {
     EnemyUnscoreableEdges.Clear();
     ScoreableEdges.Clear();
-    const auto EmptyEdges = board.EmptyEdges();
+    auto EmptyEdges = board.EmptyEdges();
 
-    for (auto edge : EmptyEdges) {
+    for (Edge edge : EmptyEdges) {
       if (int maxCount = board.MaxCount(edge); maxCount == 3) {
         ScoreableEdges.Append(edge);
       } else if (maxCount < 2) {

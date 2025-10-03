@@ -21,7 +21,7 @@ class L3Model final : public AIInterface {
     int times = SearchTime / board.RemainStep() + 1;
     while (times--) {
       AuxBoard.Reset(board.GetBoardV1());
-      auto edge = RandomChoice(SubModel.BestCandidateEdges(AuxBoard));
+      Edge edge = RandomChoice(SubModel.BestCandidateEdges(AuxBoard));
       AuxBoard.Add(edge);
       while (AuxBoard.Gaming()) {
         AuxBoard.Add(RandomChoice(SubModel.BestCandidateEdges(AuxBoard)));

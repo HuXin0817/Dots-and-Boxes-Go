@@ -17,7 +17,7 @@ class BoardV3 : public BoardV1 {
   int
   Add(Edge edge) {
     int score = BoardV1::Add(edge);
-    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
+    for (Box box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
       if (EdgeCountOfBox::At(box) == 3) {
         Edge edgeToAdd = FindNotContainsEdgeInBox(box);
         ScoreableEdges.Append(edgeToAdd);
@@ -37,7 +37,7 @@ class BoardV3 : public BoardV1 {
           break;
         }
       }
-      auto edge = ScoreableEdges.Pop();
+      Edge edge = ScoreableEdges.Pop();
       if (Contains(edge)) {
         continue;
       }
