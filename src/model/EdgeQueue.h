@@ -16,7 +16,7 @@ class EdgeQueue {
   Edge
   Pop();
 
-  [[nodiscard]] std::vector<Edge>
+  [[nodiscard]] std::span<const Edge>
   Export() const;
 
   [[nodiscard]] bool

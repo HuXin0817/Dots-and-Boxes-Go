@@ -25,7 +25,7 @@ EdgeQueue::Pop() {
   return e;
 }
 
-[[nodiscard]] std::vector<Edge>
+[[nodiscard]] std::span<const Edge>
 EdgeQueue::Export() const {
   return {m.begin() + front, m.begin() + end};
 }
