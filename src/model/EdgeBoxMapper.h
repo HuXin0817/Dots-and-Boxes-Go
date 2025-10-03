@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../common/Array.h"
+#include "../common/List.h"
+#include "../common/Span.h"
 #include "Box.h"
 #include "Edge.h"
 
@@ -10,7 +12,7 @@ class EdgeBoxMapper {
 
   public:
   static Array<Array<Edge, 4>, Box::Max> BoxNearEdges;
-  static Array<std::vector<Box>, Edge::Max> EdgeNearBoxes;
+  static Array<Span<const Box>, Edge::Max> EdgeNearBoxes;
 };
 
 inline Array<Array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
@@ -36,24 +38,30 @@ inline Array<Array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
   return BoxNearEdges;
 }();
 
-inline Array<std::vector<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
-  auto nearBoxes = [](Edge e) {
-    std::vector<Box> boxes;
+inline Array<Span<const Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
+  static List<Box, 2 * Edge::Max - BoardSize * 4> NearBoxes;
+
+  auto nearBoxes = [=](Edge e) -> Span<const Box> {
+    auto start = NearBoxes.end();
+
     int x = e.dot2().X() - 1;
     int y = e.dot2().Y() - 1;
     if (x >= 0 && y >= 0) {
-      boxes.emplace_back(x, y);
+      NearBoxes.Append(Box(x, y));
     }
 
     x = e.dot1().X();
     y = e.dot1().Y();
     if (x < BoardSize && y < BoardSize) {
-      boxes.emplace_back(x, y);
+      NearBoxes.Append(Box(x, y));
     }
-    return boxes;
+
+    auto end = NearBoxes.end();
+
+    return {start, end};
   };
 
-  Array<std::vector<Box>, Edge::Max> mapper;
+  Array<Span<const Box>, Edge::Max> mapper;
   for (int e = 0; e < Edge::Max; e++) {
     mapper.At(e) = nearBoxes(Edge(e));
   }

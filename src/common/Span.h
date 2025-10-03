@@ -5,10 +5,11 @@
 template <typename T>
 class Span {
   public:
+  Span() = default;
+
   Span(T* beg, T* end) : _begin(beg), _end(end) {
   }
 
-  // Constructor for const conversion
   template <typename U>
   Span(const Span<U>& other) : _begin(other.begin()), _end(other.end()) {
   }
@@ -59,8 +60,8 @@ class Span {
   }
 
   private:
-  T* _begin;
-  T* _end;
+  T* _begin = nullptr;
+  T* _end = nullptr;
 };
 
 template <typename T>
