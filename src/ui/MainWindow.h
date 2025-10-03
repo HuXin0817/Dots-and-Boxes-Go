@@ -57,10 +57,10 @@ class MainWindow final : public BaseCanvasLayer {
   Add(Edge edge) {
     auto Turn = board->Turn;
     if (board->NowStep() > 0) {
-      edgeLayer->EdgeCanvases.At(lastEdge)->highLight = false;
+      edgeLayer->Canvases.At(lastEdge)->highLight = false;
     }
-    edgeLayer->EdgeCanvases.At(edge)->state = StateFromTurn(Turn);
-    edgeLayer->EdgeCanvases.At(edge)->raise();
+    edgeLayer->Canvases.At(edge)->state = StateFromTurn(Turn);
+    edgeLayer->Canvases.At(edge)->raise();
 
     for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
       int count = 0;
@@ -140,7 +140,7 @@ class MainWindow final : public BaseCanvasLayer {
       }
 
       std::this_thread::sleep_for(std::chrono::seconds(2));
-      edgeLayer->EdgeCanvases.At(lastEdge)->highLight = false;
+      edgeLayer->Canvases.At(lastEdge)->highLight = false;
       update();
 
       std::this_thread::sleep_for(std::chrono::seconds(2));
