@@ -16,6 +16,14 @@ class Array {
   }
 
   Array&
+  operator=(const Array& other) {
+    if (this != &other) {
+      std::memcpy(data, other.data, Size * sizeof(T));
+    }
+    return *this;
+  }
+
+  Array&
   operator=(std::initializer_list<T> init) {
     int i = 0;
     for (const auto& item : init) {
