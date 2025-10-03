@@ -136,10 +136,10 @@ class MainWindow final : public BaseCanvasLayer {
         printf("| Step %d | Player %d Move (%d, %d) -> (%d, %d) | Score %d : %d |\n",
                step,
                playerId,
-               PlayerMoveEdge.dot1().X(),
-               PlayerMoveEdge.dot1().Y(),
-               PlayerMoveEdge.dot2().X(),
-               PlayerMoveEdge.dot2().Y(),
+               PlayerMoveEdge.Dot1().X(),
+               PlayerMoveEdge.Dot1().Y(),
+               PlayerMoveEdge.Dot2().X(),
+               PlayerMoveEdge.Dot2().Y(),
                board->Player1Score,
                board->Player2Score);
       }

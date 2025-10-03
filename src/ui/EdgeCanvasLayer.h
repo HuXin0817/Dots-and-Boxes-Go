@@ -19,7 +19,7 @@ class EdgeCanvasLayer final : public BaseCanvasLayer {
     resize(WindowSize, WindowSize);
 
     for (int i = 0; i < Edge::Max; i++) {
-      if (Edge(i).dot1().X() == Edge(i).dot2().X()) {
+      if (Edge(i).Dot1().X() == Edge(i).Dot2().X()) {
         EdgeCanvases.At(i) = std::make_unique<EdgeCanvas>(false, this);
       } else {
         EdgeCanvases.At(i) = std::make_unique<EdgeCanvas>(true, this);
@@ -37,9 +37,9 @@ class EdgeCanvasLayer final : public BaseCanvasLayer {
 
     for (int i = 0; i < Edge::Max; i++) {
       Edge e(i);
-      int x = x0 + e.dot1().X() * EdgeCanvas::B;
-      int y = y0 + e.dot1().Y() * EdgeCanvas::B;
-      if (e.dot1().X() == e.dot2().X()) {
+      int x = x0 + e.Dot1().X() * EdgeCanvas::B;
+      int y = y0 + e.Dot1().Y() * EdgeCanvas::B;
+      if (e.Dot1().X() == e.Dot2().X()) {
         y += DotCanvas::R;
       } else {
         x += DotCanvas::R;

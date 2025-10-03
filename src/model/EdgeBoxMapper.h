@@ -44,14 +44,14 @@ inline Array<Span<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
   auto nearBoxes = [&index](Edge e) -> Span<Box> {
     auto start = NearBoxes.begin() + index;
 
-    int x = e.dot2().X() - 1;
-    int y = e.dot2().Y() - 1;
+    int x = e.Dot2().X() - 1;
+    int y = e.Dot2().Y() - 1;
     if (x >= 0 && y >= 0) {
       NearBoxes.At(index++) = Box(x, y);
     }
 
-    x = e.dot1().X();
-    y = e.dot1().Y();
+    x = e.Dot1().X();
+    y = e.Dot1().Y();
     if (x < BoardSize && y < BoardSize) {
       NearBoxes.At(index++) = Box(x, y);
     }

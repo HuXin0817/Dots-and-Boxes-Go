@@ -13,12 +13,12 @@ class Edge {
   }
 
   Dot
-  dot1() const {
+  Dot1() const {
     return std::get<1>(DotMapper).At(v);
   }
 
   Dot
-  dot2() const {
+  Dot2() const {
     return std::get<2>(DotMapper).At(v);
   }
 
