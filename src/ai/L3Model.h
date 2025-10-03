@@ -13,20 +13,20 @@ class L3Model final : public AIInterface {
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
-    if (auto l = SubModel.BestCandidateEdges(board); l.Size() == 1) {
-      return l;
+    if (auto edges = SubModel.BestCandidateEdges(board); edges.Size() == 1) {
+      return edges;
     }
 
     ScoreMap.Reset();
-    int Times = SearchTime / board.RemainStep() + 1;
-    while (Times--) {
+    int times = SearchTime / board.RemainStep() + 1;
+    while (times--) {
       AuxBoard.Reset(board.GetBoardV1());
-      auto e = RandomChoice(SubModel.BestCandidateEdges(AuxBoard));
-      AuxBoard.Add(e);
+      auto edge = RandomChoice(SubModel.BestCandidateEdges(AuxBoard));
+      AuxBoard.Add(edge);
       while (AuxBoard.Gaming()) {
         AuxBoard.Add(RandomChoice(SubModel.BestCandidateEdges(AuxBoard)));
       }
-      ScoreMap.Add(e, AuxBoard.Score());
+      ScoreMap.Add(edge, AuxBoard.Score());
     }
 
     return ScoreMap.Export();

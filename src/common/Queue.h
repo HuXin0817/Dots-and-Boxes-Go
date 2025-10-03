@@ -20,32 +20,20 @@ class Queue {
   }
 
   void
-  Append(T e) {
+  Append(T item) {
     assert(End < Cap);
-    Data.At(End++) = e;
+    Data.At(End++) = item;
   }
 
   T
   Pop() {
     assert(!Empty());
-    auto e = Data.At(Begin);
-    Begin++;
-    return e;
+    return Data.At(Begin++);
   }
 
   Span<T>
   Export() const {
     return {Data.begin() + Begin, Data.begin() + End};
-  }
-
-  bool
-  Contains(T e) const {
-    for (int i = Begin; i < End; i++) {
-      if (Data.At(i) == e) {
-        return true;
-      }
-    }
-    return false;
   }
 
   private:

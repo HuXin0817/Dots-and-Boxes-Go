@@ -41,17 +41,17 @@ inline Array<Span<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
   static Array<Box, 2 * Edge::Max - BoardSize * 4> NearBoxes;
   int index = 0;
 
-  auto nearBoxes = [&index](Edge e) -> Span<Box> {
+  auto nearBoxes = [&index](Edge edge) -> Span<Box> {
     auto start = NearBoxes.begin() + index;
 
-    int x = e.Dot2().X() - 1;
-    int y = e.Dot2().Y() - 1;
+    int x = edge.Dot2().X() - 1;
+    int y = edge.Dot2().Y() - 1;
     if (x >= 0 && y >= 0) {
       NearBoxes.At(index++) = Box(x, y);
     }
 
-    x = e.Dot1().X();
-    y = e.Dot1().Y();
+    x = edge.Dot1().X();
+    y = edge.Dot1().Y();
     if (x < BoardSize && y < BoardSize) {
       NearBoxes.At(index++) = Box(x, y);
     }
@@ -62,8 +62,8 @@ inline Array<Span<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
   };
 
   Array<Span<Box>, Edge::Max> mapper;
-  for (int e = 0; e < Edge::Max; e++) {
-    mapper.At(e) = nearBoxes(Edge(e));
+  for (int edge = 0; edge < Edge::Max; edge++) {
+    mapper.At(edge) = nearBoxes(Edge(edge));
   }
   return mapper;
 }();

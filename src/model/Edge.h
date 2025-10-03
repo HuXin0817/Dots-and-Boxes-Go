@@ -35,23 +35,23 @@ inline std::
           Array<Dot, Max> EdgeToDot1{};
           Array<Dot, Max> EdgeToDot2{};
 
-          int e = 0;
+          int edge = 0;
           for (int x = 0; x < Dot::Size; x++) {
             for (int y = 0; y < Dot::Size; y++) {
               Dot d1(x, y);
               if (int x1 = x + 1; x1 < Dot::Size) {
                 Dot d2(x1, y);
-                DotsToEdges.At(d1).At(d2) = e;
-                EdgeToDot1.At(e) = d1;
-                EdgeToDot2.At(e) = d2;
-                e++;
+                DotsToEdges.At(d1).At(d2) = edge;
+                EdgeToDot1.At(edge) = d1;
+                EdgeToDot2.At(edge) = d2;
+                edge++;
               }
               if (int y1 = y + 1; y1 < Dot::Size) {
                 Dot d2(x, y1);
-                DotsToEdges.At(d1).At(d2) = e;
-                EdgeToDot1.At(e) = d1;
-                EdgeToDot2.At(e) = d2;
-                e++;
+                DotsToEdges.At(d1).At(d2) = edge;
+                EdgeToDot1.At(edge) = d1;
+                EdgeToDot2.At(edge) = d2;
+                edge++;
               }
             }
           }

@@ -33,8 +33,8 @@ class MainWindow final : public BaseCanvasLayer {
     boxLayer = std::make_unique<BoxCanvasLayer>(this);
     edgeLayer = std::make_unique<EdgeCanvasLayer>(this);
     dotLayer = std::make_unique<DotCanvasLayer>(this);
-    std::function<std::function<void()>(Edge)> CallBackFactory = [this](Edge e) {
-      return [e, this] { return setPlayerMoveEdge(e); };
+    std::function<std::function<void()>(Edge)> CallBackFactory = [this](Edge edge) {
+      return [edge, this] { return setPlayerMoveEdge(edge); };
     };
     edgeButtonLayer = std::make_unique<EdgeButtonLayer>(CallBackFactory, this);
   }
@@ -54,28 +54,28 @@ class MainWindow final : public BaseCanvasLayer {
 
   public slots:
   void
-  Add(Edge e) {
+  Add(Edge edge) {
     auto Turn = board->Turn;
     if (board->NowStep() > 0) {
       edgeLayer->EdgeCanvases.At(lastEdge)->highLight = false;
     }
-    edgeLayer->EdgeCanvases.At(e)->state = StateFromTurn(Turn);
-    edgeLayer->EdgeCanvases.At(e)->raise();
+    edgeLayer->EdgeCanvases.At(edge)->state = StateFromTurn(Turn);
+    edgeLayer->EdgeCanvases.At(edge)->raise();
 
-    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(e)) {
-      int c = 0;
+    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
+      int count = 0;
       for (auto nearEdge : EdgeBoxMapper::BoxNearEdges.At(box)) {
         if (board->Contains(nearEdge)) {
-          c++;
+          count++;
         }
       }
-      if (c == 3) {
+      if (count == 3) {
         boxLayer->BoxCanvases.At(box)->state = StateFromTurn(Turn);
       }
     }
 
-    board->Add(e);
-    lastEdge = e;
+    board->Add(edge);
+    lastEdge = edge;
     update();
     QApplication::beep();
   }
@@ -162,8 +162,8 @@ class MainWindow final : public BaseCanvasLayer {
   Edge lastEdge;
 
   void
-  setPlayerMoveEdge(Edge e) {
-    if (board->Contains(e)) {
+  setPlayerMoveEdge(Edge edge) {
+    if (board->Contains(edge)) {
       return;
     }
     if (OpenAIPlayer1 && board->Turn == Player1Turn) {
@@ -172,6 +172,6 @@ class MainWindow final : public BaseCanvasLayer {
     if (OpenAIPlayer2 && board->Turn == Player2Turn) {
       return;
     }
-    PlayerMoveEdge = e;
+    PlayerMoveEdge = edge;
   }
 };

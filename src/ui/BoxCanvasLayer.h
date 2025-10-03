@@ -18,8 +18,8 @@ class BoxCanvasLayer final : public BaseCanvasLayer {
   public:
   explicit BoxCanvasLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
     resize(WindowSize, WindowSize);
-    for (int i = 0; i < Box::Max; i++) {
-      BoxCanvases.At(i) = std::make_unique<BoxCanvas>(this);
+    for (int box = 0; box < Box::Max; box++) {
+      BoxCanvases.At(box) = std::make_unique<BoxCanvas>(this);
     }
   }
 

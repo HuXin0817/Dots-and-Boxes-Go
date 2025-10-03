@@ -10,26 +10,26 @@ class L2Model final : public AIInterface {
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
-    if (auto l = SubModel.BestCandidateEdges(board);
+    if (auto edges = SubModel.BestCandidateEdges(board);
         !SubModel.SubModel.EnemyUnscoreableEdges.Empty()) {
-      return l;
+      return edges;
     }
 
     SearchEdges.Clear();
-    int maxs = -(Box::Max + 1);
-    for (auto e : board.EmptyEdges()) {
+    int maxScore = -(Box::Max + 1);
+    for (auto emptyEdge : board.EmptyEdges()) {
       AuxBoard.Reset(board.GetBoardV1());
-      AuxBoard.Add(e);
+      AuxBoard.Add(emptyEdge);
       while (AuxBoard.Gaming()) {
         auto edge = SubModel.BestCandidateEdges(AuxBoard).At(0);
         assert(board.MaxCount(edge) > 1);
         AuxBoard.Add(edge);
       }
-      if (int s = AuxBoard.Score(); s > maxs) {
-        maxs = s;
-        SearchEdges.Reset(e);
-      } else if (s == maxs) {
-        SearchEdges.Append(e);
+      if (int score = AuxBoard.Score(); score > maxScore) {
+        maxScore = score;
+        SearchEdges.Reset(emptyEdge);
+      } else if (score == maxScore) {
+        SearchEdges.Append(emptyEdge);
       }
     }
 

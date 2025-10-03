@@ -8,14 +8,14 @@ class BoardV2 : public BoardV1, public ScoreMap {
   BoardV2() = default;
 
   void
-  Reset(const BoardV1& nb) {
-    GetBoardV1() = nb;
+  Reset(const BoardV1& newBoard) {
+    GetBoardV1() = newBoard;
     ScoreMap::Reset();
   }
 
   int
-  Add(Edge e) {
-    int score = BoardV1::Add(e);
+  Add(Edge edge) {
+    int score = BoardV1::Add(edge);
     ScoreMap::Add(score);
     return score;
   }

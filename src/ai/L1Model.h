@@ -11,30 +11,32 @@ class L1Model final : public AIInterface {
   public:
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
-    if (auto l = SubModel.BestCandidateEdges(board);
+    if (auto edges = SubModel.BestCandidateEdges(board);
         !SubModel.EnemyUnscoreableEdges.Empty() || !SubModel.ScoreableEdges.Empty()) {
-      return l;
+      return edges;
     }
 
-    int mins = Box::Max + 1;
-    auto& Candidate = SubModel.EnemyUnscoreableEdges;
-    assert(Candidate.Empty());
+    int minScore = Box::Max + 1;
+    auto& candidateEdges = SubModel.EnemyUnscoreableEdges;
+    assert(candidateEdges.Empty());
 
-    for (auto e : board.EmptyEdges()) {
+    for (auto edge : board.EmptyEdges()) {
       AuxBoard.Reset(board.GetBoardV1());
-      int v = AuxBoard.Add(e);
-      assert(v == 0);
-
-      int s = AuxBoard.MaxObtainableScore(mins);
-      if (s < mins) {
-        mins = s;
-        Candidate.Reset(e);
-      } else if (s == mins) {
-        Candidate.Append(e);
+#ifdef NDEBUG
+      AuxBoard.Add(edge);
+#else
+      assert(AuxBoard.Add(edge) == 0);
+#endif
+      int score = AuxBoard.MaxObtainableScore(minScore);
+      if (score < minScore) {
+        minScore = score;
+        candidateEdges.Reset(edge);
+      } else if (score == minScore) {
+        candidateEdges.Append(edge);
       }
     }
 
-    return Candidate.Export();
+    return candidateEdges.Export();
   }
 
   private:

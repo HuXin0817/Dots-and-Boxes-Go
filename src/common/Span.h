@@ -7,7 +7,7 @@ class Span {
   public:
   Span() = default;
 
-  Span(const T* beg, const T* end) : Begin(beg), End(end) {
+  Span(const T* begin, const T* end) : Begin(begin), End(end) {
   }
 
   const T*

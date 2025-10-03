@@ -15,21 +15,21 @@ class L4Model final : public AIInterface {
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
-    if (auto l = L2Model().BestCandidateEdges(board); l.Size() == 1) {
-      return l;
+    if (auto edges = L2Model().BestCandidateEdges(board); edges.Size() == 1) {
+      return edges;
     }
 
     thread_local L3Model model(SubModelSearchTime);
 
 #pragma omp parallel for
-    for (auto& r : SearchResults) {
+    for (auto& searchResult : SearchResults) {
       model.BestCandidateEdges(board);
-      r = model.ScoreMap;
+      searchResult = model.ScoreMap;
     }
 
     EdgeScoreMap result;
-    for (const auto& r : SearchResults) {
-      result.Add(r);
+    for (const auto& searchResult : SearchResults) {
+      result.Add(searchResult);
     }
 
     return result.Export();

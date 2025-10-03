@@ -30,15 +30,15 @@ class EdgeScoreMap {
 
   Span<Edge>
   Export() {
-    float maxs = 0.0;
-    for (int e = 0; e < Edge::Max; e++) {
-      if (Time.At(e) > 0) {
-        float s = static_cast<float>(Score.At(e)) / static_cast<float>(Time.At(e));
-        if (s > maxs || BestEdges.Empty()) {
-          maxs = s;
-          BestEdges.Reset(e);
-        } else if (s == maxs) {
-          BestEdges.Append(e);
+    float maxScore = 0.0;
+    for (int edge = 0; edge < Edge::Max; edge++) {
+      if (Time.At(edge) > 0) {
+        float score = static_cast<float>(Score.At(edge)) / static_cast<float>(Time.At(edge));
+        if (score > maxScore || BestEdges.Empty()) {
+          maxScore = score;
+          BestEdges.Reset(edge);
+        } else if (score == maxScore) {
+          BestEdges.Append(edge);
         }
       }
     }

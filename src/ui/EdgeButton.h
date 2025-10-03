@@ -10,17 +10,16 @@ class EdgeButton final : public BaseCanvas {
   static constexpr int B = A * 5;
 
   std::function<void()> CallBack;
+  bool Rotate = false;
 
-  explicit EdgeButton(bool rotate, std::function<void()> CallBack, QWidget* parent = nullptr)
-      : BaseCanvas(parent), CallBack(std::move(CallBack)), Rotate(rotate) {
+  explicit EdgeButton(bool rotate, std::function<void()> callBack, QWidget* parent = nullptr)
+      : BaseCanvas(parent), CallBack(std::move(callBack)), Rotate(rotate) {
     if (!rotate) {
       resize(QSize(A, B));
     } else {
       resize(QSize(B, A));
     }
   }
-
-  bool Rotate = false;
 
   protected:
   void

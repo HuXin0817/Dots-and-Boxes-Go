@@ -8,24 +8,24 @@ class EdgeCountOfBox : public Array<int, Box::Max> {
   EdgeCountOfBox() = default;
 
   int
-  Add(Edge e) {
-    int s = 0;
-    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(e)) {
+  Add(Edge edge) {
+    int score = 0;
+    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
       At(box)++;
       assert(At(box) <= 4);
       if (At(box) == 4) {
-        s++;
+        score++;
       }
     }
-    return s;
+    return score;
   }
 
   int
-  MaxCount(Edge e) const {
-    int c = 0;
-    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(e)) {
-      c = std::max(c, At(box));
+  MaxCount(Edge edge) const {
+    int maxCount = 0;
+    for (auto box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
+      maxCount = std::max(maxCount, At(box));
     }
-    return c;
+    return maxCount;
   }
 };

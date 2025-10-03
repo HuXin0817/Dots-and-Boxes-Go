@@ -8,9 +8,9 @@
 class BoardV0 : public Step {
   public:
   BoardV0() {
-    for (int i = 0; i < Edge::Max; i++) {
-      EdgeIndexes.At(i) = i;
-      Edges.At(i) = i;
+    for (int edge = 0; edge < Edge::Max; edge++) {
+      EdgeIndexes.At(edge) = edge;
+      Edges.At(edge) = edge;
     }
   }
 
@@ -27,13 +27,13 @@ class BoardV0 : public Step {
   }
 
   bool
-  Contains(Edge e) const {
-    return EdgeIndexes.At(e) < NowStep();
+  Contains(Edge edge) const {
+    return EdgeIndexes.At(edge) < NowStep();
   }
 
   bool
-  NotContains(Edge e) const {
-    return EdgeIndexes.At(e) >= NowStep();
+  NotContains(Edge edge) const {
+    return EdgeIndexes.At(edge) >= NowStep();
   }
 
   Span<Edge>

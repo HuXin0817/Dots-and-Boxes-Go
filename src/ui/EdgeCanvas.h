@@ -26,8 +26,9 @@ class EdgeCanvas final : public BaseCanvas {
     if (state == State::Free) {
       if (isDarkMode()) {
         return {65, 65, 65, 255};
+      } else {
+        return {217, 217, 217, 255};
       }
-      return {217, 217, 217, 255};
     }
 
     QColor color;

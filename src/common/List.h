@@ -9,8 +9,8 @@ template <typename T, int Cap>
 class List {
   public:
   void
-  Reset(T e) {
-    Data.At(0) = e;
+  Reset(T item) {
+    Data.At(0) = item;
     Len = 1;
   }
 
@@ -25,9 +25,9 @@ class List {
   }
 
   void
-  Append(T e) {
+  Append(T item) {
     assert(Len < Cap);
-    Data.At(Len++) = e;
+    Data.At(Len++) = item;
   }
 
   Span<T>

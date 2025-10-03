@@ -9,8 +9,8 @@ class BoardV3 : public BoardV1 {
   BoardV3() = default;
 
   void
-  Reset(const BoardV1& nb) {
-    GetBoardV1() = nb;
+  Reset(const BoardV1& newBoard) {
+    GetBoardV1() = newBoard;
     ScoreableEdges.Clear();
   }
 
@@ -31,13 +31,13 @@ class BoardV3 : public BoardV1 {
     int score = 0;
     while (Gaming()) {
       if (ScoreableEdges.Empty()) {
-        if (Edge e = FindScoreableEdge(); static_cast<int>(e) != -1) {
-          ScoreableEdges.Append(e);
+        if (Edge edge = FindScoreableEdge(); edge != -1) {
+          ScoreableEdges.Append(edge);
         } else {
           break;
         }
       }
-      Edge edge = ScoreableEdges.Pop();
+      auto edge = ScoreableEdges.Pop();
       if (Contains(edge)) {
         continue;
       }
@@ -49,11 +49,6 @@ class BoardV3 : public BoardV1 {
       }
     }
     return score;
-  }
-
-  bool
-  ScoreableEdgesEmpty() const {
-    return ScoreableEdges.Empty();
   }
 
   private:

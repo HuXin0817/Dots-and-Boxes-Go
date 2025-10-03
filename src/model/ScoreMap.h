@@ -21,15 +21,15 @@ class ScoreMap {
   }
 
   void
-  Add(int s) {
-    if (s == 0) {
+  Add(int score) {
+    if (score == 0) {
       Turn = !Turn;
       return;
     }
     if (Turn == Player1Turn) {
-      Player1Score += s;
+      Player1Score += score;
     } else {
-      Player2Score += s;
+      Player2Score += score;
     }
   }
 

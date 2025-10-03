@@ -17,11 +17,11 @@ class EdgeCanvasLayer final : public BaseCanvasLayer {
   explicit EdgeCanvasLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
     resize(WindowSize, WindowSize);
 
-    for (int i = 0; i < Edge::Max; i++) {
-      if (Edge(i).Dot1().X() == Edge(i).Dot2().X()) {
-        EdgeCanvases.At(i) = std::make_unique<EdgeCanvas>(false, this);
+    for (int edge = 0; edge < Edge::Max; edge++) {
+      if (Edge(edge).Dot1().X() == Edge(edge).Dot2().X()) {
+        EdgeCanvases.At(edge) = std::make_unique<EdgeCanvas>(false, this);
       } else {
-        EdgeCanvases.At(i) = std::make_unique<EdgeCanvas>(true, this);
+        EdgeCanvases.At(edge) = std::make_unique<EdgeCanvas>(true, this);
       }
     }
   }
@@ -35,15 +35,15 @@ class EdgeCanvasLayer final : public BaseCanvasLayer {
     int y0 = (height() - BoardWindowSize) / 2 - R;
 
     for (int i = 0; i < Edge::Max; i++) {
-      Edge e(i);
-      int x = x0 + e.Dot1().X() * EdgeCanvas::B;
-      int y = y0 + e.Dot1().Y() * EdgeCanvas::B;
-      if (e.Dot1().X() == e.Dot2().X()) {
+      Edge edge(i);
+      int x = x0 + edge.Dot1().X() * EdgeCanvas::B;
+      int y = y0 + edge.Dot1().Y() * EdgeCanvas::B;
+      if (edge.Dot1().X() == edge.Dot2().X()) {
         y += R;
       } else {
         x += R;
       }
-      EdgeCanvases.At(e)->move(x, y);
+      EdgeCanvases.At(edge)->move(x, y);
     }
   }
 
