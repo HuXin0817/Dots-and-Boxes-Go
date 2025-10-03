@@ -20,7 +20,7 @@ class Queue {
   }
 
   void
-  AppEnd(T e) {
+  Append(T e) {
     assert(End < Cap);
     Data.At(End++) = e;
   }

@@ -26,7 +26,7 @@ class List {
 
   void
   Append(T e) {
-    assert(Size < Cap);
+    assert(Len < Cap);
     Data.At(Len++) = e;
   }
 
