@@ -40,22 +40,22 @@ class List {
     return Len;
   }
 
-  auto
+  T*
   begin() {
     return Data.begin();
   }
 
-  auto
+  T*
   end() {
     return Data.begin() + Len;
   }
 
-  auto
+  const T*
   begin() const {
     return Data.begin();
   }
 
-  auto
+  const T*
   end() const {
     return Data.begin() + Len;
   }

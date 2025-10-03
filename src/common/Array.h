@@ -34,22 +34,22 @@ class Array {
     return *this;
   }
 
-  auto
+  T*
   begin() {
     return Data;
   }
 
-  auto
+  T*
   end() {
     return Data + Size;
   }
 
-  auto
+  const T*
   begin() const {
     return Data;
   }
 
-  auto
+  const T*
   end() const {
     return Data + Size;
   }
