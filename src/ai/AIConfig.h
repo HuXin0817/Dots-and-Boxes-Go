@@ -14,21 +14,21 @@ enum class AIModelType { L0, L1, L2, L3, L4 };
 
 class AIConfig {
   public:
-  static std::unique_ptr<AIInterface>
+  static AIInterface*
   createModel(AIModelType type) {
     switch (type) {
       case AIModelType::L0:
-        return std::make_unique<L0Model>();
+        return new L0Model();
       case AIModelType::L1:
-        return std::make_unique<L1Model>();
+        return new L1Model();
       case AIModelType::L2:
-        return std::make_unique<L2Model>();
+        return new L2Model();
       case AIModelType::L3:
-        return std::make_unique<L3Model>();
+        return new L3Model();
       case AIModelType::L4:
-        return std::make_unique<L4Model>();
+        return new L4Model();
       default:
-        return std::make_unique<L4Model>();
+        return new L4Model();
     }
   }
 

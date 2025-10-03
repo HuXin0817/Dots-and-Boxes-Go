@@ -29,14 +29,14 @@ class MainWindow final : public BaseCanvasLayer {
     resize(WindowSize, WindowSize);
     setMinimumSize(WindowSize, WindowSize);
 
-    board = std::make_unique<BoardV2>();
-    boxLayer = std::make_unique<BoxCanvasLayer>(this);
-    edgeLayer = std::make_unique<EdgeCanvasLayer>(this);
-    dotLayer = std::make_unique<DotCanvasLayer>(this);
+    board.New();
+    boxLayer.New(this);
+    edgeLayer.New(this);
+    dotLayer.New(this);
     std::function<std::function<void()>(Edge)> CallBackFactory = [this](Edge edge) {
       return [edge, this] { return setPlayerMoveEdge(edge); };
     };
-    edgeButtonLayer = std::make_unique<EdgeButtonLayer>(CallBackFactory, this);
+    edgeButtonLayer.New(CallBackFactory, this);
   }
 
   QColor
@@ -151,14 +151,14 @@ class MainWindow final : public BaseCanvasLayer {
   private:
   bool OpenAIPlayer1;
   bool OpenAIPlayer2;
-  std::unique_ptr<AIInterface> AIPlayer1;
-  std::unique_ptr<AIInterface> AIPlayer2;
+  Ptr<AIInterface> AIPlayer1;
+  Ptr<AIInterface> AIPlayer2;
   Edge PlayerMoveEdge;
-  std::unique_ptr<BoardV2> board;
-  std::unique_ptr<BoxCanvasLayer> boxLayer;
-  std::unique_ptr<EdgeCanvasLayer> edgeLayer;
-  std::unique_ptr<DotCanvasLayer> dotLayer;
-  std::unique_ptr<EdgeButtonLayer> edgeButtonLayer;
+  Ptr<BoardV2> board;
+  Ptr<BoxCanvasLayer> boxLayer;
+  Ptr<EdgeCanvasLayer> edgeLayer;
+  Ptr<DotCanvasLayer> dotLayer;
+  Ptr<EdgeButtonLayer> edgeButtonLayer;
   Edge lastEdge;
 
   void

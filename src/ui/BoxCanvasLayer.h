@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "../common/Array.h"
+#include "../common/Ptr.h"
 #include "../model/Box.h"
 #include "BaseCanvasLayer.h"
 #include "BoxCanvas.h"
@@ -19,7 +20,7 @@ class BoxCanvasLayer final : public BaseCanvasLayer {
   explicit BoxCanvasLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
     resize(WindowSize, WindowSize);
     for (int box = 0; box < Box::Max; box++) {
-      BoxCanvases.At(box) = std::make_unique<BoxCanvas>(this);
+      BoxCanvases.At(box).New(this);
     }
   }
 
@@ -41,5 +42,5 @@ class BoxCanvasLayer final : public BaseCanvasLayer {
   }
 
   private:
-  Array<std::unique_ptr<BoxCanvas>, Box::Max> BoxCanvases;
+  Array<Ptr<BoxCanvas>, Box::Max> BoxCanvases;
 };

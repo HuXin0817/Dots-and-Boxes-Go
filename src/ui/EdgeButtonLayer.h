@@ -20,7 +20,7 @@ class EdgeButtonLayer final : public EdgeLayer<EdgeButton> {
     resize(WindowSize, WindowSize);
 
     for (Edge edge = 0; edge < Edge::Max; edge++) {
-      Canvases.At(edge) = std::make_unique<EdgeButton>(edge.Rotate(), CallBackFactory(edge), this);
+      Canvases.At(edge).New(edge.Rotate(), CallBackFactory(edge), this);
     }
   }
 };

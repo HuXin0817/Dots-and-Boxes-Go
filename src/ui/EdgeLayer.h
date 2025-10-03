@@ -35,5 +35,5 @@ class EdgeLayer : public BaseCanvasLayer {
     }
   }
 
-  Array<std::unique_ptr<Canvas>, Edge::Max> Canvases;
+  Array<Ptr<Canvas>, Edge::Max> Canvases;
 };

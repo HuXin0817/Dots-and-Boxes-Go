@@ -18,7 +18,7 @@ class DotCanvasLayer final : public BaseCanvasLayer {
   explicit DotCanvasLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
     resize(WindowSize, WindowSize);
     for (int dot = 0; dot < Dot::Max; dot++) {
-      DotCanvases.At(dot) = std::make_unique<DotCanvas>(this);
+      DotCanvases.At(dot).New(this);
     }
   }
 
@@ -40,5 +40,5 @@ class DotCanvasLayer final : public BaseCanvasLayer {
   }
 
   private:
-  Array<std::unique_ptr<DotCanvas>, Dot::Max> DotCanvases;
+  Array<Ptr<DotCanvas>, Dot::Max> DotCanvases;
 };
