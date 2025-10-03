@@ -3,9 +3,9 @@
 QColor
 DotCanvas::Color() {
   if (isDarkMode()) {
-    return DarkThemeColor;
+    return {202, 202, 202, 255};
   } else {
-    return LightThemeColor;
+    return {255, 255, 255, 255};
   }
 }
 

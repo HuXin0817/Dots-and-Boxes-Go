@@ -13,9 +13,6 @@ class DotCanvas final : public QWidget {
   static constexpr int R = 8;
   static constexpr int A = 2 * R;
 
-  static inline QColor DarkThemeColor{202, 202, 202};
-  static inline QColor LightThemeColor{255, 255, 255};
-
   static QColor
   Color();
 
