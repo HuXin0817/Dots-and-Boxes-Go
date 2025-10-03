@@ -25,7 +25,6 @@ class L4Model final : public AIInterface {
 
 #pragma omp parallel for
     for (auto& r : SearchResults) {
-      r.Reset();
       model.BestCandidateEdges(board);
       r = model.ScoreMap;
     }
