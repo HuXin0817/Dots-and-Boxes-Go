@@ -9,11 +9,6 @@ class Edge {
   public:
   static constexpr int Max = 2 * BoardSize * (BoardSize + 1);
 
-  Edge() = default;
-
-  Edge(int v) : v(v) {
-  }
-
   Edge(Dot dot1, Dot dot2) : v(std::get<0>(DotMapper).At(dot1).At(dot2)) {
   }
 
@@ -27,12 +22,7 @@ class Edge {
     return std::get<2>(DotMapper).At(v);
   }
 
-  operator int() const {
-    return v;
-  }
-
-  private:
-  int v = 0;
+  V(Edge)
 
   static std::tuple<Array<Array<int, Dot::Max>, Dot::Max>, Array<Dot, Max>, Array<Dot, Max>>
       DotMapper;
