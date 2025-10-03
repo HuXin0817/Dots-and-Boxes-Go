@@ -20,13 +20,12 @@ class EdgeScoreMap {
     Score.At(edge) += score;
   }
 
-  EdgeScoreMap
-  operator+=(const EdgeScoreMap& other) {
+  void
+  Add(const EdgeScoreMap& other) {
     for (int i = 0; i < Edge::Max; i++) {
       Time.At(i) += other.Time.At(i);
       Score.At(i) += other.Score.At(i);
     }
-    return *this;
   }
 
   Span<Edge>

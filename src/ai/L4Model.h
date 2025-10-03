@@ -32,7 +32,7 @@ class L4Model final : public AIInterface {
 
     EdgeScoreMap result;
     for (const auto& r : SearchResults) {
-      result += r;
+      result.Add(r);
     }
 
     return result.Export();
