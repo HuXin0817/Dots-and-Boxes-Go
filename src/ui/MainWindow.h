@@ -12,7 +12,7 @@
 #include <memory>
 #include <thread>
 
-#include "../ai/L4Model.h"
+#include "../ai/AIConfig.h"
 #include "BoxCanvasLayer.h"
 #include "DotCanvasLayer.h"
 #include "EdgeButtonLayer.h"
@@ -23,8 +23,8 @@ class MainWindow : public BaseCanvasLayer {
   public:
   MainWindow(bool OpenAIPlayer1,
              bool OpenAIPlayer2,
-             AIInterface* AIPlayer1,
-             AIInterface* AIPlayer2,
+             AIModelType AIPlayer1Type,
+             AIModelType AIPlayer2Type,
              QWidget* parent = nullptr);
 
   QColor
@@ -49,8 +49,8 @@ class MainWindow : public BaseCanvasLayer {
   private:
   bool OpenAIPlayer1;
   bool OpenAIPlayer2;
-  AIInterface* AIPlayer1;
-  AIInterface* AIPlayer2;
+  std::unique_ptr<AIInterface> AIPlayer1;
+  std::unique_ptr<AIInterface> AIPlayer2;
   Edge PlayerMoveEdge;
   std::unique_ptr<BoardV2> board;
   std::unique_ptr<BoxCanvasLayer> boxLayer;

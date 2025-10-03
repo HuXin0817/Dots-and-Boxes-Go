@@ -2,14 +2,14 @@
 
 MainWindow::MainWindow(bool OpenAIPlayer1,
                        bool OpenAIPlayer2,
-                       AIInterface* AIPlayer1,
-                       AIInterface* AIPlayer2,
+                       AIModelType AIPlayer1Type,
+                       AIModelType AIPlayer2Type,
                        QWidget* parent)
     : BaseCanvasLayer(parent),
       OpenAIPlayer1(OpenAIPlayer1),
       OpenAIPlayer2(OpenAIPlayer2),
-      AIPlayer1(AIPlayer1),
-      AIPlayer2(AIPlayer2) {
+      AIPlayer1(AIConfig::createModel(AIPlayer1Type)),
+      AIPlayer2(AIConfig::createModel(AIPlayer2Type)) {
   resize(WindowSize, WindowSize);
   setMinimumSize(WindowSize, WindowSize);
 
