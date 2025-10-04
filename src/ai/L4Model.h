@@ -1,7 +1,5 @@
 #pragma once
 
-#include <omp.h>
-
 #include "../common/Vector.h"
 #include "Interface.h"
 #include "L3Model.h"
