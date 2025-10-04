@@ -15,16 +15,16 @@
 class MainWindow final : public BaseCanvasLayer {
   Q_OBJECT
   public:
-  MainWindow(bool OpenAIPlayer1,
-             bool OpenAIPlayer2,
+  MainWindow(bool AIPlayer1,
+             bool AIPlayer2,
              AIModelType AIPlayer1Type,
              AIModelType AIPlayer2Type,
              QWidget* parent = nullptr)
       : BaseCanvasLayer(parent),
-        OpenAIPlayer1(OpenAIPlayer1),
-        OpenAIPlayer2(OpenAIPlayer2),
-        AIPlayer1(AIConfig::createModel(AIPlayer1Type)),
-        AIPlayer2(AIConfig::createModel(AIPlayer2Type)) {
+        AIPlayer1(AIPlayer1),
+        AIPlayer2(AIPlayer2),
+        Player1Model(AIConfig::createModel(AIPlayer1Type)),
+        Player2Model(AIConfig::createModel(AIPlayer2Type)) {
     resize(WindowSize, WindowSize);
     setMinimumSize(WindowSize, WindowSize);
 
@@ -104,10 +104,10 @@ class MainWindow final : public BaseCanvasLayer {
 
     std::thread([this] {
       while (Board->Gaming()) {
-        if (OpenAIPlayer1 && Board->Turn == Player1Turn) {
-          PlayerMoveEdge = RandomChoice(AIPlayer1->BestCandidateEdges(*Board));
-        } else if (OpenAIPlayer2 && Board->Turn == Player2Turn) {
-          PlayerMoveEdge = RandomChoice(AIPlayer2->BestCandidateEdges(*Board));
+        if (AIPlayer1 && Board->Turn == Player1Turn) {
+          PlayerMoveEdge = RandomChoice(Player1Model->BestCandidateEdges(*Board));
+        } else if (AIPlayer2 && Board->Turn == Player2Turn) {
+          PlayerMoveEdge = RandomChoice(Player2Model->BestCandidateEdges(*Board));
         } else {
           PlayerMoveEdge = -1;
           while (PlayerMoveEdge == -1) {
@@ -148,10 +148,10 @@ class MainWindow final : public BaseCanvasLayer {
   }
 
   private:
-  bool OpenAIPlayer1;
-  bool OpenAIPlayer2;
-  Ptr<AIInterface> AIPlayer1;
-  Ptr<AIInterface> AIPlayer2;
+  bool AIPlayer1;
+  bool AIPlayer2;
+  Ptr<AIInterface> Player1Model;
+  Ptr<AIInterface> Player2Model;
   Edge PlayerMoveEdge;
   Ptr<BoardV2> Board;
   Ptr<BoxCanvasLayer> BoxCanvasLayer;
@@ -165,10 +165,10 @@ class MainWindow final : public BaseCanvasLayer {
     if (Board->Contains(edge)) {
       return;
     }
-    if (OpenAIPlayer1 && Board->Turn == Player1Turn) {
+    if (AIPlayer1 && Board->Turn == Player1Turn) {
       return;
     }
-    if (OpenAIPlayer2 && Board->Turn == Player2Turn) {
+    if (AIPlayer2 && Board->Turn == Player2Turn) {
       return;
     }
     PlayerMoveEdge = edge;

@@ -16,8 +16,8 @@ main(int argc, char* argv[]) {
 
   auto player1Model = AIModelType::L4;
   auto player2Model = AIModelType::L4;
-  bool aiPlayer1 = true;
-  bool aiPlayer2 = true;
+  bool AIPlayer1 = true;
+  bool AIPlayer2 = true;
 
   for (int i = 1; i < argc; i++) {
     std::string arg = argv[i];
@@ -26,13 +26,13 @@ main(int argc, char* argv[]) {
     } else if (arg == "--player2" && i + 1 < argc) {
       player2Model = AIConfig::parseModelType(argv[++i]);
     } else if (arg == "--ai-player1") {
-      aiPlayer1 = true;
+      AIPlayer1 = true;
     } else if (arg == "--human-player1") {
-      aiPlayer1 = false;
+      AIPlayer1 = false;
     } else if (arg == "--ai-player2") {
-      aiPlayer2 = true;
+      AIPlayer2 = true;
     } else if (arg == "--human-player2") {
-      aiPlayer2 = false;
+      AIPlayer2 = false;
     } else if (arg == "--help" || arg == "-h") {
       printf("Dots and Boxes - AI Model Configuration\n");
       printf("Usage: %s [options]\n", argv[0]);
@@ -55,22 +55,22 @@ main(int argc, char* argv[]) {
   }
 
   printf("Starting game with player configuration:\n");
-  printf("  Player 1: %s", aiPlayer1 ? "AI" : "Human");
-  if (aiPlayer1) {
+  printf("  Player 1: %s", AIPlayer1 ? "AI" : "Human");
+  if (AIPlayer1) {
     printf(" (%s - %s)",
            AIConfig::getModelName(player1Model).c_str(),
            AIConfig::getModelDescription(player1Model).c_str());
   }
   printf("\n");
-  printf("  Player 2: %s", aiPlayer2 ? "AI" : "Human");
-  if (aiPlayer2) {
+  printf("  Player 2: %s", AIPlayer2 ? "AI" : "Human");
+  if (AIPlayer2) {
     printf(" (%s - %s)",
            AIConfig::getModelName(player2Model).c_str(),
            AIConfig::getModelDescription(player2Model).c_str());
   }
   printf("\n\n");
 
-  auto mainWindow = std::make_unique<MainWindow>(aiPlayer1, aiPlayer2, player1Model, player2Model);
+  auto mainWindow = std::make_unique<MainWindow>(AIPlayer1, AIPlayer2, player1Model, player2Model);
   mainWindow->show();
 
   return QApplication::exec();
