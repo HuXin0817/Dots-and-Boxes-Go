@@ -1,15 +1,14 @@
 #pragma once
 
-#include "../common/Vector.h"
 #include "Interface.h"
 #include "L3Model.h"
 
 class L4Model final : public AIInterface {
   public:
   static constexpr int SubModelSearchTime = 1000;
+  static constexpr int SearchGroupNumber = 100;
 
-  explicit L4Model(int GroupNumber = 100) : SearchResults(GroupNumber) {
-  }
+  L4Model() = default;
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
@@ -34,5 +33,5 @@ class L4Model final : public AIInterface {
   }
 
   private:
-  Vector<EdgeScoreMap> SearchResults;
+  Array<EdgeScoreMap, SearchGroupNumber> SearchResults;
 };
