@@ -17,11 +17,10 @@ class BoardV0 : public Step {
   void
   Add(Edge edge) {
     assert(NotContains(edge));
-    int nowStep = NowStep();
-    Edge nowEdge = Edges.At(nowStep);
+    Edge nowEdge = Edges.At(NowStep());
     int edgeIndex = EdgeIndexes.At(edge);
-    std::swap(Edges.At(edgeIndex), Edges.At(nowStep));
-    EdgeIndexes.At(edge) = nowStep;
+    std::swap(Edges.At(edgeIndex), Edges.At(NowStep()));
+    EdgeIndexes.At(edge) = NowStep();
     EdgeIndexes.At(nowEdge) = edgeIndex;
     Go();
   }
