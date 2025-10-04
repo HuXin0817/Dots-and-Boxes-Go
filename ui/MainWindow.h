@@ -54,11 +54,10 @@ class MainWindow final : public BaseCanvasLayer {
   public slots:
   void
   Add(Edge edge) {
-    bool Turn = Board->Turn;
     if (Board->NowStep() > 0) {
       EdgeCanvasLayer->Canvases.At(LastEdge)->highLight = false;
     }
-    EdgeCanvasLayer->Canvases.At(edge)->state = StateFromTurn(Turn);
+    EdgeCanvasLayer->Canvases.At(edge)->state = StateFromTurn(Board->Turn);
     EdgeCanvasLayer->Canvases.At(edge)->raise();
 
     for (Box box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
@@ -69,7 +68,7 @@ class MainWindow final : public BaseCanvasLayer {
         }
       }
       if (count == 3) {
-        BoxCanvasLayer->BoxCanvases.At(box)->state = StateFromTurn(Turn);
+        BoxCanvasLayer->BoxCanvases.At(box)->state = StateFromTurn(Board->Turn);
       }
     }
 
@@ -118,12 +117,9 @@ class MainWindow final : public BaseCanvasLayer {
         }
         Add(PlayerMoveEdge);
 
-        int playerId = Board->Turn == Player1Turn ? 1 : 2;
-        int step = Board->NowStep();
-
         printf("| Step %d | Player %d Move (%d, %d) -> (%d, %d) | Score %d : %d |\n",
-               step,
-               playerId,
+               Board->NowStep(),
+               Board->Turn == Player1Turn ? 1 : 2,
                PlayerMoveEdge.Dot1().X(),
                PlayerMoveEdge.Dot1().Y(),
                PlayerMoveEdge.Dot2().X(),
