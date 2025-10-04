@@ -16,7 +16,7 @@ class L2Model final : public AIInterface {
     }
 
     SearchEdges.Clear();
-    int maxScore = -(Box::Max + 1);
+    int maxScore = -Box::Max;
     for (Edge emptyEdge : board.EmptyEdges()) {
       AuxBoard.Reset(board.GetBoardV1());
       AuxBoard.Add(emptyEdge);
