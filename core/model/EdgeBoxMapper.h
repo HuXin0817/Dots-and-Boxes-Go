@@ -14,19 +14,19 @@ class EdgeBoxMapper {
 inline Array<Array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
   Array<Array<Edge, 4>, Box::Max> BoxNearEdges;
 
-  for (int i = 0; i < Box::Max; i++) {
-    int x = i / BoardSize;
-    int y = i % BoardSize;
-    Dot d00(x, y);
-    Dot d01(x + 1, y);
-    Dot d10(x, y + 1);
-    Dot d11(x + 1, y + 1);
-    BoxNearEdges.At(i) = {
-        Edge(d00, d01),
-        Edge(d00, d10),
-        Edge(d10, d11),
-        Edge(d01, d11),
-    };
+  for (int x = 0; x < Box::Size; x++) {
+    for (int y = 0; y < Box::Size; y++) {
+      Dot d00(x, y);
+      Dot d01(x + 1, y);
+      Dot d10(x, y + 1);
+      Dot d11(x + 1, y + 1);
+      BoxNearEdges.At(Box(x, y)) = {
+          Edge(d00, d01),
+          Edge(d00, d10),
+          Edge(d10, d11),
+          Edge(d01, d11),
+      };
+    }
   }
 
   return BoxNearEdges;
@@ -57,8 +57,8 @@ inline Array<Span<Box>, Edge::Max> EdgeBoxMapper::EdgeNearBoxes = [] {
   };
 
   Array<Span<Box>, Edge::Max> mapper;
-  for (int edge = 0; edge < Edge::Max; edge++) {
-    mapper.At(edge) = nearBoxes(Edge(edge));
+  for (Edge edge = 0; edge < Edge::Max; edge++) {
+    mapper.At(edge) = nearBoxes(edge);
   }
   return mapper;
 }();

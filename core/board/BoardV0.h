@@ -8,7 +8,7 @@
 class BoardV0 : public Step {
   public:
   BoardV0() {
-    for (int edge = 0; edge < Edge::Max; edge++) {
+    for (Edge edge = 0; edge < Edge::Max; edge++) {
       EdgeIndexes.At(edge) = edge;
       Edges.At(edge) = edge;
     }

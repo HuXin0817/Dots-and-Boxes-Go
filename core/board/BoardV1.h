@@ -29,9 +29,9 @@ class BoardV1 : public BoardV0, public EdgeCountOfBox {
 
   Edge
   FindScoreableEdge() const {
-    for (int box = 0; box < Box::Max; box++) {
+    for (Box box = 0; box < Box::Max; box++) {
       if (EdgeCountOfBox::At(box) == 3) {
-        return FindNotContainsEdgeInBox(Box(box));
+        return FindNotContainsEdgeInBox(box);
       }
     }
     return -1;

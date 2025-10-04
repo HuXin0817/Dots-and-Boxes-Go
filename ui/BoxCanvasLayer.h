@@ -16,7 +16,7 @@ class BoxCanvasLayer final : public BaseCanvasLayer {
   public:
   explicit BoxCanvasLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
     resize(WindowSize, WindowSize);
-    for (int box = 0; box < Box::Max; box++) {
+    for (Box box = 0; box < Box::Max; box++) {
       BoxCanvases.At(box).New(this);
     }
   }

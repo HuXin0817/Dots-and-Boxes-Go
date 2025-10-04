@@ -16,7 +16,7 @@ class DotCanvasLayer final : public BaseCanvasLayer {
   public:
   explicit DotCanvasLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
     resize(WindowSize, WindowSize);
-    for (int dot = 0; dot < Dot::Max; dot++) {
+    for (Dot dot = 0; dot < Dot::Max; dot++) {
       DotCanvases.At(dot).New(this);
     }
   }

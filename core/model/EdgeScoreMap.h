@@ -31,7 +31,7 @@ class EdgeScoreMap {
   Span<Edge>
   Export() {
     float maxScore = 0.0;
-    for (int edge = 0; edge < Edge::Max; edge++) {
+    for (Edge edge = 0; edge < Edge::Max; edge++) {
       if (Time.At(edge) > 0) {
         float score = static_cast<float>(Score.At(edge)) / static_cast<float>(Time.At(edge));
         if (score > maxScore || BestEdges.Empty()) {

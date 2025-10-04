@@ -20,8 +20,7 @@ class EdgeLayer : public BaseCanvasLayer {
     int x0 = (width() - BoardWindowSize) / 2 - R;
     int y0 = (height() - BoardWindowSize) / 2 - R;
 
-    for (int i = 0; i < Edge::Max; i++) {
-      Edge edge(i);
+    for (Edge edge = 0; edge < Edge::Max; edge++) {
       int x = x0 + edge.Dot1().X() * EdgeCanvas::B;
       int y = y0 + edge.Dot1().Y() * EdgeCanvas::B;
       if (edge.Dot1().X() == edge.Dot2().X()) {
