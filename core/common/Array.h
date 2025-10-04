@@ -5,6 +5,8 @@
 template <class T, int Size>
 class Array {
   public:
+  Array() = default;
+
   T&
   At(int i) {
     return Data[i];
@@ -55,5 +57,5 @@ class Array {
   }
 
   private:
-  T Data[Size] = {};
+  T Data[Size];
 };
