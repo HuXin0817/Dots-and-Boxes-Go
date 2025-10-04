@@ -15,8 +15,6 @@ class EdgeBoxMapper {
 };
 
 inline Array<Array<Edge, 4>, Box::Max> EdgeBoxMapper::BoxNearEdges = [] {
-  [[maybe_unused]] Edge dummy(0);
-
   Array<Array<Edge, 4>, Box::Max> BoxNearEdges;
 
   for (int i = 0; i < Box::Max; i++) {
