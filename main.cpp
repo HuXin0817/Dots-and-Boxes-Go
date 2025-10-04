@@ -20,8 +20,7 @@ main(int argc, char* argv[]) {
   QApplication::setStyle(QStyleFactory::create("Fusion"));
 
   for (int i = 1; i < argc; i++) {
-    std::string arg = argv[i];
-    if (arg == "--player1" && i + 1 < argc) {
+    if (std::string arg = argv[i]; arg == "--player1" && i + 1 < argc) {
       player1Model = AIConfig::parseModelType(argv[++i]);
     } else if (arg == "--player2" && i + 1 < argc) {
       player2Model = AIConfig::parseModelType(argv[++i]);

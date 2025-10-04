@@ -27,8 +27,7 @@ class L1Model final : public AIInterface {
 #else
       assert(AuxBoard.Add(edge) == 0);
 #endif
-      int score = AuxBoard.MaxObtainableScore(minScore);
-      if (score < minScore) {
+      if (int score = AuxBoard.MaxObtainableScore(minScore); score < minScore) {
         minScore = score;
         candidateEdges.Reset(edge);
       } else if (score == minScore) {
