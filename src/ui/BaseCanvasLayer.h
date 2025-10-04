@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QWidget>
-
 #include "BoxCanvas.h"
 #include "EdgeCanvas.h"
 

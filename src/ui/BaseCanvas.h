@@ -2,7 +2,6 @@
 
 #include <QApplication>
 #include <QColor>
-#include <QPalette>
 #include <QWidget>
 
 #include "../model/ScoreMap.h"

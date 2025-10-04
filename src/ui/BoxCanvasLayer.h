@@ -1,8 +1,5 @@
 #pragma once
 
-#include <QWidget>
-#include <memory>
-
 #include "../common/Array.h"
 #include "../common/Ptr.h"
 #include "../model/Box.h"

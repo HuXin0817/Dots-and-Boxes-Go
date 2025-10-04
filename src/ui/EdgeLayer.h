@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "../common/Array.h"
 #include "../model/Edge.h"
 #include "BaseCanvasLayer.h"

@@ -4,7 +4,6 @@
 #include <QColor>
 #include <QTimer>
 #include <chrono>
-#include <memory>
 #include <thread>
 
 #include "../ai/AIConfig.h"

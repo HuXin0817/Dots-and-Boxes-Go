@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QWidget>
-#include <memory>
 
 #include "../common/Array.h"
 #include "../model/Edge.h"
