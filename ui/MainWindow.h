@@ -82,13 +82,15 @@ class MainWindow final : public BaseCanvasLayer {
   protected:
   void
   paintEvent(QPaintEvent* event) override {
+    BaseCanvasLayer::paintEvent(event);
+
     QPainter painter(this);
     painter.fillRect(rect(), Color());
   }
 
   void
   resizeEvent(QResizeEvent* event) override {
-    QWidget::resizeEvent(event);
+    BaseCanvasLayer::resizeEvent(event);
 
     int x = (width() - WindowSize) / 2;
     int y = (height() - WindowSize) / 2;
@@ -100,7 +102,7 @@ class MainWindow final : public BaseCanvasLayer {
 
   void
   showEvent(QShowEvent* event) override {
-    QWidget::showEvent(event);
+    BaseCanvasLayer::showEvent(event);
 
     std::thread([this] {
       while (Board->Gaming()) {

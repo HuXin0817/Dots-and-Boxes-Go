@@ -24,7 +24,7 @@ class BoxCanvasLayer final : public BaseCanvasLayer {
   protected:
   void
   resizeEvent(QResizeEvent* event) override {
-    QWidget::resizeEvent(event);
+    BaseCanvasLayer::resizeEvent(event);
 
     int x0 = (width() - BoardWindowSize) / 2 + R;
     int y0 = (height() - BoardWindowSize) / 2 + R;
