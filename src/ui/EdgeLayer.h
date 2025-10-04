@@ -4,7 +4,7 @@
 #include "../model/Edge.h"
 #include "BaseCanvasLayer.h"
 
-template <typename Canvas>
+template <class Canvas>
 class EdgeLayer : public BaseCanvasLayer {
   friend class MainWindow;
 

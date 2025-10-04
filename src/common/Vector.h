@@ -1,6 +1,6 @@
 #pragma once
 
-template <typename T>
+template <class T>
 class Vector {
   public:
   explicit Vector(int Len) : Len(Len) {

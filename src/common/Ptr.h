@@ -1,6 +1,6 @@
 #pragma once
 
-template <typename T>
+template <class T>
 class Ptr {
   public:
   Ptr() = default;

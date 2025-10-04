@@ -2,7 +2,7 @@
 
 #include <random>
 
-template <typename T>
+template <class T>
 class Span {
   public:
   Span() = default;
@@ -40,7 +40,7 @@ class Span {
   const T* End = nullptr;
 };
 
-template <typename T>
+template <class T>
 const T&
 RandomChoice(const Span<T>& data) {
   assert(!data.Empty());

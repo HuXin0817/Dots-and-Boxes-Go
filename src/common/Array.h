@@ -2,7 +2,7 @@
 
 #include <initializer_list>
 
-template <typename T, int Size>
+template <class T, int Size>
 class Array {
   public:
   T&

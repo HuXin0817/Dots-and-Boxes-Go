@@ -5,7 +5,7 @@
 #include "Array.h"
 #include "Span.h"
 
-template <typename T, int Cap>
+template <class T, int Cap>
 class Queue {
   public:
   void
