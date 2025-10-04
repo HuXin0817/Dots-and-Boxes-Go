@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../model/Box.h"
 #include "../model/Edge.h"
 #include "../model/EdgeCountOfBox.h"
+#include "../model/Square.h"
 #include "BoardV0.h"
 
 class BoardV1 : public BoardV0, public EdgeCountOfBox {

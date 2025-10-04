@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Box.h"
+#include "Square.h"
 
 static constexpr bool Player1Turn = true;
 static constexpr bool Player2Turn = !Player1Turn;

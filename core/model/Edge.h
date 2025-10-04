@@ -3,7 +3,7 @@
 #include <tuple>
 
 #include "../common/Array.h"
-#include "Dot.h"
+#include "Square.h"
 
 class Edge {
   public:

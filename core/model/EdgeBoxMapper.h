@@ -2,13 +2,10 @@
 
 #include "../common/Array.h"
 #include "../common/Span.h"
-#include "Box.h"
 #include "Edge.h"
+#include "Square.h"
 
 class EdgeBoxMapper {
-  friend class Box;
-  friend class Edge;
-
   public:
   static Array<Array<Edge, 4>, Box::Max> BoxNearEdges;
   static Array<Span<Box>, Edge::Max> EdgeNearBoxes;

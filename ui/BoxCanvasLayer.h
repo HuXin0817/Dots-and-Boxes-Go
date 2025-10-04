@@ -2,7 +2,7 @@
 
 #include "../core/common/Array.h"
 #include "../core/common/Ptr.h"
-#include "../core/model/Box.h"
+#include "../core/model/Square.h"
 #include "BaseCanvasLayer.h"
 #include "BoxCanvas.h"
 #include "DotCanvas.h"

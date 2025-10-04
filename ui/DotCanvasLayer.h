@@ -3,7 +3,7 @@
 #include <QWidget>
 
 #include "../core/common/Array.h"
-#include "../core/model/Dot.h"
+#include "../core/model/Square.h"
 #include "BaseCanvasLayer.h"
 #include "DotCanvas.h"
 #include "EdgeCanvas.h"
