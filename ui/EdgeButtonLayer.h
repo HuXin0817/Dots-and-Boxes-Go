@@ -2,8 +2,8 @@
 
 #include <QWidget>
 
-#include "../common/Array.h"
-#include "../model/Edge.h"
+#include "../core/common/Array.h"
+#include "../core/model/Edge.h"
 #include "EdgeButton.h"
 #include "EdgeLayer.h"
 

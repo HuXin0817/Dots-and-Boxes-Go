@@ -6,7 +6,7 @@
 #include <chrono>
 #include <thread>
 
-#include "../ai/AIConfig.h"
+#include "../core/ai/AIConfig.h"
 #include "BoxCanvasLayer.h"
 #include "DotCanvasLayer.h"
 #include "EdgeButtonLayer.h"

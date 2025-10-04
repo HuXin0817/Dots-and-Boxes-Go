@@ -4,7 +4,7 @@
 #include <QColor>
 #include <QWidget>
 
-#include "../model/ScoreMap.h"
+#include "../core/model/ScoreMap.h"
 
 class BaseCanvas : public QWidget {
   public:

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../common/Array.h"
-#include "../common/Ptr.h"
-#include "../model/Box.h"
+#include "../core/common/Array.h"
+#include "../core/common/Ptr.h"
+#include "../core/model/Box.h"
 #include "BaseCanvasLayer.h"
 #include "BoxCanvas.h"
 #include "DotCanvas.h"

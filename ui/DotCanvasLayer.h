@@ -2,8 +2,8 @@
 
 #include <QWidget>
 
-#include "../common/Array.h"
-#include "../model/Dot.h"
+#include "../core/common/Array.h"
+#include "../core/model/Dot.h"
 #include "BaseCanvasLayer.h"
 #include "DotCanvas.h"
 #include "EdgeCanvas.h"
