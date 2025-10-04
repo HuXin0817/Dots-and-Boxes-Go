@@ -2,7 +2,7 @@
 
 #include "../common/Config.h"
 
-template <int size>
+template <int A>
 class Square {
   public:
   Square(int x, int y) : v(x * Size + y) {
@@ -10,16 +10,16 @@ class Square {
 
   int
   X() const {
-    return v / size;
+    return v / Size;
   }
 
   int
   Y() const {
-    return v % size;
+    return v % Size;
   }
 
-  static constexpr int Size = size;
-  static constexpr int Max = size * size;
+  static constexpr int Size = A;
+  static constexpr int Max = Size * Size;
 
   V(Square)
 };
