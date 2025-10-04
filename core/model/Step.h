@@ -24,5 +24,6 @@ class Step {
     v++;
   }
 
-  V(Step);
+  private:
+  int v = 0;
 };
