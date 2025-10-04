@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../board/BoardV2.h"
+#include "../common/Random.h"
 #include "../model/EdgeScoreMap.h"
 #include "L2Model.h"
 
