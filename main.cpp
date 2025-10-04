@@ -5,6 +5,11 @@
 #include "src/ai/AIConfig.h"
 #include "src/ui/MainWindow.h"
 
+auto player1Model = AIModelType::L4;
+auto player2Model = AIModelType::L4;
+bool AIPlayer1 = true;
+bool AIPlayer2 = true;
+
 int
 main(int argc, char* argv[]) {
   QApplication app(argc, argv);
@@ -13,11 +18,6 @@ main(int argc, char* argv[]) {
   QApplication::setApplicationVersion("1.0");
   QApplication::setOrganizationName("Dots and Boxes");
   QApplication::setStyle(QStyleFactory::create("Fusion"));
-
-  auto player1Model = AIModelType::L4;
-  auto player2Model = AIModelType::L4;
-  bool AIPlayer1 = true;
-  bool AIPlayer2 = true;
 
   for (int i = 1; i < argc; i++) {
     std::string arg = argv[i];
