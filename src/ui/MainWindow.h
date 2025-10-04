@@ -28,14 +28,14 @@ class MainWindow final : public BaseCanvasLayer {
     resize(WindowSize, WindowSize);
     setMinimumSize(WindowSize, WindowSize);
 
-    board.New();
-    boxLayer.New(this);
-    edgeLayer.New(this);
-    dotLayer.New(this);
+    Board.New();
+    BoxCanvasLayer.New(this);
+    EdgeCanvasLayer.New(this);
+    DotCanvasLayer.New(this);
     std::function<std::function<void()>(Edge)> CallBackFactory = [this](Edge edge) {
       return [edge, this] { return setPlayerMoveEdge(edge); };
     };
-    edgeButtonLayer.New(CallBackFactory, this);
+    EdgeButtonLayer.New(CallBackFactory, this);
   }
 
   QColor
@@ -54,27 +54,27 @@ class MainWindow final : public BaseCanvasLayer {
   public slots:
   void
   Add(Edge edge) {
-    bool Turn = board->Turn;
-    if (board->NowStep() > 0) {
-      edgeLayer->Canvases.At(lastEdge)->highLight = false;
+    bool Turn = Board->Turn;
+    if (Board->NowStep() > 0) {
+      EdgeCanvasLayer->Canvases.At(LastEdge)->highLight = false;
     }
-    edgeLayer->Canvases.At(edge)->state = StateFromTurn(Turn);
-    edgeLayer->Canvases.At(edge)->raise();
+    EdgeCanvasLayer->Canvases.At(edge)->state = StateFromTurn(Turn);
+    EdgeCanvasLayer->Canvases.At(edge)->raise();
 
     for (Box box : EdgeBoxMapper::EdgeNearBoxes.At(edge)) {
       int count = 0;
       for (Edge nearEdge : EdgeBoxMapper::BoxNearEdges.At(box)) {
-        if (board->Contains(nearEdge)) {
+        if (Board->Contains(nearEdge)) {
           count++;
         }
       }
       if (count == 3) {
-        boxLayer->BoxCanvases.At(box)->state = StateFromTurn(Turn);
+        BoxCanvasLayer->BoxCanvases.At(box)->state = StateFromTurn(Turn);
       }
     }
 
-    board->Add(edge);
-    lastEdge = edge;
+    Board->Add(edge);
+    LastEdge = edge;
     update();
     QApplication::beep();
   }
@@ -93,9 +93,9 @@ class MainWindow final : public BaseCanvasLayer {
     int x = (width() - WindowSize) / 2;
     int y = (height() - WindowSize) / 2;
 
-    boxLayer->move(x, y);
-    edgeLayer->move(x, y);
-    dotLayer->move(x, y);
+    BoxCanvasLayer->move(x, y);
+    EdgeCanvasLayer->move(x, y);
+    DotCanvasLayer->move(x, y);
   }
 
   void
@@ -103,11 +103,11 @@ class MainWindow final : public BaseCanvasLayer {
     QWidget::showEvent(event);
 
     std::thread([this] {
-      while (board->Gaming()) {
-        if (OpenAIPlayer1 && board->Turn == Player1Turn) {
-          PlayerMoveEdge = RandomChoice(AIPlayer1->BestCandidateEdges(*board));
-        } else if (OpenAIPlayer2 && board->Turn == Player2Turn) {
-          PlayerMoveEdge = RandomChoice(AIPlayer2->BestCandidateEdges(*board));
+      while (Board->Gaming()) {
+        if (OpenAIPlayer1 && Board->Turn == Player1Turn) {
+          PlayerMoveEdge = RandomChoice(AIPlayer1->BestCandidateEdges(*Board));
+        } else if (OpenAIPlayer2 && Board->Turn == Player2Turn) {
+          PlayerMoveEdge = RandomChoice(AIPlayer2->BestCandidateEdges(*Board));
         } else {
           PlayerMoveEdge = -1;
           while (PlayerMoveEdge == -1) {
@@ -116,8 +116,8 @@ class MainWindow final : public BaseCanvasLayer {
         }
         Add(PlayerMoveEdge);
 
-        int playerId = board->Turn == Player1Turn ? 1 : 2;
-        int step = board->NowStep();
+        int playerId = Board->Turn == Player1Turn ? 1 : 2;
+        int step = Board->NowStep();
 
         printf("| Step %d | Player %d Move (%d, %d) -> (%d, %d) | Score %d : %d |\n",
                step,
@@ -126,20 +126,20 @@ class MainWindow final : public BaseCanvasLayer {
                PlayerMoveEdge.Dot1().Y(),
                PlayerMoveEdge.Dot2().X(),
                PlayerMoveEdge.Dot2().Y(),
-               board->Player1Score,
-               board->Player2Score);
+               Board->Player1Score,
+               Board->Player2Score);
       }
 
-      if (board->Player1Score > board->Player2Score) {
+      if (Board->Player1Score > Board->Player2Score) {
         printf("| Player 1 Win! |\n");
-      } else if (board->Player2Score > board->Player1Score) {
+      } else if (Board->Player2Score > Board->Player1Score) {
         printf("| Player 2 Win! |\n");
       } else {
         printf("| Draw! |\n");
       }
 
       std::this_thread::sleep_for(std::chrono::seconds(2));
-      edgeLayer->Canvases.At(lastEdge)->highLight = false;
+      EdgeCanvasLayer->Canvases.At(LastEdge)->highLight = false;
       update();
 
       std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -153,22 +153,22 @@ class MainWindow final : public BaseCanvasLayer {
   Ptr<AIInterface> AIPlayer1;
   Ptr<AIInterface> AIPlayer2;
   Edge PlayerMoveEdge;
-  Ptr<BoardV2> board;
-  Ptr<BoxCanvasLayer> boxLayer;
-  Ptr<EdgeCanvasLayer> edgeLayer;
-  Ptr<DotCanvasLayer> dotLayer;
-  Ptr<EdgeButtonLayer> edgeButtonLayer;
-  Edge lastEdge;
+  Ptr<BoardV2> Board;
+  Ptr<BoxCanvasLayer> BoxCanvasLayer;
+  Ptr<EdgeCanvasLayer> EdgeCanvasLayer;
+  Ptr<DotCanvasLayer> DotCanvasLayer;
+  Ptr<EdgeButtonLayer> EdgeButtonLayer;
+  Edge LastEdge;
 
   void
   setPlayerMoveEdge(Edge edge) {
-    if (board->Contains(edge)) {
+    if (Board->Contains(edge)) {
       return;
     }
-    if (OpenAIPlayer1 && board->Turn == Player1Turn) {
+    if (OpenAIPlayer1 && Board->Turn == Player1Turn) {
       return;
     }
-    if (OpenAIPlayer2 && board->Turn == Player2Turn) {
+    if (OpenAIPlayer2 && Board->Turn == Player2Turn) {
       return;
     }
     PlayerMoveEdge = edge;
