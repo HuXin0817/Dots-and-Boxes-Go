@@ -12,12 +12,12 @@ bool AIPlayer2 = true;
 
 int
 main(int argc, char* argv[]) {
-  QApplication app(argc, argv);
+  QApplication Application(argc, argv);
 
-  QApplication::setApplicationName("Dots and Boxes");
-  QApplication::setApplicationVersion("1.0");
-  QApplication::setOrganizationName("Dots and Boxes");
-  QApplication::setStyle(QStyleFactory::create("Fusion"));
+  Application.setApplicationName("Dots and Boxes");
+  Application.setApplicationVersion("1.0");
+  Application.setOrganizationName("Dots and Boxes");
+  Application.setStyle(QStyleFactory::create("Fusion"));
 
   for (int i = 1; i < argc; i++) {
     if (std::string arg = argv[i]; arg == "--player1" && i + 1 < argc) {
@@ -72,5 +72,5 @@ main(int argc, char* argv[]) {
   Ptr<MainWindow> mainWindow = new MainWindow(AIPlayer1, AIPlayer2, player1Model, player2Model);
   mainWindow->show();
 
-  return QApplication::exec();
+  return Application.exec();
 }
