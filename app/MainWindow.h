@@ -104,7 +104,7 @@ class MainWindow final : public BaseCanvasLayer {
     BaseCanvasLayer::showEvent(event);
 
     std::thread([this] {
-      while (Board->Gaming()) {
+      while (Board->Step::Gaming()) {
         if (AIPlayer1 && Board->Turn == Player1Turn) {
           PlayerMoveEdge = RandomChoice(Player1Model->BestCandidateEdges(*Board));
         } else if (AIPlayer2 && Board->Turn == Player2Turn) {
