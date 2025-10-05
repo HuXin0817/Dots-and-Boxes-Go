@@ -8,7 +8,7 @@
 
 class BaseCanvas : public QWidget {
   public:
-  explicit BaseCanvas(QWidget* parent = nullptr) : QWidget(parent) {
+  BaseCanvas(QWidget* parent = nullptr) : QWidget(parent) {
   }
 
   virtual QColor

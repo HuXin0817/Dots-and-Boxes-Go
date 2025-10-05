@@ -9,7 +9,7 @@ class L3Model final : public AIInterface {
   friend class L4Model;
 
   public:
-  explicit L3Model(int SearchTime = 10000) : SearchTime(SearchTime) {
+  L3Model(int SearchTime = 10000) : SearchTime(SearchTime) {
   }
 
   Span<Edge>

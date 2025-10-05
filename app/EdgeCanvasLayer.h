@@ -14,7 +14,7 @@ class EdgeCanvasLayer final : public EdgeLayer<EdgeCanvas> {
   Q_OBJECT
 
   public:
-  explicit EdgeCanvasLayer(QWidget* parent = nullptr) : EdgeLayer(parent) {
+  EdgeCanvasLayer(QWidget* parent = nullptr) : EdgeLayer(parent) {
     resize(WindowSize, WindowSize);
 
     for (Edge edge = 0; edge < Edge::Max; edge++) {

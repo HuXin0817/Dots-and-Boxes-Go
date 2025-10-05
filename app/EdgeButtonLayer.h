@@ -13,8 +13,8 @@ class EdgeButtonLayer final : public EdgeLayer<EdgeButton> {
   Q_OBJECT
 
   public:
-  explicit EdgeButtonLayer(const std::function<std::function<void()>(Edge)>& CallBackFactory,
-                           QWidget* parent = nullptr)
+  EdgeButtonLayer(const std::function<std::function<void()>(Edge)>& CallBackFactory,
+                  QWidget* parent = nullptr)
       : EdgeLayer(parent) {
     resize(WindowSize, WindowSize);
 

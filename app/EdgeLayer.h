@@ -9,7 +9,7 @@ class EdgeLayer : public BaseCanvasLayer {
   friend class MainWindow;
 
   public:
-  explicit EdgeLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
+  EdgeLayer(QWidget* parent = nullptr) : BaseCanvasLayer(parent) {
   }
 
   protected:

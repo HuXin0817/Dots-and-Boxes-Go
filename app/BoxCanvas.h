@@ -10,7 +10,7 @@ class BoxCanvas final : public BaseCanvas {
   public:
   static constexpr int A = EdgeCanvas::B - 2 * R;
 
-  explicit BoxCanvas(QWidget* parent = nullptr) : BaseCanvas(parent) {
+  BoxCanvas(QWidget* parent = nullptr) : BaseCanvas(parent) {
     resize(QSize(A, A));
   }
 

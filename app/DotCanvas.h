@@ -20,7 +20,7 @@ class DotCanvas final : public BaseCanvas {
     }
   }
 
-  explicit DotCanvas(QWidget* parent = nullptr) : BaseCanvas(parent) {
+  DotCanvas(QWidget* parent = nullptr) : BaseCanvas(parent) {
     setFixedSize(A, A);
   }
 

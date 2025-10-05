@@ -9,7 +9,7 @@ class EdgeCanvas final : public BaseCanvas {
   static constexpr int A = R * 2;
   static constexpr int B = A * 5;
 
-  explicit EdgeCanvas(bool rotate, QWidget* parent = nullptr) : BaseCanvas(parent), Rotate(rotate) {
+  EdgeCanvas(bool rotate, QWidget* parent = nullptr) : BaseCanvas(parent), Rotate(rotate) {
     if (!rotate) {
       resize(QSize(A, B));
     } else {
