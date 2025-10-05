@@ -17,21 +17,17 @@ class L4Model final : public AIInterface {
     }
 
     thread_local L3Model model(SubModelSearchTime);
+    EdgeScoreMap result;
 
 #pragma omp parallel for
-    for (auto& searchResult : SearchResults) {
+    for (int i = 0; i < SearchGroupNumber; ++i) {
       model.BestCandidateEdges(board);
-      searchResult = model.ScoreMap;
-    }
-
-    EdgeScoreMap result;
-    for (const auto& searchResult : SearchResults) {
-      result.Add(searchResult);
+#pragma omp critical
+      {
+        result.Add(model.ScoreMap);
+      }
     }
 
     return result.Export();
   }
-
-  private:
-  Array<EdgeScoreMap, SearchGroupNumber> SearchResults;
 };
