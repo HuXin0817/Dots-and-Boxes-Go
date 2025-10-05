@@ -40,7 +40,7 @@ class MainWindow final : public BaseCanvasLayer {
 
   QColor
   Color() const override {
-    if (isDarkMode()) {
+    if (isDarkTheme()) {
       return {43, 43, 43, 255};
     } else {
       return {242, 242, 242, 255};

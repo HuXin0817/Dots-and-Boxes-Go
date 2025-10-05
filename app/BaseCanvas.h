@@ -28,7 +28,7 @@ class BaseCanvas : public QWidget {
   }
 
   static bool
-  isDarkMode() {
+  isDarkTheme() {
     QPalette palette = QApplication::palette();
     QColor windowColor = palette.color(QPalette::Window);
 

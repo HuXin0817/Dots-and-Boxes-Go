@@ -24,7 +24,7 @@ class EdgeCanvas final : public BaseCanvas {
   QColor
   Color() const override {
     if (state == State::Free) {
-      if (isDarkMode()) {
+      if (isDarkTheme()) {
         return {65, 65, 65, 255};
       } else {
         return {217, 217, 217, 255};

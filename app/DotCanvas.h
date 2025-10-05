@@ -13,7 +13,7 @@ class DotCanvas final : public BaseCanvas {
 
   QColor
   Color() const override {
-    if (isDarkMode()) {
+    if (isDarkTheme()) {
       return {202, 202, 202, 255};
     } else {
       return {255, 255, 255, 255};
