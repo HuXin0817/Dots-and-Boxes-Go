@@ -69,7 +69,7 @@ main(int argc, char* argv[]) {
   }
   printf("\n\n");
 
-  auto mainWindow = std::make_unique<MainWindow>(AIPlayer1, AIPlayer2, player1Model, player2Model);
+  Ptr<MainWindow> mainWindow = new MainWindow(AIPlayer1, AIPlayer2, player1Model, player2Model);
   mainWindow->show();
 
   return QApplication::exec();
