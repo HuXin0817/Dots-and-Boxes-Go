@@ -105,6 +105,8 @@ class MainWindow final : public BaseCanvasLayer {
 
     std::thread([this] {
       while (Board->Step::Gaming()) {
+        auto startTime = std::chrono::high_resolution_clock::now();
+
         if (AIPlayer1 && Board->Turn == Player1Turn) {
           PlayerMoveEdge = RandomChoice(Player1Model->BestCandidateEdges(*Board));
         } else if (AIPlayer2 && Board->Turn == Player2Turn) {
@@ -117,7 +119,11 @@ class MainWindow final : public BaseCanvasLayer {
         }
         Add(PlayerMoveEdge);
 
-        printf("| Step %d | Player %d Move (%d, %d) -> (%d, %d) | Score %d : %d |\n",
+        auto endTime = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+        double seconds = static_cast<double>(duration.count()) / 1000000.0;
+
+        printf("| Step %d | Player %d Move (%d, %d) -> (%d, %d) | Score %d : %d | Time: %.2fs |\n",
                Board->NowStep(),
                Board->Turn == Player1Turn ? 1 : 2,
                PlayerMoveEdge.Dot1().X(),
@@ -125,7 +131,8 @@ class MainWindow final : public BaseCanvasLayer {
                PlayerMoveEdge.Dot2().X(),
                PlayerMoveEdge.Dot2().Y(),
                Board->Player1Score,
-               Board->Player2Score);
+               Board->Player2Score,
+               seconds);
       }
 
       if (Board->Player1Score > Board->Player2Score) {
