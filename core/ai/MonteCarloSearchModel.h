@@ -3,13 +3,13 @@
 #include "../board/BoardV2.h"
 #include "../common/Random.h"
 #include "../model/EdgeScoreMap.h"
-#include "L2Model.h"
+#include "ImprovedSearchModel.h"
 
-class L3Model final : public AIInterface {
-  friend class L4Model;
+class MonteCarloSearchModel final : public SearchModel {
+  friend class ParallelSearchModel;
 
   public:
-  L3Model(int SearchTime = 10000) : SearchTime(SearchTime) {
+  MonteCarloSearchModel(int SearchTime = 10000) : SearchTime(SearchTime) {
   }
 
   Span<Edge>
@@ -34,7 +34,7 @@ class L3Model final : public AIInterface {
   }
 
   private:
-  L2Model SubModel;
+  ImprovedSearchModel SubModel;
   int SearchTime;
   BoardV2 AuxBoard;
   EdgeScoreMap ScoreMap;

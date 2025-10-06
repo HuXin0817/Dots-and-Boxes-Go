@@ -2,32 +2,32 @@
 
 #include <string>
 
-#include "Interface.h"
-#include "L0Model.h"
-#include "L1Model.h"
-#include "L2Model.h"
-#include "L3Model.h"
-#include "L4Model.h"
+#include "BasicSearchModel.h"
+#include "ImprovedSearchModel.h"
+#include "MonteCarloSearchModel.h"
+#include "ParallelSearchModel.h"
+#include "SearchModel.h"
+#include "SimpleStrategyModel.h"
 
 enum class AIModelType { L0, L1, L2, L3, L4 };
 
 class AIConfig {
   public:
-  static AIInterface*
+  static SearchModel*
   createModel(AIModelType type) {
     switch (type) {
       case AIModelType::L0:
-        return new L0Model();
+        return new SimpleStrategyModel();
       case AIModelType::L1:
-        return new L1Model();
+        return new BasicSearchModel();
       case AIModelType::L2:
-        return new L2Model();
+        return new ImprovedSearchModel();
       case AIModelType::L3:
-        return new L3Model();
+        return new MonteCarloSearchModel();
       case AIModelType::L4:
-        return new L4Model();
+        return new ParallelSearchModel();
       default:
-        return new L4Model();
+        return new ParallelSearchModel();
     }
   }
 

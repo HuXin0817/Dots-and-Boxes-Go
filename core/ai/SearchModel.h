@@ -4,9 +4,9 @@
 #include "../common/Span.h"
 #include "../model/Edge.h"
 
-class AIInterface {
+class SearchModel {
   public:
-  virtual ~AIInterface() = default;
+  virtual ~SearchModel() = default;
 
   virtual Span<Edge>
   BestCandidateEdges(const BoardV2& board) = 0;

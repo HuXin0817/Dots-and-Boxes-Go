@@ -2,11 +2,11 @@
 
 #include "../board/BoardV3.h"
 #include "../common/Span.h"
-#include "Interface.h"
-#include "L0Model.h"
+#include "SearchModel.h"
+#include "SimpleStrategyModel.h"
 
-class L1Model final : public AIInterface {
-  friend class L2Model;
+class BasicSearchModel final : public SearchModel {
+  friend class ImprovedSearchModel;
 
   public:
   Span<Edge>
@@ -39,6 +39,6 @@ class L1Model final : public AIInterface {
   }
 
   private:
-  L0Model SubModel;
+  SimpleStrategyModel SubModel;
   BoardV3 AuxBoard;
 };

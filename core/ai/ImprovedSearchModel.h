@@ -2,11 +2,11 @@
 
 #include "../common/List.h"
 #include "../common/Span.h"
-#include "L1Model.h"
+#include "BasicSearchModel.h"
 
-class L2Model final : public AIInterface {
+class ImprovedSearchModel final : public SearchModel {
   public:
-  L2Model() = default;
+  ImprovedSearchModel() = default;
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
@@ -37,7 +37,7 @@ class L2Model final : public AIInterface {
   }
 
   private:
-  L1Model SubModel;
+  BasicSearchModel SubModel;
   BoardV2 AuxBoard;
   List<Edge, Edge::Max> SearchEdges;
 };

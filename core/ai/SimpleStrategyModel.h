@@ -3,14 +3,14 @@
 #include "../board/BoardV2.h"
 #include "../common/List.h"
 #include "../common/Span.h"
-#include "Interface.h"
+#include "SearchModel.h"
 
-class L0Model final : public AIInterface {
-  friend class L1Model;
-  friend class L2Model;
+class SimpleStrategyModel final : public SearchModel {
+  friend class BasicSearchModel;
+  friend class ImprovedSearchModel;
 
   public:
-  L0Model() = default;
+  SimpleStrategyModel() = default;
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {

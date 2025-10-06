@@ -148,8 +148,8 @@ class MainWindow final : public BaseCanvasLayer {
   private:
   bool AIPlayer1;
   bool AIPlayer2;
-  Ptr<AIInterface> Player1Model;
-  Ptr<AIInterface> Player2Model;
+  Ptr<SearchModel> Player1Model;
+  Ptr<SearchModel> Player2Model;
   Edge PlayerMoveEdge;
   Ptr<BoardV2> Board;
   Ptr<BoxCanvasLayer> BoxCanvasLayer;

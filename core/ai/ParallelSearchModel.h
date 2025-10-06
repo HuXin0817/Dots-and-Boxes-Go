@@ -1,22 +1,22 @@
 #pragma once
 
-#include "Interface.h"
-#include "L3Model.h"
+#include "MonteCarloSearchModel.h"
+#include "SearchModel.h"
 
-class L4Model final : public AIInterface {
+class ParallelSearchModel final : public SearchModel {
   public:
   static constexpr int SubModelSearchTime = 1000;
   static constexpr int SearchGroupNumber = 100;
 
-  L4Model() = default;
+  ParallelSearchModel() = default;
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
-    if (auto edges = L2Model().BestCandidateEdges(board); edges.Size() == 1) {
+    if (auto edges = ImprovedSearchModel().BestCandidateEdges(board); edges.Size() == 1) {
       return edges;
     }
 
-    thread_local L3Model model(SubModelSearchTime);
+    thread_local MonteCarloSearchModel model(SubModelSearchTime);
     EdgeScoreMap result;
 
 #pragma omp parallel for
