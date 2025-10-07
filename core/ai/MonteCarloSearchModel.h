@@ -9,8 +9,7 @@ class MonteCarloSearchModel final : public SearchModel {
   friend class ParallelSearchModel;
 
   public:
-  MonteCarloSearchModel(int SearchTime = 10000) : SearchTime(SearchTime) {
-  }
+  MonteCarloSearchModel() = default;
 
   Span<Edge>
   BestCandidateEdges(const BoardV2& board) override {
@@ -35,7 +34,7 @@ class MonteCarloSearchModel final : public SearchModel {
 
   private:
   ImprovedSearchModel SubModel;
-  int SearchTime;
+  const int SearchTime = 1000;
   BoardV2 AuxBoard;
   EdgeScoreMap ScoreMap;
 };

@@ -5,7 +5,6 @@
 
 class ParallelSearchModel final : public SearchModel {
   public:
-  static constexpr int SubModelSearchTime = 1000;
   static constexpr int SearchGroupNumber = 100;
 
   ParallelSearchModel() = default;
@@ -16,7 +15,7 @@ class ParallelSearchModel final : public SearchModel {
       return edges;
     }
 
-    thread_local MonteCarloSearchModel model(SubModelSearchTime);
+    thread_local MonteCarloSearchModel model;
     EdgeScoreMap result;
 
 #pragma omp parallel for
