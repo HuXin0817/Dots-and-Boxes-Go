@@ -23,7 +23,7 @@ class Edge {
   }
 
   bool
-  Rotate() {
+  Rotate() const {
     return Dot1().Y() == Dot2().Y();
   }
 
