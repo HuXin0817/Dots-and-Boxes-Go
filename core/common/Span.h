@@ -25,6 +25,7 @@ class Span {
 
   const T&
   At(int i) const {
+    assert(i >= 0 && i < Size());
     return Begin[i];
   }
 

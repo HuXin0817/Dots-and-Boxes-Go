@@ -9,11 +9,13 @@ class Array {
 
   T&
   At(int i) {
+    assert(i >= 0 && i < Size);
     return Data[i];
   }
 
   const T&
   At(int i) const {
+    assert(i >= 0 && i < Size);
     return Data[i];
   }
 
