@@ -19,12 +19,22 @@ class Edge {
 
   Dot
   Dot1() const {
-    return (v >> 1) + (v & 1) * (v >> 1) / BoardSize;
+    int dot = v >> 1;
+    if (v & 1) {
+      dot += dot / BoardSize;
+    }
+    return dot;
   }
 
   Dot
   Dot2() const {
-    return (v >> 1) + (v & 1 ? (v >> 1) / BoardSize + 1 : BoardSize + 1);
+    int dot = v >> 1;
+    if (v & 1) {
+      dot += dot / BoardSize + 1;
+    } else {
+      dot += BoardSize + 1;
+    }
+    return dot;
   }
 
   bool
