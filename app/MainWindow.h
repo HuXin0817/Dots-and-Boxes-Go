@@ -123,13 +123,10 @@ class MainWindow final : public BaseCanvasLayer {
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
         double seconds = static_cast<double>(duration.count()) / 1000000.0;
 
-        printf("| Step %d | Player %d Move (%d, %d) -> (%d, %d) | Score %d : %d | Time: %.2fs |\n",
+        printf("| Step %d | Player %d Move %s | Score %d : %d | Time: %.2fs |\n",
                Board->NowStep(),
                Board->Turn == Player1Turn ? 1 : 2,
-               PlayerMoveEdge.Dot1().X(),
-               PlayerMoveEdge.Dot1().Y(),
-               PlayerMoveEdge.Dot2().X(),
-               PlayerMoveEdge.Dot2().Y(),
+               PlayerMoveEdge.ToString().c_str(),
                Board->Player1Score,
                Board->Player2Score,
                seconds);

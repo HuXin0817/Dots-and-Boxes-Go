@@ -18,6 +18,13 @@ class Square {
     return v % Size;
   }
 
+  std::string
+  ToString() const {
+    std::stringstream ss;
+    ss << "(" << X() << ", " << Y() << ")";
+    return ss.str();
+  }
+
   static constexpr int Size = A;
   static constexpr int Max = Size * Size;
 

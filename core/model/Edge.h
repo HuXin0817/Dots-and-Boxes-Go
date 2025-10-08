@@ -27,6 +27,13 @@ class Edge {
     return Dot1().Y() == Dot2().Y();
   }
 
+  std::string
+  ToString() const {
+    std::stringstream ss;
+    ss << Dot1().ToString() << " -> " << Dot2().ToString();
+    return ss.str();
+  }
+
   V(Edge)
 
   private:
