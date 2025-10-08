@@ -10,7 +10,7 @@ class EdgeCanvas final : public BaseCanvas {
   static constexpr int B = A * 5;
 
   EdgeCanvas(bool rotate, QWidget* parent = nullptr) : BaseCanvas(parent), Rotate(rotate) {
-    if (!rotate) {
+    if (Rotate) {
       resize(QSize(A, B));
     } else {
       resize(QSize(B, A));
@@ -59,7 +59,7 @@ class EdgeCanvas final : public BaseCanvas {
     painter.setPen(Qt::NoPen);
     painter.setBrush(QBrush(Color()));
 
-    if (!Rotate) {
+    if (Rotate) {
       int x = width() / 2 - A / 2;
       int y = height() / 2 - B / 2;
       painter.drawRect(x, y, A, B);
